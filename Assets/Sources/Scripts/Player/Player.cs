@@ -11,12 +11,12 @@ public class Player : PawnBase
     public GameObject UI;
     public Transform WeaponSoket;
     public Animator playerAnimator;
-    private Inventory inventory;
+    public float movespeed = 5f;
     public GameMenu gameMenu;
     //private variables
+    private Inventory inventory;
     private Rigidbody2D rb;
     private Vector3 moveDir;
-    private float movespeed = 5f;
     private Vector2 mousePos;
     #endregion
 
@@ -31,8 +31,8 @@ public class Player : PawnBase
         rb = GetComponent<Rigidbody2D>();
         RescaleHealPoint();
         inventory = GetComponent<Inventory>();
-
     }
+
     #region Body
     // Update is called once per frame
     void Update()
@@ -57,44 +57,46 @@ public class Player : PawnBase
     #region Methods
 
     public void HandleMovement() {
-        float speed = 5f;
-    	float moveX = 0f;
-        float moveY = 0f;
 
-        if (Input.GetKey(KeyCode.W)) {
-        	moveY = +1f;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-        	moveY = -1f;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-        	moveX = +1f;
-        }        
-        if (Input.GetKey(KeyCode.A)) {
-        	moveX = -1f;
-        }
+      float speed = 5f;
+      float moveX = 0f;
+      float moveY = 0f;
 
-        moveDir = new Vector3(moveX, moveY).normalized;	
+      if (Input.GetKey(KeyCode.W)) {
+        moveY = +1f;
+      }
+      if (Input.GetKey(KeyCode.S)) {
+        moveY = -1f;
+      }
+      if (Input.GetKey(KeyCode.D)) {
+        moveX = +1f;
+      }        
+      if (Input.GetKey(KeyCode.A)) {
+        moveX = -1f;
+      }
+
+      moveDir = new Vector3(moveX, moveY).normalized;	
     }
 
     public void RescaleHealPoint()
    {
+     if(UI != null){
       UI.GetComponent<UIGameMode>().ShowSoulLevel(GetSoul());
       UI.GetComponent<UIGameMode>().SetHealSlider(GetCurrentHP());
+     }
    }
 
 
     void Rotation(float angle)
     {
-
-            WeaponSoket.eulerAngles = new Vector3(0,0, angle);
+      WeaponSoket.eulerAngles = new Vector3(0,0, angle);
     }
 
     float Angle()
     {
-         Vector2 lookDirection = GetLookAtDirection();
-         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 90f;
-         return angle;
+      Vector2 lookDirection = GetLookAtDirection();
+      float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 90f;
+      return angle;
     }
 
     Vector2 GetLookAtDirection(){
@@ -164,6 +166,7 @@ public class Player : PawnBase
 
         SetCurrentHP(GetCurrentHP() + deltaHP);
         RescaleHealPoint();
+        
         if(GetCurrentHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
         {
             Death();

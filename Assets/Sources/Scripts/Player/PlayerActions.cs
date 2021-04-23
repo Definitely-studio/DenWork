@@ -16,7 +16,15 @@ public class PlayerActions : MonoBehaviour
     void Start()
     {
       player = GetComponent<Player>();
-//      RescaleBullet(equippedweapon.GetComponent<Gun>().currentBulletsInMagazine, equippedweapon.GetComponent<Gun>().MaxBulletsInMagazine);
+      
+      //Устанавливаем начальное значение Пулек
+      if(equippedweapon != null){
+        if(equippedweapon.GetComponent<GunBase>() != null)
+          {
+              RescaleBullet(equippedweapon.GetComponent<GunBase>().GetCurrentBulletInMagazine(), equippedweapon.GetComponent<GunBase>().MaxBulletsInMagazine);
+          }
+      }
+
     }
 
     // Update is called once per frame
@@ -77,14 +85,18 @@ public class PlayerActions : MonoBehaviour
 
     void Attack()
     {
-        if(equippedweapon)
+      if(equippedweapon != null){
+        if(equippedweapon.GetComponent<GunBase>() != null)
         {
             equippedweapon.GetComponent<GunBase>().Shoot();
+            RescaleBullet(equippedweapon.GetComponent<GunBase>().GetCurrentBulletInMagazine(), equippedweapon.GetComponent<GunBase>().MaxBulletsInMagazine);
         }
+      }
     }
 
     void RescaleBullet(int buller, int maxBullet)
     {
+      if(GetComponent<Player>().UI != null)
         GetComponent<Player>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
     }
 
