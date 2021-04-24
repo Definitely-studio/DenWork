@@ -30,13 +30,14 @@ public class MainLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RefrashProgressLevel();
+       // RefrashProgressLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
         FlashTimer -= Time.deltaTime;
+        if(Flash != null){
         Flash.SetActive(false);
         if (FlashTimer < 0)
         {
@@ -48,6 +49,7 @@ public class MainLogic : MonoBehaviour
                 Flash.SetActive(true);
             }
         }
+        }
     }
 
     public void EnemyDead()
@@ -58,6 +60,7 @@ public class MainLogic : MonoBehaviour
 
     void RefrashProgressLevel()
     {
+
         Rain.GetComponent<Rain>().SetRain(ProgressLevel);
         Water.GetComponent<Water>().SetProgress(ProgressLevel);
        // TextPrigress.text = (SoulsRequiredToWin - ProgressLevel).ToString();
