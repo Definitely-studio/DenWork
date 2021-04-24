@@ -41,7 +41,7 @@ public class MeleeEnemyActions1 : EnemyActions
 
     public override void Attack(){
         Debug.Log("Attack");
-        enemy.state = States.attackig;
+       // enemy.state = States.attackig;
         enemy.animationsController.SetAttackAnimatorKey();
     }
 

@@ -8,6 +8,7 @@ public class Agent : MonoBehaviour
 {
 
     [SerializeField] Transform target;
+    [SerializeField] Transform Player;
     [SerializeField] Enemy enemy;
     [SerializeField] EnemyActions enemyActions;
     [SerializeField] float minDistanceToPlayer = 2f;
@@ -16,33 +17,37 @@ public class Agent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
         target = GameObject.FindGameObjectWithTag("Player").transform;
         enemyActions = GetComponent<EnemyActions>();
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        agent.SetDestination(target.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        agent.SetDestination(target.position);
         
   
         if(enemy.state != States.attackig){
-            if(Vector2.Distance(transform.position, target.position) >= minDistanceToPlayer)
+            if(Vector2.Distance(transform.position, Player.position) >= minDistanceToPlayer)
             {
-            agent.SetDestination(target.position);
+            SetAgentDestination(Player);
             enemy.animationsController.SetMovingAnimatorKey(true);
             }
         else{
-            agent.SetDestination(transform.position);
+            SetAgentDestination(transform);
             enemy.animationsController.SetMovingAnimatorKey(false);
             enemyActions.Attack();
             }
 
         if(enemy.GetIsDead())
-            agent.SetDestination(transform.position);
+            SetAgentDestination(transform);
 
         }
 
