@@ -11,12 +11,14 @@ public class Enemy : PawnBase
     public Transform WeaponSocket;
     public States state;
     public EnemyTypes enemyType;
+    public GameObject Player;
+    public Agent agent;
     public PlayerDetector playerDetector;
     public EnemyActions enemyActions;
     public EnemyMeleeWeapon enemyMeleeWeapon;
     public float destroyTime = 3f;
+    public GameObject[] wayPoint;
     public EnemyAnimationsController animationsController;
-
     // приватные поля
     protected Rigidbody2D rb;
     protected bool isAttackCooldown = false;

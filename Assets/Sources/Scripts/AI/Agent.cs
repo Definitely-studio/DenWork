@@ -18,7 +18,8 @@ public class Agent : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = transform;
         enemyActions = GetComponent<EnemyActions>();
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
@@ -32,9 +33,9 @@ public class Agent : MonoBehaviour
     {
 
         agent.SetDestination(target.position);
-        
-  
-        if(enemy.state != States.attackig){
+        //Debug.Log(target.position);
+    
+       /* if(enemy.state != States.attackig){
             if(Vector2.Distance(transform.position, Player.position) >= minDistanceToPlayer)
             {
             SetAgentDestination(Player);
@@ -49,7 +50,7 @@ public class Agent : MonoBehaviour
         if(enemy.GetIsDead())
             SetAgentDestination(transform);
 
-        }
+        }*/
 
         
             
@@ -61,6 +62,10 @@ public class Agent : MonoBehaviour
 
      public void SetAgentDestination(Transform DestTarget){
         Debug.Log(DestTarget.position);
+        
         target = DestTarget;
     }
+
+
+    
 }

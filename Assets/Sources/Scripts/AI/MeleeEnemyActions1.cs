@@ -36,7 +36,6 @@ public class MeleeEnemyActions1 : EnemyActions
             enemy.enemyMeleeWeapon.SetActiveCollider(false);
             break;
       }
-        
     }
 
     public override void Attack(){
@@ -44,5 +43,13 @@ public class MeleeEnemyActions1 : EnemyActions
        // enemy.state = States.attackig;
         enemy.animationsController.SetAttackAnimatorKey();
     }
+
+    
+
+    IEnumerator Waiting(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+    }
+
 
 }

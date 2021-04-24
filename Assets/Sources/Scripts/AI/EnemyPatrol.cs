@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : StateMachineBehaviour
+public class EnemyPatrol : NPCBaseFMS
 {
 
-    GameObject NPC;
-    Agent agent;
     GameObject[] waypoints;
     int currentWP;
-    
 
     void Awake(){
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+       
         NPC = animator.gameObject;
+        waypoints = NPC.GetComponent<Enemy>().wayPoint;
         agent = NPC.GetComponent<Agent>();
         currentWP = 0;
         Debug.Log(waypoints[currentWP]);
-        //agent.SetAgentDestination(waypoints[currentWP].transform.position); 
+        agent.SetAgentDestination(waypoints[currentWP].transform); 
+        //agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform); 
+
         
     }
 
@@ -33,7 +33,7 @@ public class EnemyPatrol : StateMachineBehaviour
         if(waypoints.Length == 0)
             return;
 
-        if(Vector2.Distance(NPC.transform.position, waypoints[currentWP].transform.position) < 2)
+        if(Vector2.Distance(NPC.transform.position, waypoints[currentWP].transform.position) < minDistancetoDestination)
         {
             
             currentWP++;
@@ -41,7 +41,7 @@ public class EnemyPatrol : StateMachineBehaviour
             {
                 currentWP = 0;
             }
-            //agent.SetAgentDestination(waypoints[currentWP].transform.position); 
+            agent.SetAgentDestination(waypoints[currentWP].transform); 
         }
     }
 

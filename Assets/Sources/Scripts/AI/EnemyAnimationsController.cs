@@ -27,5 +27,10 @@ public class EnemyAnimationsController : MonoBehaviour
         animator.SetBool("isMoving", value);
     }
 
+      public void SetPlayerFound(bool value){
+        animator.SetBool("PlayerFound", value);
+    }
+
+
 
 }

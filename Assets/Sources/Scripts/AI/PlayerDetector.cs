@@ -8,8 +8,10 @@ public class PlayerDetector : MonoBehaviour
   public Transform playerDetect;
   public Transform target;
   public LayerMask layerMask;
+  public Enemy enemy;
   bool playerisFound = false;
   bool canWeAttack = false;
+
 
 
 
@@ -46,12 +48,14 @@ public class PlayerDetector : MonoBehaviour
       Debug.DrawRay(playerDetect.position, lookDirection * rayLenght, Color.red);
 
       
-
+      Debug.Log(PlayerInfo.collider);
       if(PlayerInfo.collider != null){
 
         if(PlayerInfo.collider.gameObject.tag == "Player" )
         {
             playerisFound = true;
+            Debug.Log(playerisFound);
+            enemy.animationsController.SetPlayerFound(true);
         }
         else
             playerisFound = false;
