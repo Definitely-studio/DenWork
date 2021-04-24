@@ -181,31 +181,6 @@ public class Player : PawnBase
 
     }
 
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Pickup") // Pick for item on groud
-        {
-          textObject.text = "To pick up a "+col.gameObject.GetComponent<ItemCommon>().objectName+" Press E";
-        }      
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Pickup")
-        {
-          textObject.text = null;
-        }
-    }
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if(col.gameObject.tag == "Pickup" && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")))
-        {
-          Destroy(col.gameObject);
-          inventory.playerInventory.Add(col.gameObject.GetComponent<ItemCommon>().objectName);
-          Debug.Log(inventory.playerInventory);
-        }         
-    }
     #endregion
 }
     

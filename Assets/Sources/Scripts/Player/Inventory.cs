@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> playerInventory = new List<string>() {};
+    private List<Item> itemList;
 	public GameObject inventoryUI;
 	private bool isInventoryActive = true;
-	void Start()
-	{
-		playerInventory.Add("Testname");
+	
+	public Inventory() {
+		itemList = new List<Item>();
+		Debug.Log("Inventory");
 	}
 
 	private void Update()
@@ -18,6 +19,11 @@ public class Inventory : MonoBehaviour
 	    inventoryUI.SetActive(false);
 	    isInventoryActive = false;
 	}
+	    else if( Input.GetKeyDown( KeyCode.I ) && !isInventoryActive )  {
+	    inventoryUI.SetActive(true);
+	    isInventoryActive = true;
+	}	
+
 }
 
 }
