@@ -362,6 +362,7 @@
 "Assets/Sources/Scripts/AI/SpawnPoint.cs"
 "Assets/Sources/Scripts/AudioMixed.cs"
 "Assets/Sources/Scripts/GlobalList.cs"
+"Assets/Sources/Scripts/Item/Item.cs"
 "Assets/Sources/Scripts/ItemCommon.cs"
 "Assets/Sources/Scripts/LevelScenario/Altar.cs"
 "Assets/Sources/Scripts/LevelScenario/Altar_Eyes.cs"
