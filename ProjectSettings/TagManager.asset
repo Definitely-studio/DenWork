@@ -12,6 +12,7 @@ TagManager:
   - PuppeterSpawner
   - Wall
   - Weapon
+  - Door
   layers:
   - Default
   - TransparentFX

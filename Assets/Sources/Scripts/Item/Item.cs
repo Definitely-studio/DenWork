@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Item {
 	public enum ItemType {
-		RangedWeapon,
-		MeleeWeapon,
+		RangedWeaponItem,
+		MeleeWeaponItem,
 		MiscItem,
-		Edible,
-		Cloth,
-		Ammo
+		EdibleItem,
+		ClothItem,
+		AmmoItem,
+		KeyItem
 	}
 	public ItemType itemType;
+	public string itemLabel = "Default item label";
 	public int amount;
 }
