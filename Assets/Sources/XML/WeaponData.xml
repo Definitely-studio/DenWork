@@ -1,0 +1,13 @@
+<? xml version="1.0" encoding="utf-8" ?>
+<weapons>
+	<gun>
+		name="Revolver"
+		label="revolver"
+	    BulletNum = 1;
+	    reloadingTime = 4f;
+	    MaxBulletsInMagazine = 6;
+	    shootingSpeed = 40f;
+	</gun>
+
+
+</weapons>
