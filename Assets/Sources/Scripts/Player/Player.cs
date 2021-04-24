@@ -21,10 +21,8 @@ public class Player : PawnBase
     #endregion
 
     public GameObject MainLogic;
-
     public AudioSource AudioDamage;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerAnimator = GetComponent<Animator>();

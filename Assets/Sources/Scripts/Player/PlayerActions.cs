@@ -100,4 +100,18 @@ public class PlayerActions : MonoBehaviour
         GetComponent<Player>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
     }
 
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+      // Door opening
+        if(col.gameObject.tag == "Door")
+        {
+          // if(player.GetComponent<Inventory>().itemList. col.gameObject.GetComponent<DoorController>().keyNeeded == );
+          Destroy(col.gameObject);
+          Debug.Log("Picked item");
+        }   
+
+              
+    }
+
 }
