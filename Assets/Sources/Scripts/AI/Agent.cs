@@ -7,9 +7,9 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
 
-
     [SerializeField] Transform target;
     [SerializeField] Enemy enemy;
+    [SerializeField] EnemyActions enemyActions;
     [SerializeField] float minDistanceToPlayer = 2f;
 
     private NavMeshAgent agent;
@@ -17,6 +17,8 @@ public class Agent : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyActions = GetComponent<EnemyActions>();
+        enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -25,17 +27,35 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+  
+        if(enemy.state != States.attackig){
+            if(Vector2.Distance(transform.position, target.position) >= minDistanceToPlayer)
+            {
+            agent.SetDestination(target.position);
+            enemy.animationsController.SetMovingAnimatorKey(true);
+            }
+        else{
+            agent.SetDestination(transform.position);
+            enemy.animationsController.SetMovingAnimatorKey(false);
+            enemyActions.Attack();
+            }
 
-        //Debug.Log(Vector2.Distance(transform.position, target.position));
-        /*
-        if(enemy.state != States.dead && Vector2.Distance(transform.position, target.position) >= minDistanceToPlayer)
-            agent.SetDestination(target.position);
-        else
+        if(enemy.GetIsDead())
             agent.SetDestination(transform.position);
-            */
-        if(Vector2.Distance(transform.position, target.position) >= minDistanceToPlayer)
-            agent.SetDestination(target.position);
-        else
-            agent.SetDestination(transform.position);
+
+        }
+
+        
+            
+    }
+
+    public NavMeshAgent GetAgent(){
+        return agent;
+    }
+
+     public void SetAgentDestination(Transform DestTarget){
+        Debug.Log(DestTarget.position);
+        target = DestTarget;
     }
 }

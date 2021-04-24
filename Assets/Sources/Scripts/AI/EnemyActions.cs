@@ -25,7 +25,7 @@ public class EnemyActions : MonoBehaviour
         
             if (deltaHP <0)
             {
-            enemy.enemyAnimator.SetTrigger("Damage");
+            //enemy.enemyAnimator.SetTrigger("Damage");
             }
             enemy.SetCurrentHP(enemy.GetCurrentHP() + deltaHP);
             Debug.Log(enemy.GetCurrentHP());
@@ -35,33 +35,16 @@ public class EnemyActions : MonoBehaviour
                 //SetIsDead(true);
                 Death();
             }
-            
         }
     }
 
-    //активируем коллизию которая отвечает за атаку
-    public void ChangeStateMeleeAttackCollision(int value)
-    {
-        // 0 set false
-        // 1 set true
-        switch (value)
-      {
-          case 0:
-            enemy.enemyMeleeWeapon.SetActiveCollider(false);
-            break;
-          case 1:
-            enemy.enemyMeleeWeapon.SetActiveCollider(true);
-              break;
-          default:
-            enemy.enemyMeleeWeapon.SetActiveCollider(false);
-            break;
-      }
-        
-    }
+
 
     private void Death(){
 
-        enemy.AudioDead.Play();
+        if(enemy.AudioDead != null)
+            enemy.AudioDead.Play();
+            
         enemy.state = States.dead;
 
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f + 5.0f);
@@ -73,5 +56,8 @@ public class EnemyActions : MonoBehaviour
         Destroy(gameObject, enemy.destroyTime);
     }
 
+    public virtual void Attack(){
+
+    }
 
 }

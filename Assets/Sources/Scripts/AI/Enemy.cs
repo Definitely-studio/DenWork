@@ -12,11 +12,10 @@ public class Enemy : PawnBase
     public States state;
     public EnemyTypes enemyType;
     public PlayerDetector playerDetector;
-    public Animator enemyAnimator;
     public EnemyActions enemyActions;
     public EnemyMeleeWeapon enemyMeleeWeapon;
-    public Collision2D MeleeAttackCollision;
     public float destroyTime = 3f;
+    public EnemyAnimationsController animationsController;
 
     // приватные поля
     protected Rigidbody2D rb;
@@ -34,7 +33,7 @@ public class Enemy : PawnBase
         state = (state != States.passive) ? States.lookingfor : States.passive;
         rb = GetComponent<Rigidbody2D> ();
         //bodySprite = transform.Find("Body").transform;
-        enemyAnimator = GetComponent <Animator> ();
+        //enemyAnimator = GetComponent <Animator> ();
         //playerDetector = transform.Find("PlayerDetector").GetComponent<PlayerDetector>();
         target = GameObject.FindWithTag("Player").transform;
     }
@@ -50,34 +49,24 @@ public class Enemy : PawnBase
       {
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f);
         
-        if(enemyAnimator != null)
-        {
-          SetAnimatorKeys();
-        }
         
          if(WeaponSocket != null)
         {
           rangedWeaponRotation();
         }
-        //Debug.Log($" isAttackCooldown {isAttackCooldown}");
-        //Debug.Log($" can we shoot {playerDetector.GetCanWeShoot()}");
-        //Debug.Log($" isAttackCooldown {isAttackCooldown}");
-        //Debug.Log($" summt {!isAttackCooldown && playerDetector.GetCanWeShoot()}");
-
+        
         if(playerDetector != null)
         {
-          if(!isAttackCooldown && playerDetector.GetCanWeShoot() && !GetIsDead())
+         /* if(!isAttackCooldown && playerDetector.GetCanWeShoot() && !GetIsDead())
           {
-            //Debug.Log("EnemyAttack");
-            //Debug.Log($" player is found {playerDetector.GetCanWeShoot()}");
+
             AttackStart();
-            //Debug.Log("EnemyAttack");
           }
 
           else if(!isAttackCooldown && !playerDetector.GetCanWeShoot())
           {
             AttackEnd();
-          }
+          }*/
         }
       }
 
@@ -89,84 +78,6 @@ public class Enemy : PawnBase
       return rb;
     }
 
-    void SetAnimatorKeys(){
-
-      if(state == States.passive)
-      {
-        enemyAnimator.SetBool("MoveRight", false);
-        enemyAnimator.SetBool("MoveLeft", false);
-        enemyAnimator.SetBool("MoveTop", false);
-        enemyAnimator.SetBool("MoveBack", false);
-        enemyAnimator.SetBool("Idle", true);
-      }
-      else
-      {
-      Vector2 lookDirection = GetLookAtDirection();
-
-      if(lookDirection.normalized.y < 0.5f && lookDirection.normalized.y > -0.5f)
-      {
-
-        if (lookDirection.normalized.x < - 0.5f)
-        {
-          //Debug.Log("MoveLeft");
-          enemyAnimator.SetBool("MoveRight", false);
-          enemyAnimator.SetBool("MoveLeft", true);
-          enemyAnimator.SetBool("MoveTop", false);
-          enemyAnimator.SetBool("MoveBack", false);
-        //  enemyAnimator.SetBool("Idle", false);
-          transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.y);
-        }
-        else if (lookDirection.normalized.x > 0.5f)
-        {
-          enemyAnimator.SetBool("MoveRight", true);
-          enemyAnimator.SetBool("MoveLeft", false);
-          enemyAnimator.SetBool("MoveTop", false);
-          enemyAnimator.SetBool("MoveBack", false);
-        //  enemyAnimator.SetBool("Idle", false);
-          transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.y);
-        }
-      }
-      else
-      {
-        if(lookDirection.normalized.y > 0.5f)
-        {
-          enemyAnimator.SetBool("MoveBack", true);
-          enemyAnimator.SetBool("MoveLeft", false);
-          enemyAnimator.SetBool("MoveRight", false);
-          enemyAnimator.SetBool("MoveTop", false);
-        //  enemyAnimator.SetBool("Idle", false);
-          transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.y);
-        }
-        else if(lookDirection.normalized.y < -0.5f)
-        {
-          enemyAnimator.SetBool("MoveRight", false);
-          enemyAnimator.SetBool("MoveLeft", false);
-          enemyAnimator.SetBool("MoveTop", true);
-          enemyAnimator.SetBool("MoveBack", false);
-        //  enemyAnimator.SetBool("Idle", false);
-          transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.y);
-        }
-      }
-
-  /*  else
-    {
-      enemyAnimator.SetBool("MoveRight", false);
-      enemyAnimator.SetBool("MoveLeft", false);
-      enemyAnimator.SetBool("MoveTop", false);
-      enemyAnimator.SetBool("MoveBack", false);
-      enemyAnimator.SetBool("Idle", true);
-    }*/
-    }
-  }
-
-
-    public virtual void AttackStart(){
-
-    }
-
-    public virtual void AttackEnd(){
-
-    }
 
     // петод разворачивающий оружие в сторону игрока
     void rangedWeaponRotation()

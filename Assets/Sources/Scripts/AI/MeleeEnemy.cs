@@ -10,7 +10,7 @@ public class MeleeEnemy : Enemy
     	enemyAnimator = GetComponent<Animator>();
     }
 
-
+/*
     public override void AttackStart(){
 
 /*    хотел вторую анимацию добавить получше, но вышлдо так себе
@@ -19,7 +19,7 @@ public class MeleeEnemy : Enemy
         enemyAnimator.SetTrigger("StabAttack");
       else
         enemyAnimator.SetTrigger("CutAttack");
-*/
+
 
         enemyAnimator.SetTrigger("StabAttack");
 
@@ -35,6 +35,7 @@ public class MeleeEnemy : Enemy
         //EquippedWeapon.SetAttackColliderActive(true);
     }
 
+*/
     //  Медод, вызывающий включение/выключение коллизии оружия, мызывается из Animation Event
 /*
     public void MeleeWeaponActivateCollider (int value)

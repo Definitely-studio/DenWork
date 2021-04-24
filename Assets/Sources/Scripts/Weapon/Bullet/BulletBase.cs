@@ -31,11 +31,11 @@ public class BulletBase : MonoBehaviour
       if (other.gameObject.tag == "Enemy" )
       {
 
-          if (other.gameObject.GetComponent<Enemy>() != null)
+          if (other.gameObject.GetComponent<EnemyActions>() != null && other.gameObject.GetComponent<Enemy>() != null)
           {
             if(other.gameObject.GetComponent<Enemy> ().state != States.dead && !other.gameObject.GetComponent<Enemy> ().GetIsDead())
             {
-              other.gameObject.GetComponent<Enemy>().ChangeHP(damage);
+              other.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
               Destroy(gameObject);
             }
           }

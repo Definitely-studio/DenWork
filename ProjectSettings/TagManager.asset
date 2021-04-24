@@ -12,6 +12,7 @@ TagManager:
   - PuppeterSpawner
   - Wall
   - Weapon
+  - Waypoint
   layers:
   - Default
   - TransparentFX
