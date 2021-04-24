@@ -141,7 +141,7 @@ public class AIPathCustom : MonoBehaviour
 
         //вызов функции движения из Enemy
         // Если находисмся в состоянии поиска и нет препятствия перед АИ, то движемся
-        if(Vector2.Distance(rb.position, target.position) >= minDistanceToPlayer && enemy.state == States.lookingfor && enemy.otherEnemyDetector.GetCanWeMove()){
+        if(Vector2.Distance(rb.position, target.position) >= minDistanceToPlayer && enemy.state == States.lookingfor){
             //Debug.Log(enemy);
             enemy.Movement(direction, enemy.maxSpeed);
           }

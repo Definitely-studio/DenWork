@@ -9,8 +9,8 @@ public class BulletBase : MonoBehaviour
   public int damage = 2;
   public Transform barrel;
   public float spreading = 0f;
-  public bool isThisEnemybullet = false; // если false, то пуля может дамажит врагов, если true, то только игрока
-
+  public float destroyTime = 20f;
+  
   // Start is called before the first frame update
   void Start()
   {
@@ -22,13 +22,13 @@ public class BulletBase : MonoBehaviour
       rb.AddForce(trajectory.normalized * speed, ForceMode2D.Impulse);
       //rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
       //print (transform.rotation);
-      Destroy(gameObject, 20); // Destroy this after 20sec
+      Destroy(gameObject, destroyTime); // Destroy this after 20sec
   }
 
   void OnTriggerEnter2D(Collider2D other)
   {
 
-      if (other.gameObject.tag == "Enemy" && !isThisEnemybullet)
+      if (other.gameObject.tag == "Enemy" )
       {
 
           if (other.gameObject.GetComponent<Enemy>() != null)
@@ -41,19 +41,11 @@ public class BulletBase : MonoBehaviour
           }
       }
 
-      if (other.gameObject.tag == "Player" && isThisEnemybullet)
-      {
-          Destroy(gameObject);
-          if (other.gameObject.GetComponent<Player>() != null)
-          {
-              other.gameObject.GetComponent<Player>().ChangeHP(damage);
-          }
-      } 
-
       if (other.gameObject.tag == "Wall")
       {
           Destroy(gameObject);
       }       
   }
+
 
 }

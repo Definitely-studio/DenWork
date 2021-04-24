@@ -29,6 +29,7 @@ public class CameraMovement : MonoBehaviour
             TimeShaking -= dTime;
 
         FollowCamera();
+      
     }
 
     void FollowCamera()
@@ -46,7 +47,7 @@ public class CameraMovement : MonoBehaviour
             OldPositionY = cameraY;
         }
 
-
+        // шэйк камеры 
         float multiplayShaking = 0.1f;
         if (TimeShaking > 0)
         {

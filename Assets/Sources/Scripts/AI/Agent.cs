@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
 
+
     [SerializeField] Transform target;
     [SerializeField] Enemy enemy;
     [SerializeField] float minDistanceToPlayer = 2f;
@@ -25,7 +26,7 @@ public class Agent : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(Vector2.Distance(transform.position, target.position));
+        //Debug.Log(Vector2.Distance(transform.position, target.position));
         /*
         if(enemy.state != States.dead && Vector2.Distance(transform.position, target.position) >= minDistanceToPlayer)
             agent.SetDestination(target.position);

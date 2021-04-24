@@ -45,6 +45,7 @@ public class MeleeEnemy : Enemy
         EquippedWeapon.GetComponent<MeleeWeapon> ().SetActiveCollider(false);
     }
 */
+/*
     public override void Death()
     {
 
@@ -59,9 +60,9 @@ public class MeleeEnemy : Enemy
         rb.bodyType = RigidbodyType2D.Static;
         SetIsDead (true);
         StartCoroutine(Disappear(3.0f));
-        SoulGenerate();
+        
         GameObject.FindWithTag("MainCamera").GetComponent<MainLogic>().EnemyDead();
-    }
+    }*/
 
 
 }
