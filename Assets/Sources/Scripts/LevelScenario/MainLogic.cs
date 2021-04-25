@@ -30,13 +30,14 @@ public class MainLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RefrashProgressLevel();
+       // RefrashProgressLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
         FlashTimer -= Time.deltaTime;
+        if(Flash != null){
         Flash.SetActive(false);
         if (FlashTimer < 0)
         {
@@ -48,20 +49,22 @@ public class MainLogic : MonoBehaviour
                 Flash.SetActive(true);
             }
         }
+        }
     }
 
     public void EnemyDead()
     {
         EnemyKill++;
-        AllEnemy.GetComponent<PuppeteerEnemys>().FirstAttack();
+        //AllEnemy.GetComponent<PuppeteerEnemys>().FirstAttack();
     }
 
     void RefrashProgressLevel()
     {
+
         Rain.GetComponent<Rain>().SetRain(ProgressLevel);
         Water.GetComponent<Water>().SetProgress(ProgressLevel);
        // TextPrigress.text = (SoulsRequiredToWin - ProgressLevel).ToString();
-        AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
+        //AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
     }
 
     public void AddSoul()
@@ -74,7 +77,7 @@ public class MainLogic : MonoBehaviour
             AudioMelody2.volume = ProgressLevel / (5000);
             AudioMelodyMain.volume = 1 - ProgressLevel / (1000);
             ProgressLevel++;
-            Pawns.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
+            //Pawns.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
         }
         else
         {

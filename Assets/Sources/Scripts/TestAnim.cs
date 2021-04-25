@@ -14,7 +14,7 @@ public class TestAnim : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.D))
+      /*  if (Input.GetKeyDown(KeyCode.D))
         {
             playerAnimator.Play("ZombieWalk");  
             rb2d.velocity = new Vector2(10f, 0);            
@@ -24,6 +24,6 @@ public class TestAnim : MonoBehaviour
         {
             playerAnimator.Play("ZombieAttack");             
                   
-        }
+        }*/
     }
 }

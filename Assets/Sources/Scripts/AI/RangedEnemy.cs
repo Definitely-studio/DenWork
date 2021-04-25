@@ -18,7 +18,7 @@ public class RangedEnemy : Enemy
 
     }*/
 
-
+/*
     public override void AttackStart(){
     //  anim.SetBool("Attack", true);
     //  Debug.Log("EnemyAttack");
@@ -39,7 +39,7 @@ public class RangedEnemy : Enemy
       yield return new WaitForSeconds(waitTime);
 //      EquippedWeapon.GetComponent<Gun>().Shoot();
 
-    }
+    }*/
 
 
 }

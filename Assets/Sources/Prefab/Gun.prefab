@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 5191440435245403462}
   - component: {fileID: 5287024234693242502}
   - component: {fileID: 5509141956719615030}
-  - component: {fileID: 458742445039755611}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -241,23 +240,6 @@ MonoBehaviour:
   reloadingTime: 5
   MaxBulletsInMagazine: 6
   shootingSpeed: 60
---- !u!114 &458742445039755611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191440435245403457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7a0845c60aced4387f897f95aa3352, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  damage: 2
-  barrel: {fileID: 5191440435623732240}
-  spreading: 0
-  isThisEnemybullet: 0
 --- !u!1 &5191440435623732243
 GameObject:
   m_ObjectHideFlags: 0
