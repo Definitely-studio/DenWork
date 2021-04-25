@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerActions : MonoBehaviour
 {
+	public Text uiText;
     public GameObject equippedweapon;
     private Player player;
     public Camera cam;
-    private bool keyhere;
+    private bool keyhere = false;
     private string keystring;
 
     public AudioSource MActive1;
@@ -95,25 +98,46 @@ public class PlayerActions : MonoBehaviour
       // Door opening
         if(col.gameObject.tag == "Door")
         {
+        	uiText.text = "Press E to open the door";
+        }
 
-          // Check if key is need
-          if(col.gameObject.GetComponent<DoorController>().keyName != null) {
-          // Check if player have needed key
+    }
 
-          keystring = col.gameObject.GetComponent<DoorController>().keyName;
+    void OnTriggerStay2D(Collider2D col) {
+      // Door opening
+        if(col.gameObject.tag == "Door")
+        {
+        	  
+	          // Check if key is need
+	          if(col.gameObject.GetComponent<DoorController>().keyName != null) {
+	          // Check if player have needed key
 
-          // search for key
-          foreach(Item it in player.GetComponent<Inventory>().itemList) {
-            if (it.itemLabel == keystring)
-            {keyhere = true;}
+	          keystring = col.gameObject.GetComponent<DoorController>().keyName;
+
+	          // search for key
+	          foreach(Item it in player.GetComponent<Inventory>().itemList) {
+	            if (it.itemLabel == keystring)
+	            {keyhere = true;}
+	          }
+
+	          // open door
+	          if( Input.GetKeyDown( KeyCode.E )) {
+		          
+		          if(keyhere){
+		          Destroy(col.gameObject);
+		          }
+		          else {uiText.text = "You don't have the nessesary key";}
+	          }
           }
-          Debug.Log("keyhere = "+keyhere);
-          // open door
-          if(keyhere){
-          Destroy(col.gameObject);
-          }
-          }
-        }   
+        }
+    }
+    void OnTriggerExit2D(Collider2D col) {
+      // Door opening
+        if(col.gameObject.tag == "Door")
+        {
+        	uiText.text = null;
+        }
+
     }
 
 }
