@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   enemy: 0
+  damage: 10
   explosion: {fileID: 489138928597204683}
 --- !u!1001 &176131860875244049
 PrefabInstance:

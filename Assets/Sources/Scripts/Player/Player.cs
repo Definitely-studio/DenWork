@@ -8,7 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
     [SerializeField] private GameObject _gun;
- 
+    
+    [SerializeField] private int MaxHP;
+    private bool isDead = false;
+    private int currentHP;
     private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;
 
@@ -17,12 +20,29 @@ public class Player : MonoBehaviour
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-        //_gun = Instantiate(gun, this.transform);
-       
-        //_gun.transform.SetParent(this.transform);
+    
 
     }
-   
+    
+    public bool GetIsDead(){
+        return isDead;
+    }
+
+    
+
+    public int GetHP()
+    {
+        return currentHP;
+    }
+
+     public void SetHP(int value)
+    {
+         currentHP = value;
+    }
+
+    public void SetIsDead(bool value){
+        isDead = value;
+    }
 
     private void OnEnable()
         {

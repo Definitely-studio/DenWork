@@ -156,6 +156,32 @@ public class PlayerActions : MonoBehaviour
     }
 
 
+   public void ChangeHP(int deltaHP)
+    {
+        if(player!= null ){
+
+        
+            if (deltaHP <0)
+            {
+            //enemy.enemyAnimator.SetTrigger("Damage");
+            }
+            player.SetHP(player.GetHP() + deltaHP);
+            Debug.Log(player.GetHP());
+
+            if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
+            {
+                Death();
+            }
+        }
+    }
+
+    private void Death()
+    {
+      gameObject.GetComponent<Collider2D>().enabled = false;
+      player.SetIsDead(true);
+      Debug.Log("Death");
+
+    }
 
 
     void OnTriggerExit2D(Collider2D col) {

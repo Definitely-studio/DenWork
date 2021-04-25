@@ -18,7 +18,7 @@ public class Agent : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
+        
         target = transform;
         enemyActions = GetComponent<EnemyActions>();
         enemy = GetComponent<Enemy>();
@@ -33,24 +33,7 @@ public class Agent : MonoBehaviour
     {
 
         agent.SetDestination(target.position);
-        //Debug.Log(target.position);
-    
-       /* if(enemy.state != States.attackig){
-            if(Vector2.Distance(transform.position, Player.position) >= minDistanceToPlayer)
-            {
-            SetAgentDestination(Player);
-            enemy.animationsController.SetMovingAnimatorKey(true);
-            }
-        else{
-            SetAgentDestination(transform);
-            enemy.animationsController.SetMovingAnimatorKey(false);
-            enemyActions.Attack();
-            }
-
-        if(enemy.GetIsDead())
-            SetAgentDestination(transform);
-
-        }*/
+        
 
         enemy.animationsController.SetDistance(Vector2.Distance(transform.position, Player.position));
 

@@ -73,6 +73,11 @@ public class Bullet : MonoBehaviour
                     {
                         collision.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
                     }
+                if(collision.gameObject.tag == "Player")
+                    {
+                        collision.gameObject.GetComponent<PlayerActions>().ChangeHP(damage);
+                    }
+
 
                 StartCoroutine(ExampleCoroutine());
                 

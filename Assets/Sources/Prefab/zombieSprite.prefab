@@ -1680,8 +1680,6 @@ MonoBehaviour:
   destroyTime: 3
   wayPoint:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   animationsController: {fileID: 6062941562838285967}
   AudioDead: {fileID: 0}
 --- !u!114 &8689084449421949399

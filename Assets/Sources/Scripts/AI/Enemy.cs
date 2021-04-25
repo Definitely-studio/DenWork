@@ -58,19 +58,7 @@ public class Enemy : PawnBase
           rangedWeaponRotation();
         }
         
-        if(playerDetector != null)
-        {
-         /* if(!isAttackCooldown && playerDetector.GetCanWeShoot() && !GetIsDead())
-          {
-
-            AttackStart();
-          }
-
-          else if(!isAttackCooldown && !playerDetector.GetCanWeShoot())
-          {
-            AttackEnd();
-          }*/
-        }
+        
       }
 
 
