@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeEnemyActions1 : EnemyActions
 {
 
-   
+   float attackCooldownTime = 2f; 
     // Start is called before the first frame update
     void Start()
     {
@@ -38,17 +38,26 @@ public class MeleeEnemyActions1 : EnemyActions
       }
     }
 
-    public override void Attack(){
+    public override void AttackStart(){
         Debug.Log("Attack");
        // enemy.state = States.attackig;
-        enemy.animationsController.SetAttackAnimatorKey();
+        enemy.animationsController.SetAttackAnimatorKey(true);
+
+        StartCoroutine(AttackCooldown(attackCooldownTime));
     }
 
-    
+     public override void AttackEnd(){
+        Debug.Log("AttackEnd");
+       // enemy.state = States.attackig;
+        enemy.animationsController.SetAttackAnimatorKey(false);
 
-    IEnumerator Waiting(float waitTime)
+        
+    }
+
+    IEnumerator AttackCooldown(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        AttackEnd();
     }
 
 

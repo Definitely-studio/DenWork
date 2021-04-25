@@ -20,7 +20,7 @@ public class GameMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+       /* if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Time.timeScale == 0)
             {
@@ -30,7 +30,7 @@ public class GameMenu : MonoBehaviour
             {
                 OnOptions();
             }
-        }
+        }*/
     }
 
     public void ToStartGame()

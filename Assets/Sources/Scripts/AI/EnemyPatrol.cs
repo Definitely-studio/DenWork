@@ -20,7 +20,7 @@ public class EnemyPatrol : NPCBaseFMS
         waypoints = NPC.GetComponent<Enemy>().wayPoint;
         agent = NPC.GetComponent<Agent>();
         currentWP = 0;
-        Debug.Log(waypoints[currentWP]);
+        //Debug.Log(waypoints[currentWP]);
         agent.SetAgentDestination(waypoints[currentWP].transform); 
         //agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform); 
 
@@ -41,7 +41,7 @@ public class EnemyPatrol : NPCBaseFMS
             {
                 currentWP = 0;
             }
-            agent.SetAgentDestination(waypoints[currentWP].transform); 
+            agent.SetAgentDestinationDelay(2f, waypoints[currentWP].transform); 
         }
     }
 
@@ -62,4 +62,6 @@ public class EnemyPatrol : NPCBaseFMS
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject equippedweapon;
-    private Player player;
+    private PlayerOld player;
     public Camera cam;
 
     public AudioSource MActive1;
@@ -15,7 +15,7 @@ public class PlayerActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      player = GetComponent<Player>();
+      player = GetComponent<PlayerOld>();
       
       //Устанавливаем начальное значение Пулек
       if(equippedweapon != null){
@@ -30,10 +30,10 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(!(player.GetIsDead()))
+     /* if(!(player.GetIsDead()))
       {
         InputActions();
-      }
+      }*/
 
 
 
@@ -45,7 +45,7 @@ public class PlayerActions : MonoBehaviour
 
     void InputActions()
     {
-      if(Input.GetButton("Fire1"))
+      /*if(Input.GetButton("Fire1"))
       {
             Attack();
       }
@@ -72,7 +72,7 @@ public class PlayerActions : MonoBehaviour
       if(Input.GetButtonDown("Ability3"))
       {
           
-      }
+      }*/
 
     }
 
@@ -96,8 +96,8 @@ public class PlayerActions : MonoBehaviour
 
     void RescaleBullet(int buller, int maxBullet)
     {
-      if(GetComponent<Player>().UI != null)
-        GetComponent<Player>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
+      if(GetComponent<PlayerOld>().UI != null)
+        GetComponent<PlayerOld>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
     }
 
 

@@ -56,7 +56,11 @@ public class EnemyActions : MonoBehaviour
         Destroy(gameObject, enemy.destroyTime);
     }
 
-    public virtual void Attack(){
+    public virtual void AttackStart(){
+
+    }
+ 
+     public virtual void AttackEnd(){
 
     }
 

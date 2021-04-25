@@ -19,8 +19,8 @@ public class EnemyAnimationsController : MonoBehaviour
         
     }
 
-    public void SetAttackAnimatorKey(){
-        animator.SetTrigger("Attack");
+    public void SetAttackAnimatorKey(bool value){
+        animator.SetBool("Attack", value);
     }
 
     public void SetMovingAnimatorKey(bool value){
@@ -29,6 +29,13 @@ public class EnemyAnimationsController : MonoBehaviour
 
       public void SetPlayerFound(bool value){
         animator.SetBool("PlayerFound", value);
+    }
+      public void SetDistance(float value){
+        animator.SetFloat("Distance", value);
+    }
+
+    public void SetPlayerLookFor(bool value){
+        animator.SetBool("LookFor", value);
     }
 
 

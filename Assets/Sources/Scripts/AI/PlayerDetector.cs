@@ -48,25 +48,61 @@ public class PlayerDetector : MonoBehaviour
       Debug.DrawRay(playerDetect.position, lookDirection * rayLenght, Color.red);
 
       
-      Debug.Log(PlayerInfo.collider);
-      if(PlayerInfo.collider != null){
+      //Debug.Log(PlayerInfo.collider);
+
+      if(PlayerInfo.collider != null && playerisFound == false){
 
         if(PlayerInfo.collider.gameObject.tag == "Player" )
         {
             playerisFound = true;
-            Debug.Log(playerisFound);
+            
             enemy.animationsController.SetPlayerFound(true);
         }
         else
+        {
             playerisFound = false;
         }
-      else
+      }
+      else if(PlayerInfo.collider != null && playerisFound == true)
+      {
+         if(PlayerInfo.collider.gameObject.tag == "Player" )
+        {
+            playerisFound = true;
+           
+            enemy.animationsController.SetPlayerFound(true);
+        }
+        
+          else
+        {
+          StartCoroutine(LookForPlayer(5f));
+          playerisFound = false;
+          enemy.animationsController.SetPlayerFound(false);
+        }
+      }
+      else if(PlayerInfo.collider == null && playerisFound == true)
+      {
+         StartCoroutine(LookForPlayer(5f));
+          playerisFound = false;
+          enemy.animationsController.SetPlayerFound(false);
+      }
+      else if(PlayerInfo.collider == null && playerisFound == false)
+      {
         playerisFound = false;
+        enemy.animationsController.SetPlayerFound(false);
+      }
+      
 
     }
 
 
-
+  IEnumerator LookForPlayer(float waitTime)
+  {
+    
+    enemy.animationsController.SetPlayerLookFor(true);
+    yield return new WaitForSeconds(waitTime);
+    enemy.animationsController.SetPlayerLookFor(false);
+    
+  }
 
     void OnTriggerStay2D(Collider2D other)
     {

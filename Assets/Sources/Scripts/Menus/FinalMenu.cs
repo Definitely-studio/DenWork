@@ -12,10 +12,10 @@ public class FinalMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+       /* if (Input.GetKeyDown(KeyCode.Escape))
         {
             StartCoroutine(LoadYourAsyncScene());
-        }
+        }*/
     }
 
     IEnumerator LoadYourAsyncScene()

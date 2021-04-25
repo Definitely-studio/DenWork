@@ -8,6 +8,11 @@ public class Inventory : MonoBehaviour
 	public GameObject inventoryUI;
 	private bool isInventoryActive = true;
 	
+
+
+	private void Start(){
+		
+	}
 	public Inventory() {
 		itemList = new List<Item>();
 		Debug.Log("Inventory");
@@ -18,7 +23,7 @@ public class Inventory : MonoBehaviour
 
 	private void Update()
 		{
-			if( Input.GetKeyDown( KeyCode.I )) 
+			/*if( Input.GetKeyDown( KeyCode.I )) 
 			{
 
 				    if (isInventoryActive)  {
@@ -29,7 +34,7 @@ public class Inventory : MonoBehaviour
 				    inventoryUI.SetActive(true);
 				    isInventoryActive = true;
 				}	
-			}
+			}*/
 		}
 	public void AddItem(Item item) {
 		itemList.Add(item);
@@ -37,13 +42,13 @@ public class Inventory : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col)
     {
-    	// Pickuping item func
+    	/*// Pickuping item func
         if(col.gameObject.tag == "Pickup" && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")))
         {
           AddItem(col.gameObject.GetComponent<ItemWorld>().item);
           Destroy(col.gameObject);
           Debug.Log("Picked item");
-        }   
+        }   */
 
               
     }

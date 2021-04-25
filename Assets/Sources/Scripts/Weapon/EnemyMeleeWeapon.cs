@@ -32,9 +32,9 @@ public class EnemyMeleeWeapon : MonoBehaviour
       if(other.gameObject.tag == "Player"){
       
 
-            if (other.gameObject.GetComponent<Player> () != null)
+            if (other.gameObject.GetComponent<PlayerOld> () != null)
             {
-                other.gameObject.GetComponent<Player> ().ChangeHP(damage);
+                other.gameObject.GetComponent<PlayerOld> ().ChangeHP(damage);
             }
           }
 

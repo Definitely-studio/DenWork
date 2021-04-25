@@ -52,20 +52,35 @@ public class Agent : MonoBehaviour
 
         }*/
 
-        
-            
+        enemy.animationsController.SetDistance(Vector2.Distance(transform.position, Player.position));
+
     }
+
 
     public NavMeshAgent GetAgent(){
         return agent;
     }
 
      public void SetAgentDestination(Transform DestTarget){
-        Debug.Log(DestTarget.position);
+        //Debug.Log(DestTarget.position);
         
         target = DestTarget;
     }
 
+    public void SetAgentDestinationDelay(float waitTime, Transform DestTarget)
+    {
+        StartCoroutine(Waiting( waitTime, DestTarget));
+
+    }
+
+IEnumerator Waiting(float waitTime, Transform DestTarget)
+  {
+    yield return new WaitForSeconds(waitTime);
+     SetAgentDestination(DestTarget); 
+    
+  }
+
+    
 
     
 }
