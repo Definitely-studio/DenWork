@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField]private float speed;
     [SerializeField]private float enemy;
+    [SerializeField]private int damage;
     [SerializeField] private ParticleSystem explosion;
 
     private Rigidbody2D _rigidbody;
@@ -13,6 +14,7 @@ public class Bullet : MonoBehaviour
 
     public float Enemy { get => enemy; set => enemy = value; }
     public float Speed { get => speed; set => speed = value; }
+    public int Damage { get => damage; set => damage = value; }
 
     private void Awake()
     {
@@ -61,6 +63,17 @@ public class Bullet : MonoBehaviour
                 Speed = 0;
                 explosion.gameObject.SetActive(true);
                 //his.delay(explosion.duration);
+
+                /*if(collision.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer == "Player")
+                    {
+                        collision.gameObject.GetComponent<PlayerOld>().ChangeHP(damage);
+                    }*/
+
+                if(collision.gameObject.tag == "Enemy")
+                    {
+                        collision.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
+                    }
+
                 StartCoroutine(ExampleCoroutine());
                 
             }

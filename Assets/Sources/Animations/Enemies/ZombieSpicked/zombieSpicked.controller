@@ -79,7 +79,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 1
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8902615383220554407}
   m_Solo: 0
@@ -133,7 +133,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: be8bf3c817b973a4a95d8a7abf5889ed, type: 2}
+  m_Motion: {fileID: 7400000, guid: ca27bebf7c109e349a5e9893042bb74f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -296,7 +296,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 3
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3531627223239078147}
   m_Solo: 0
@@ -342,7 +342,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: zombieSprite
+  m_Name: zombieSpicked
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isMoving
@@ -398,7 +398,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 3
+    m_EventTreshold: 5
   - m_ConditionMode: 1
     m_ConditionEvent: PlayerFound
     m_EventTreshold: 0
@@ -458,7 +458,7 @@ AnimatorStateMachine:
     m_Position: {x: 380, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3531627223239078147}
-    m_Position: {x: 390, y: -170, z: 0}
+    m_Position: {x: 380, y: -170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 3639360923164516983}
@@ -466,7 +466,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -180, y: 360, z: 0}
-  m_EntryPosition: {x: -220, y: -60, z: 0}
+  m_EntryPosition: {x: -620, y: 80, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 8751883887635237313}
@@ -492,7 +492,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: be8bf3c817b973a4a95d8a7abf5889ed, type: 2}
+  m_Motion: {fileID: 7400000, guid: ca27bebf7c109e349a5e9893042bb74f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -622,7 +622,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: be8bf3c817b973a4a95d8a7abf5889ed, type: 2}
+  m_Motion: {fileID: 7400000, guid: ca27bebf7c109e349a5e9893042bb74f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -667,7 +667,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 986afc306c17125488b1da6faa92199e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0f5ea9bcb3d172e4185d28b785436b3e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

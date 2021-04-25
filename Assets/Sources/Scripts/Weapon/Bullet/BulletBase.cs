@@ -28,7 +28,7 @@ public class BulletBase : MonoBehaviour
   void OnTriggerEnter2D(Collider2D other)
   {
 
-      if (other.gameObject.tag == "Enemy" )
+      /*if (other.gameObject.tag == "Enemy" )
       {
 
           if (other.gameObject.GetComponent<EnemyActions>() != null && other.gameObject.GetComponent<Enemy>() != null)
@@ -39,7 +39,7 @@ public class BulletBase : MonoBehaviour
               Destroy(gameObject);
             }
           }
-      }
+      }*/
 
       if (other.gameObject.tag == "Wall")
       {

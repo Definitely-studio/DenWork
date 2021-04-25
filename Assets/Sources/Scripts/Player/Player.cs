@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
-     [SerializeField] private GameObject _gun;
+    [SerializeField] private GameObject _gun;
  
     private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;

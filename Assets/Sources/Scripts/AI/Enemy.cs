@@ -31,13 +31,14 @@ public class Enemy : PawnBase
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindWithTag("Player");
         target = GameObject.FindWithTag("Player").transform;
         state = (state != States.passive) ? States.lookingfor : States.passive;
         rb = GetComponent<Rigidbody2D> ();
         //bodySprite = transform.Find("Body").transform;
         //enemyAnimator = GetComponent <Animator> ();
         //playerDetector = transform.Find("PlayerDetector").GetComponent<PlayerDetector>();
-        target = GameObject.FindWithTag("Player").transform;
+      
     }
 
 

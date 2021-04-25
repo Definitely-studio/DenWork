@@ -128,7 +128,7 @@ public class PlayerActions : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col) {
       // Door opening
-        if(col.gameObject.tag == "Door")
+        /*if(col.gameObject.tag == "Door")
         {
         	  
 	          // Check if key is need
@@ -152,8 +152,12 @@ public class PlayerActions : MonoBehaviour
 		          else {uiText.text = "You don't have the nessesary key";}
 	          }
           }
-        }
+        }*/
     }
+
+
+
+
     void OnTriggerExit2D(Collider2D col) {
       // Door opening
         if(col.gameObject.tag == "Door")
