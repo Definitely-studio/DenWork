@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public string keyNeeded = "White Key";
+	public bool isKeyNeed = true; 
+	public bool doorClosed = true;
+    public string keyName = "White Key";
 }

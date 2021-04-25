@@ -4,49 +4,30 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] private GameObject _gun;
-    [SerializeField] private Input _input;
+    public GameObject equippedweapon;
     private Player player;
     public Camera cam;
+    private bool keyhere;
+    private string keystring;
+
     public AudioSource MActive1;
     public AudioSource MActive2;
     public AudioSource MActive3;
-
-
-
-     private void Awake()
-    {
-        _input = new Input();
-        _input.Player.Shoot.performed += context => Shoot();
-        /*_gun = Instantiate(gun, this.transform);
-       
-        _gun.transform.SetParent(this.transform);*/
-
-    }
-
 
     // Start is called before the first frame update
     void Start()
     {
       player = GetComponent<Player>();
-      
-     /* //Устанавливаем начальное значение Пулек
-      if(equippedweapon != null){
-        if(equippedweapon.GetComponent<GunBase>() != null)
-          {
-              RescaleBullet(equippedweapon.GetComponent<GunBase>().GetCurrentBulletInMagazine(), equippedweapon.GetComponent<GunBase>().MaxBulletsInMagazine);
-          }
-      }*/
-
+//      RescaleBullet(equippedweapon.GetComponent<Gun>().currentBulletsInMagazine, equippedweapon.GetComponent<Gun>().MaxBulletsInMagazine);
     }
 
     // Update is called once per frame
     void Update()
     {
-     /* if(!(player.GetIsDead()))
+      if(!(player.GetIsDead()))
       {
         InputActions();
-      }*/
+      }
 
 
 
@@ -58,60 +39,81 @@ public class PlayerActions : MonoBehaviour
 
     void InputActions()
     {
-
-      
-      /*if(Input.GetButton("Fire1"))
+      if(Input.GetButton("Fire1"))
       {
             Attack();
       }
 
 
-      }*/
+      if(Input.GetButtonDown("Submit"))
+      {
 
-    }
+      }
 
-      private void Shoot()
-    {
-      if (_gun != null){
-        _gun.GetComponent<Gun>().Shoot();
+      if(Input.GetButtonDown("Ability1"))
+      {
+ 
 
-        }        
+      }
+
+      if(Input.GetButtonDown("Ability2"))
+      {
+      
+        
+
+      }
+
+      if(Input.GetButtonDown("Ability3"))
+      {
+          
+      }
+
     }
 
     IEnumerator HealPlayer(int waitTime)
     {
+    
         yield return new WaitForSeconds(1);
-    }
+
+  }
 
     void Attack()
     {
-      /*if(equippedweapon != null){
-        if(equippedweapon.GetComponent<GunBase>() != null)
+        if(equippedweapon)
         {
             equippedweapon.GetComponent<GunBase>().Shoot();
-            RescaleBullet(equippedweapon.GetComponent<GunBase>().GetCurrentBulletInMagazine(), equippedweapon.GetComponent<GunBase>().MaxBulletsInMagazine);
         }
-      }*/
     }
 
-    /*void RescaleBullet(int buller, int maxBullet)
+    void RescaleBullet(int buller, int maxBullet)
     {
-      if(GetComponent<PlayerOld>().UI != null)
-        GetComponent<PlayerOld>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
+        GetComponent<Player>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
     }
-*/
 
-    void OnTriggerStay2D(Collider2D col)
-    {
+
+    void OnTriggerEnter2D(Collider2D col) {
       // Door opening
         if(col.gameObject.tag == "Door")
         {
-          // if(player.GetComponent<Inventory>().itemList. col.gameObject.GetComponent<DoorController>().keyNeeded == );
-          Destroy(col.gameObject);
-          Debug.Log("Picked item");
-        }   
 
-              
+          // Check if key is need
+          if(col.gameObject.GetComponent<DoorController>().keyName != null) {
+          // Check if player have needed key
+
+          keystring = col.gameObject.GetComponent<DoorController>().keyName;
+
+          // search for key
+          foreach(Item it in player.GetComponent<Inventory>().itemList) {
+            if (it.itemLabel == keystring)
+            {keyhere = true;}
+          }
+          Debug.Log("keyhere = "+keyhere);
+          // open door
+          if(keyhere){
+          Destroy(col.gameObject);
+          }
+          }
+        }   
     }
 
 }
