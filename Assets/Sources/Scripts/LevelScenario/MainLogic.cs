@@ -55,7 +55,7 @@ public class MainLogic : MonoBehaviour
     public void EnemyDead()
     {
         EnemyKill++;
-        AllEnemy.GetComponent<PuppeteerEnemys>().FirstAttack();
+        //AllEnemy.GetComponent<PuppeteerEnemys>().FirstAttack();
     }
 
     void RefrashProgressLevel()
@@ -64,7 +64,7 @@ public class MainLogic : MonoBehaviour
         Rain.GetComponent<Rain>().SetRain(ProgressLevel);
         Water.GetComponent<Water>().SetProgress(ProgressLevel);
        // TextPrigress.text = (SoulsRequiredToWin - ProgressLevel).ToString();
-        AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
+        //AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
     }
 
     public void AddSoul()
@@ -77,7 +77,7 @@ public class MainLogic : MonoBehaviour
             AudioMelody2.volume = ProgressLevel / (5000);
             AudioMelodyMain.volume = 1 - ProgressLevel / (1000);
             ProgressLevel++;
-            Pawns.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
+            //Pawns.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
         }
         else
         {

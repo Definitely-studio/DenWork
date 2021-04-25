@@ -55,7 +55,8 @@ public class PlayerDetector : MonoBehaviour
         if(PlayerInfo.collider.gameObject.tag == "Player" )
         {
             playerisFound = true;
-            
+            StopCoroutine("LookForPlayer");
+            enemy.animationsController.SetPlayerLookFor(false);
             enemy.animationsController.SetPlayerFound(true);
         }
         else
@@ -68,7 +69,8 @@ public class PlayerDetector : MonoBehaviour
          if(PlayerInfo.collider.gameObject.tag == "Player" )
         {
             playerisFound = true;
-           
+            StopCoroutine("LookForPlayer");
+            enemy.animationsController.SetPlayerLookFor(false);
             enemy.animationsController.SetPlayerFound(true);
         }
         

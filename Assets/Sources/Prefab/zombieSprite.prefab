@@ -1576,6 +1576,7 @@ GameObject:
   - component: {fileID: 2247175230222732991}
   - component: {fileID: 6062941562838285967}
   - component: {fileID: 8067171207805350219}
+  - component: {fileID: 9067436508961441281}
   m_Layer: 0
   m_Name: zombieSprite
   m_TagString: Enemy
@@ -1786,6 +1787,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7213859255093735838}
+--- !u!58 &9067436508961441281
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340932077689384585}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0099738445, y: 0.16812955}
+  serializedVersion: 2
+  m_Radius: 0.14251651
 --- !u!1 &5363031240551724537
 GameObject:
   m_ObjectHideFlags: 0

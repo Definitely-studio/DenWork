@@ -2,25 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chase : NPCBaseFMS
+public class MeleeEnemyAttack : NPCBaseFMS
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NPC = animator.gameObject;
         agent = NPC.GetComponent<Agent>();
-        agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform);
+        agent.SetAgentDestination(animator.gameObject.transform);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Vector2.Distance(NPC.transform.position, NPC.GetComponent<Enemy>().Player.transform.position) < minDistancetoDestination)
-        {
-            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform);
-        }
-        
-
+       agent.SetAgentDestination(animator.gameObject.transform);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

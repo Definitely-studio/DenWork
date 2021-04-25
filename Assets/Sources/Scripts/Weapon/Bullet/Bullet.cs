@@ -52,8 +52,9 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-         if ( collision.gameObject.GetComponentInParent<ParentfromBullet>()
-         != null){
+         if ( collision.gameObject.GetComponent<ParentfromBullet>()
+         != null && this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != null){
+
             if ( collision.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer
             != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
             {
