@@ -7,6 +7,8 @@ public class PlayerActions : MonoBehaviour
     public GameObject equippedweapon;
     private Player player;
     public Camera cam;
+    private bool keyhere;
+    private string keystring;
 
     public AudioSource MActive1;
     public AudioSource MActive2;
@@ -89,17 +91,29 @@ public class PlayerActions : MonoBehaviour
     }
 
 
-    void OnTriggerStay2D(Collider2D col)
-    {
+    void OnTriggerEnter2D(Collider2D col) {
       // Door opening
         if(col.gameObject.tag == "Door")
         {
-          // if(player.GetComponent<Inventory>().itemList. col.gameObject.GetComponent<DoorController>().keyNeeded == );
-          Destroy(col.gameObject);
-          Debug.Log("Picked item");
-        }   
 
-              
+          // Check if key is need
+          if(col.gameObject.GetComponent<DoorController>().keyName != null) {
+          // Check if player have needed key
+
+          keystring = col.gameObject.GetComponent<DoorController>().keyName;
+
+          // search for key
+          foreach(Item it in player.GetComponent<Inventory>().itemList) {
+            if (it.itemLabel == keystring)
+            {keyhere = true;}
+          }
+          Debug.Log("keyhere = "+keyhere);
+          // open door
+          if(keyhere){
+          Destroy(col.gameObject);
+          }
+          }
+        }   
     }
 
 }

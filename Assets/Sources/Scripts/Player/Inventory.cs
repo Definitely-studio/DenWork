@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private List<Item> itemList;
+    public List<Item> itemList;
 	public GameObject inventoryUI;
 	private bool isInventoryActive = true;
 	
