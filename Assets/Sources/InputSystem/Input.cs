@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Sources/InputSystem/Input.inputactions'
 
 using System;
 using System.Collections;
@@ -38,6 +38,22 @@ public class @Input : IInputActionCollection, IDisposable
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""7a6cd954-4772-43ad-a3b5-aac30360fed6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bd389b9-3bb4-4000-915f-18229dd1f81c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Invent"",
+                    ""type"": ""Button"",
+                    ""id"": ""cef9c438-82a0-4ead-b694-5f79b0109bf0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -120,6 +136,28 @@ public class @Input : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd9bf240-67e3-4bca-9d21-b3a20159a0cf"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bda70fd-1797-4eb0-8626-b3a493971f0c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Invent"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +169,8 @@ public class @Input : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
+        m_Player_Invent = m_Player.FindAction("Invent", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +223,8 @@ public class @Input : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Submit;
+    private readonly InputAction m_Player_Invent;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -190,6 +232,8 @@ public class @Input : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @Submit => m_Wrapper.m_Player_Submit;
+        public InputAction @Invent => m_Wrapper.m_Player_Invent;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +252,12 @@ public class @Input : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Submit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
+                @Invent.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
+                @Invent.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
+                @Invent.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +271,12 @@ public class @Input : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+                @Invent.started += instance.OnInvent;
+                @Invent.performed += instance.OnInvent;
+                @Invent.canceled += instance.OnInvent;
             }
         }
     }
@@ -230,5 +286,7 @@ public class @Input : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnInvent(InputAction.CallbackContext context);
     }
 }

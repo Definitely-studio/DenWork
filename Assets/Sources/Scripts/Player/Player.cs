@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
         //_gun.transform.SetParent(this.transform);
 
     }
+   
+
+    private void OnEnable()
+        {
+            _input.Enable();
+        }
 
     private void Shoot()
     {
@@ -31,10 +37,7 @@ public class Player : MonoBehaviour
         }    
     }
 
-    private void OnEnable()
-    {
-        _input.Enable();
-    }
+    
 
     private void Update()
     {

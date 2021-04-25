@@ -9,25 +9,48 @@ public class PlayerActions : MonoBehaviour
     public Camera cam;
     private bool keyhere;
     private string keystring;
+    public Inventory inventory;
+    [SerializeField] private Input _input;
 
     public AudioSource MActive1;
     public AudioSource MActive2;
     public AudioSource MActive3;
 
     // Start is called before the first frame update
+
+    private void Awake(){
+
+      /*_input = new Input();
+      _input.Player.Invent.performed += context => ActivateInventory();*/
+		 
+	  }
+
+/*    private void OnEnable()
+      {
+        _input.Enable();
+			
+    } 
+
+    public void ActivateInventory()
+    {
+      if(inventory != null)
+        inventory.ActivateInventory();
+    }*/
+
     void Start()
     {
       player = GetComponent<Player>();
+      
 //      RescaleBullet(equippedweapon.GetComponent<Gun>().currentBulletsInMagazine, equippedweapon.GetComponent<Gun>().MaxBulletsInMagazine);
     }
 
     // Update is called once per frame
     void Update()
     {
-      if(!(player.GetIsDead()))
+     /* if(!(player.GetIsDead()))
       {
         InputActions();
-      }
+      }*/
 
 
 
@@ -39,7 +62,7 @@ public class PlayerActions : MonoBehaviour
 
     void InputActions()
     {
-      if(Input.GetButton("Fire1"))
+    /*  if(Input.GetButton("Fire1"))
       {
             Attack();
       }
@@ -66,7 +89,7 @@ public class PlayerActions : MonoBehaviour
       if(Input.GetButtonDown("Ability3"))
       {
           
-      }
+      }*/
 
     }
 
@@ -76,7 +99,7 @@ public class PlayerActions : MonoBehaviour
         yield return new WaitForSeconds(1);
 
   }
-
+/*
     void Attack()
     {
         if(equippedweapon)
@@ -84,11 +107,11 @@ public class PlayerActions : MonoBehaviour
             equippedweapon.GetComponent<GunBase>().Shoot();
         }
     }
-
-    void RescaleBullet(int buller, int maxBullet)
+*/
+    /*void RescaleBullet(int buller, int maxBullet)
     {
         GetComponent<Player>().UI.GetComponent<UIGameMode>().ShowBullet(buller, maxBullet); //��������� �������
-    }
+    }*/
 
 
     void OnTriggerEnter2D(Collider2D col) {

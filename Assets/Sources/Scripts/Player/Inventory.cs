@@ -6,13 +6,23 @@ public class Inventory : MonoBehaviour
 {
     public List<Item> itemList;
 	public GameObject inventoryUI;
+	[SerializeField] private Input _input;
 	private bool isInventoryActive = true;
+	private bool isPickupItemOverlap = false;
+	private GameObject OverlapedItem;
 	
 
 
-	private void Start(){
-		
-	}
+
+  private void Awake()
+    {
+        _input = new Input();
+        _input.Player.Invent.performed += context => ActivateInventory();
+		_input.Player.Submit.performed += context => Pickup();
+
+    }
+
+
 	public Inventory() {
 		itemList = new List<Item>();
 		Debug.Log("Inventory");
@@ -21,34 +31,58 @@ public class Inventory : MonoBehaviour
 		Debug.Log(itemList.Count);
 	}
 
+
+
+	private void ActivateInventory()
+	{
+		if (isInventoryActive)  {
+				inventoryUI.SetActive(false);
+				isInventoryActive = false;
+			}
+				else{
+				inventoryUI.SetActive(true);
+				isInventoryActive = true;
+			}	
+	}
+
+	private void Pickup()
+	{
+		if(OverlapedItem != null)
+		{
+			AddItem(OverlapedItem.GetComponent<ItemWorld>().item);
+        	Destroy(OverlapedItem);
+		}
+	}
 	private void Update()
 		{
-			/*if( Input.GetKeyDown( KeyCode.I )) 
-			{
-
-				    if (isInventoryActive)  {
-				    inventoryUI.SetActive(false);
-				    isInventoryActive = false;
-				}
-				    else{
-				    inventoryUI.SetActive(true);
-				    isInventoryActive = true;
-				}	
-			}*/
+			
 		}
 	public void AddItem(Item item) {
+
 		itemList.Add(item);
 	}
 
     void OnTriggerStay2D(Collider2D col)
     {
-    	/*// Pickuping item func
-        if(col.gameObject.tag == "Pickup" && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")))
+    	// Pickuping item func
+        if(col.gameObject.tag == "Pickup")
         {
-          AddItem(col.gameObject.GetComponent<ItemWorld>().item);
-          Destroy(col.gameObject);
-          Debug.Log("Picked item");
-        }   */
+		  isPickupItemOverlap = true;
+		  OverlapedItem = col.gameObject;
+
+        }   
+
+              
+    }
+	void OnTriggerExit2D(Collider2D col)
+    {
+    	// Pickuping item func
+        if(col.gameObject.tag == "Pickup")
+        {
+		  OverlapedItem = null;
+		  isPickupItemOverlap = false;
+
+        }   
 
               
     }
