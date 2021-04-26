@@ -104,8 +104,19 @@ public class Enemy : PawnBase
   private void OnTriggerEnter2D(Collider2D other)
     {
       
-
-        if (other.gameObject.GetComponent<Bullet>() != null)
+        if(other.gameObject.tag == "bullet" )
+        {
+          if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
+          {
+            Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+            playerDetector.SetLookForState();
+            playerDetector.lastViewdPosition.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+            agent.SetAgentDestination(playerDetector.lastViewdPosition);
+            //animationsController.SetPlayerLookFor(true);
+            enemyActions.ChangeHP(-newBullet.Enemy);
+          }
+        }
+       /* if (other.gameObject.GetComponent<Bullet>() != null)
         {
           if (other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
         {
@@ -120,6 +131,7 @@ public class Enemy : PawnBase
         }
 
         }
+        */
     }
   
 

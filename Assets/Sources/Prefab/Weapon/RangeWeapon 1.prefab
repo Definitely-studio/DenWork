@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3551811998244872918}
   - component: {fileID: 6860953188805739359}
   m_Layer: 0
-  m_Name: RangeWeapon
+  m_Name: RangeWeapon 1
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246559294273571018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.004, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1794715090197537037}
@@ -81,7 +81,7 @@ MonoBehaviour:
   weapon: {fileID: 7670697199994259537}
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
   ShootClip: {fileID: 0}
-  ReloadClip: {fileID: 0}
+  ReloadClip: {fileID: 8705494052531946156}
   crosshair: {fileID: 0}
   ui: {fileID: 0}
   sound: {fileID: 8300000, guid: 6cc72db64278ed644bff4f1cd4c45fb9, type: 3}
@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2423837915561441931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.202, y: 0.006, z: 1}
+  m_LocalPosition: {x: 0.202, y: 0.006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6665282572789689227}
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: -2588996169060052748, guid: b5bd139a418c09a47a2706c704407950, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -481,6 +481,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4291943031699242381, guid: ccad162e2715b254f96e3c9c536c9d4e, type: 3}
   m_PrefabInstance: {fileID: 2555811133292584064}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &8705494052531946156 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6604581736054906412, guid: ccad162e2715b254f96e3c9c536c9d4e, type: 3}
+  m_PrefabInstance: {fileID: 2555811133292584064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3263203630302341609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,6 +571,10 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.071843185
       objectReference: {fileID: 0}
+    - target: {fileID: -5682776105352311809, guid: 43597739f2a5f2c4aaa0c8e048032019, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -5582837473561099663, guid: 43597739f2a5f2c4aaa0c8e048032019, type: 3}
       propertyPath: m_Name
       value: PlayerHands
@@ -589,6 +598,10 @@ PrefabInstance:
     - target: {fileID: -4435653689288128132, guid: 43597739f2a5f2c4aaa0c8e048032019, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -80.516
+      objectReference: {fileID: 0}
+    - target: {fileID: -1975396832031530388, guid: 43597739f2a5f2c4aaa0c8e048032019, type: 3}
+      propertyPath: m_SortingOrder
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1444360568868037713, guid: 43597739f2a5f2c4aaa0c8e048032019, type: 3}
       propertyPath: m_LocalRotation.w

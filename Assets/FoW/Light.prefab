@@ -104,4 +104,4 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 16
-  _angle: 60
+  _angle: 80

@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
-    [SerializeField] private GameObject socket;
+    public GameObject socket;
     [SerializeField] private Gun gun;
     [SerializeField] private FieldOfView field;
     [SerializeField] private PlayerActions playerActions;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-        _gun = Instantiate(gun, this.transform);
+        _gun = Instantiate(gun, socket.transform);
         _gun.transform.SetParent(socket.transform);
       
 
@@ -75,13 +75,19 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-         if (_gun != null){
-        _gun.GetComponent<Gun>().Shoot();
+        if (_gun != null){
+            //_gun.GetComponent<Gun>().Shoot();
         if(audioSource.isPlaying != true)
             audioSource.PlayOneShot(_gun.GetAudioClip()); 
 
-        }    
+        
+        
+        _gun.Shoot();
+            f_Animator.SetTrigger("Shot");   
+            b_Animator.SetTrigger("Shot"); 
+        }
     }
+    
     public void UpdateGun(Gun targetGun)
     {
         Gun i = _gun;
@@ -135,12 +141,12 @@ public class Player : MonoBehaviour
             body.transform.eulerAngles = new Vector3(0f, 180f, 0f);             
         }
         if (lookDir.y > 0) {
-            f_body.SetActive(false);
-            b_body.SetActive(true);           
-        }
-        if (lookDir.y < 0) {
             f_body.SetActive(true);
             b_body.SetActive(false);           
+        }
+        if (lookDir.y < 0) {
+            f_body.SetActive(false);
+            b_body.SetActive(true);           
         }          
 
 
@@ -155,5 +161,29 @@ public class Player : MonoBehaviour
         }     
 
     }
+
+               private void OnTriggerEnter2D(Collider2D other)
+    {
+         //  Debug.Log(other.gameObject);
+           if(other.gameObject.tag == "bullet" )
+        {
+          if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
+          {
+                Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+
+            playerActions.ChangeHP(-newBullet.Damage);
+          }
+        }
+
+
+        /*if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+        {
+            Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+
+            playerActions.ChangeHP(-newBullet.Damage);
+
+        }*/
+    }
+
 
 }

@@ -20,7 +20,6 @@ public class RangedEnemyActions : EnemyActions
     }
 
 
-    //активируем коллизию которая отвечает за атаку
     public void Shoot()
     {
       if(weapon != null)

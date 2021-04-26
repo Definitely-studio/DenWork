@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     public int Enemy { get => enemy; set => enemy = value; }
     public float Speed { get => speed; set => speed = value; }
     public int Damage { get => damage; set => damage = value; }
+    public string tag;
 
     private void Awake()
     {
@@ -55,7 +56,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
+        if(collision.gameObject.tag != tag)
+        {
+             Speed = 0;
+                explosion.gameObject.SetActive(true);
+                StartCoroutine(ExampleCoroutine());
+        }
+        /*
          if ( collision.gameObject.GetComponent<ParentfromBullet>()
          != null && this.gameObject.GetComponentInParent<ParentfromBullet>() != null){
 
@@ -66,15 +74,16 @@ public class Bullet : MonoBehaviour
                 explosion.gameObject.SetActive(true);
                 //his.delay(explosion.duration);
 
-               /* if(collision.gameObject.tag == "Player")
+               /if(collision.gameObject.tag == "Player")
                     {
                         collision.gameObject.GetComponent<PlayerActions>().ChangeHP(damage);
-                    }*/
+                    }
 
 
                 StartCoroutine(ExampleCoroutine());
                 
             }
          }
+         */
     }
 }

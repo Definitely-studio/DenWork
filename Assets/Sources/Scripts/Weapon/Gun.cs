@@ -30,6 +30,7 @@ public class Gun : MonoBehaviour
     private Vector2 _aimPoint;
     private Rigidbody2D _rigidbody;
     private ParentfromBullet parentfrom;
+    private Transform socket;
    
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class Gun : MonoBehaviour
         crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
         canShoot = true;
         ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
+        socket = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().socket.transform;
     }
     public AudioClip GetAudioClip()
     {
@@ -70,7 +72,7 @@ public class Gun : MonoBehaviour
     {
         Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
         Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
-         _rigidbody.transform.position = new Vector3(parentfrom.transform.position.x, parentfrom.transform.position.y, _rigidbody.transform.position.z);
+         _rigidbody.transform.position = new Vector3(socket.position.x, socket.position.y, _rigidbody.transform.position.z);
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
@@ -105,6 +107,8 @@ public class Gun : MonoBehaviour
         }
         //�������� ��� ���������, ���� �� ����� �������, + ���������� ������ �����������
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
+        //newBullet.GetComponent<ParentfromBullet>().gameObject.layer = this.GetComponentInParent<ParentfromBullet>().gameObject.layer;
+        //newBullet.transform.SetParent(null);
         newBullet.gameObject.SetActive(false);
         newBullet.Enemy = _enemy;
         newBullet.Speed = _bulletSpeed;
