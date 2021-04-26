@@ -7,6 +7,7 @@ public class PlayerDetector : MonoBehaviour
   public float rayLenght = 1.0f;
   public Transform playerDetect;
   public Transform target;
+  public Transform lastViewdPosition;
   public LayerMask layerMask;
   public Enemy enemy;
   bool playerisFound = false;
@@ -21,6 +22,7 @@ public class PlayerDetector : MonoBehaviour
         playerDetect = transform;
         target = GameObject.FindWithTag("Player").transform;
         enemy = GetComponentInParent<Enemy>();
+        lastViewdPosition = target;
 
     }
 
@@ -78,6 +80,7 @@ public class PlayerDetector : MonoBehaviour
         
           else
         {
+          
           StartCoroutine(LookForPlayer(5f));
           playerisFound = false;
           enemy.animationsController.SetPlayerFound(false);
@@ -85,7 +88,8 @@ public class PlayerDetector : MonoBehaviour
       }
       else if(PlayerInfo.collider == null && playerisFound == true)
       {
-         StartCoroutine(LookForPlayer(5f));
+          
+          StartCoroutine(LookForPlayer(5f));
           playerisFound = false;
           enemy.animationsController.SetPlayerFound(false);
       }
@@ -98,10 +102,13 @@ public class PlayerDetector : MonoBehaviour
 
     }
 
-
+  public void SetLookForState()
+  {
+      StartCoroutine(LookForPlayer(5f));
+  }
   IEnumerator LookForPlayer(float waitTime)
   {
-    
+    lastViewdPosition.position = new Vector3(target.position.x,target.position.y, target.position.z);
     enemy.animationsController.SetPlayerLookFor(true);
     yield return new WaitForSeconds(waitTime);
     enemy.animationsController.SetPlayerLookFor(false);

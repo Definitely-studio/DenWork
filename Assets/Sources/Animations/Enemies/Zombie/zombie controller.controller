@@ -56,7 +56,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4399116211426278217}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -3560553271497844687}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -106,7 +107,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 1
+    m_EventTreshold: 0.3
   - m_ConditionMode: 2
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
@@ -310,6 +311,22 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+--- !u!114 &-3560553271497844687
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ebf9f41d686f243b499c0f180c8ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPC: {fileID: 0}
+  agent: {fileID: 0}
+  Destination: {fileID: 0}
+  minDistancetoDestination: 3
 --- !u!1101 &-2934148204937843735
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -352,9 +369,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: Distance
-    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3531627223239078147}
   m_Solo: 0
@@ -493,7 +507,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 1
+    m_EventTreshold: 0.3
   - m_ConditionMode: 1
     m_ConditionEvent: PlayerFound
     m_EventTreshold: 0

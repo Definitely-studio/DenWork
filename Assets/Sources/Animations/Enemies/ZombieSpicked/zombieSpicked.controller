@@ -79,7 +79,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 5
+    m_EventTreshold: 2.5
   - m_ConditionMode: 2
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
@@ -302,7 +302,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 5
+    m_EventTreshold: 2.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3531627223239078147}
   m_Solo: 0
@@ -466,7 +466,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 5
+    m_EventTreshold: 2.5
   - m_ConditionMode: 2
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
@@ -541,7 +541,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -180, y: 360, z: 0}
-  m_EntryPosition: {x: -620, y: 80, z: 0}
+  m_EntryPosition: {x: 90, y: 540, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 7776685953930813752}

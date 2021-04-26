@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
         _rigidbody.gravityScale = 0f;
+       
         //_consSpeed = Speed;
     }
 
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour
     }
     private void Start()
     {
-        
+         //Destroy(gameObject, 10f);
     }
 
     /*private void Move()

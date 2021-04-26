@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject _aimGameObject;
     [SerializeField] private int _enemy;
     [SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _shootingSpeed;
     [SerializeField] private float _reloadingTime;
     [SerializeField] private int _bulletsMaxCount;
     [SerializeField] private SpriteRenderer weapon;
@@ -16,24 +17,31 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioSource ShootClip;
     [SerializeField] private AudioSource ReloadClip;
     [SerializeField] private Crosshair crosshair;
+    [SerializeField] private UIGameMode ui;
+    
 
 
     private List<Bullet> _bullets;
+    private bool canShoot;
     private int _bulletsCurrentCount;
     private bool _isReloading;
     private Vector2 _aimPoint;
     private Rigidbody2D _rigidbody;
     private ParentfromBullet parentfrom;
+   
     private void Awake()
     {
          field = FindObjectOfType<FieldOfView>();
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
         parentfrom = this.GetComponentInParent<ParentfromBullet>();
-        _rigidbody.gravityScale = 0;;
+        _rigidbody.gravityScale = 0;
         GenerateBullet();
         _bulletsCurrentCount = _bulletsMaxCount;
         _isReloading = false;
+        crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
+        canShoot = true;
+        ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
     }
 
     private void GenerateBullet()
@@ -64,7 +72,7 @@ public class Gun : MonoBehaviour
 
         bool flipSprite = (weapon.flipY ? (targetDirection.x > 0.01f) : (targetDirection.x<0.01));
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        field.SetOrigin(new Vector3(_aimGameObject.transform.position.x,_aimGameObject.transform.position.y,10f));
+        field.SetOrigin(new Vector3(_aimGameObject.transform.position.x,_aimGameObject.transform.position.y,10));
 
         if (flipSprite)
         {
@@ -99,39 +107,43 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (_bulletsCurrentCount > 0)
-        {
-            if(ShootClip != null)
+        if(canShoot){
+            if (_bulletsCurrentCount > 0)
             {
-                ShootClip.Play();
-                Debug.Log("ShootSound");
+                if(ShootClip != null)
+                {
+                    ShootClip.Play();
+                    Debug.Log("ShootSound");
 
-            }
-            if(crosshair != null)
-              crosshair.PlayShootingAnimate();
+                }
+                if(crosshair != null)
+                crosshair.PlayShootingAnimate();
+                    
                 
-            
-            //����������� ���� �� ����� ���������
-            Bullet newBullet = GetBullet(_bullets);
-            newBullet.transform.position = _bulletPoint.gameObject.transform.position;
-            newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
+                //����������� ���� �� ����� ���������
+                Bullet newBullet = GetBullet(_bullets);
+                newBullet.transform.position = _bulletPoint.gameObject.transform.position;
+                newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
 
-            //��������� ����
-            newBullet.gameObject.SetActive(true);
-            _bulletsCurrentCount--;
-
-           
-
-        }
-         else
-        {
-            StartCoroutine(Reloading(_reloadingTime));
+                //��������� ����
+                newBullet.gameObject.SetActive(true);
+                _bulletsCurrentCount--;
+                ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount);
+                StartCoroutine(WaitBeetwenShoots(_shootingSpeed));
+                
+            }
+            else
+            {
+                if(!_isReloading)
+                    StartCoroutine(Reloading(_reloadingTime));
+            }
         }
 
     }
 
     IEnumerator Reloading(float waitTime)
     {
+        _isReloading = true;
         if(crosshair != null)
       {
         crosshair.PlayReloadingAnimate();
@@ -146,10 +158,18 @@ public class Gun : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         _bulletsCurrentCount = _bulletsMaxCount;
-
+        ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount);
         if(crosshair != null)
             crosshair.StopReloadingAnimate();
-
+        _isReloading = false;
         
     }
+
+     IEnumerator WaitBeetwenShoots(float waitTime)
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(waitTime);
+        canShoot = true;
+    }
+
 }

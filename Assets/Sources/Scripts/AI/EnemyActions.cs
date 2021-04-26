@@ -6,6 +6,7 @@ public class EnemyActions : MonoBehaviour
 {
 
     public Enemy enemy;
+    public AudioSource DamageSound;
     public AudioSource DeathSound;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,10 @@ public class EnemyActions : MonoBehaviour
         
             if (deltaHP <0)
             {
-            //enemy.enemyAnimator.SetTrigger("Damage");
+             if(DamageSound != null && !DamageSound.isPlaying)
+             {
+                 DamageSound.Play();
+             }
             }
             enemy.SetCurrentHP(enemy.GetCurrentHP() + deltaHP);
             Debug.Log(enemy.GetCurrentHP());
@@ -60,9 +64,9 @@ public class EnemyActions : MonoBehaviour
 
         //enemy.enemyAnimator.SetBool("Death", true);
         if(DeathSound != null)
-      {
-        DeathSound.Play();
-      }
+        {
+            DeathSound.Play();
+        }
 
         enemy.GetRigidBody().bodyType = RigidbodyType2D.Static;
         enemy.SetIsDead (true);
