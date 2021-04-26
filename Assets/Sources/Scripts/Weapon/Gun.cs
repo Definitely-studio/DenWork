@@ -5,21 +5,30 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPoint;
+    [SerializeField] private GameObject _aimGameObject;
     [SerializeField] private Bullet _bulletType;
     [SerializeField] private float _enemy;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private SpriteRenderer weapon;
+    [SerializeField] private FieldOfView field;
+    [SerializeField] private AudioClip sound;
 
 
     private List<Bullet> _bullets;
     private Vector2 _aimPoint;
     private Rigidbody2D _rigidbody;
+    private ParentfromBullet parentfrom;
     private void Awake()
     {
+        field = FindObjectOfType<FieldOfView>();
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
-        _rigidbody.gravityScale = 0;;
+        parentfrom = this.GetComponentInParent<ParentfromBullet>();
         GenerateBullet();
+    }
+    public AudioClip GetAudioClip()
+    {
+        return sound;
     }
 
     private void GenerateBullet()
@@ -27,10 +36,9 @@ public class Gun : MonoBehaviour
         _bullets = new List<Bullet>();
         for (int i = 0; i < 10; i++)
         {
-            Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
+            Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
             newBullet.gameObject.SetActive(false);
-            if(this.GetComponentInParent<ParentfromBullet>() != null)
-                newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
+            newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
             _bullets.Add(newBullet);
         }
     }
@@ -44,8 +52,13 @@ public class Gun : MonoBehaviour
     {
         Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
         Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
+        _rigidbody.transform.position = new Vector3(parentfrom.transform.position.x, parentfrom.transform.position.y, _rigidbody.transform.position.z);
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+        field.SetOrigin(_aimGameObject.transform.position);
+
+
 
         bool flipSprite = (weapon.flipY ? (targetDirection.x > 0.01f) : (targetDirection.x<0.01));
         if (flipSprite)
@@ -69,7 +82,7 @@ public class Gun : MonoBehaviour
                 return _bullets[i];
             }
         }
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, + пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        //Создание доп платформы, если не будет хватать, + исправляет жалобы компилятора
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
         newBullet.gameObject.SetActive(false);
         newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
@@ -81,12 +94,12 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        //перемещение пули на точку появления
         Bullet newBullet = GetBullet(_bullets);
         newBullet.transform.position = _bulletPoint.gameObject.transform.position;
         newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
 
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        //включение пули
         newBullet.gameObject.SetActive(true);
 
     }

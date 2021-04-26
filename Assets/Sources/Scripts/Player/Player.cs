@@ -7,20 +7,27 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
-     [SerializeField] private GameObject _gun;
+     [SerializeField] private Gun gun;
+    [SerializeField] private FieldOfView field;
+    [SerializeField] private AudioSource audioSource;
+
+    private Gun _gun;
  
     private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;
 
     private void Awake()
     {
+        Instantiate(field);
+
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-        //_gun = Instantiate(gun, this.transform);
+        _gun = Instantiate(gun, this.transform);
        
-        //_gun.transform.SetParent(this.transform);
+        _gun.transform.SetParent(this.transform);
 
+        audioSource = this.GetComponent<AudioSource>();
     }
    
 
@@ -33,6 +40,7 @@ public class Player : MonoBehaviour
     {
          if (_gun != null){
         _gun.GetComponent<Gun>().Shoot();
+            audioSource.PlayOneShot(_gun.GetAudioClip()); 
 
         }    
     }

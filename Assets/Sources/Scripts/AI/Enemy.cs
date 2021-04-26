@@ -105,9 +105,13 @@ public class Enemy : PawnBase
 
 
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D bullet)
     {
+        if (bullet.gameObject.GetComponent<Bullet>() != null && bullet.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+        {
+            
 
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
