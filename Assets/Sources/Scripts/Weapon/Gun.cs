@@ -112,7 +112,7 @@ public class Gun : MonoBehaviour
         newBullet.gameObject.SetActive(true);
         _bulletsCurrentCount--;
         if(_bulletsCurrentCount <= 0){
-            StartCoroutine(Reloading());
+            StartCoroutine(Reloading(_reloadingTime));
         }
 
     }
