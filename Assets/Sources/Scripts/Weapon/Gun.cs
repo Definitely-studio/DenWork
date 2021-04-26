@@ -64,7 +64,7 @@ public class Gun : MonoBehaviour
 
         bool flipSprite = (weapon.flipY ? (targetDirection.x > 0.01f) : (targetDirection.x<0.01));
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        field.SetOrigin(_aimGameObject.transform.position);
+        field.SetOrigin(new Vector3(_aimGameObject.transform.position.x,_aimGameObject.transform.position.y,10f));
 
         if (flipSprite)
         {

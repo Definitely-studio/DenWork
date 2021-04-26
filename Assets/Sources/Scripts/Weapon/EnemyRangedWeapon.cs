@@ -29,8 +29,12 @@ public class EnemyRangedWeapon : MonoBehaviour
 
     public void Shoot()
     {
-      if(bullet != null)
-      Instantiate(bullet, transform.position, transform.rotation);
+     
+      GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation); 
+
+      if(this.GetComponentInParent<ParentfromBullet>() != null)
+          newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
+        
     }
     
     IEnumerator ShootCooldown(float waitTime)

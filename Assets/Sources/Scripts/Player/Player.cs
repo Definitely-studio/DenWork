@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
     {
         //move = move.normalized;
         Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
-        _rigidbody.transform.position = dir ;
+        _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
         
        
     }
@@ -101,6 +101,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+           Debug.Log(other.gameObject);
+          
         if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
         {
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();

@@ -13,7 +13,7 @@ public class MainLogic : MonoBehaviour
     public int SoulsRequiredToWin = 500;
     public int EnemyKill = 0;
     public GameObject Rain;
-    public GameObject Water;
+    
 
     public TMP_Text TextPrigress;
 
@@ -62,7 +62,7 @@ public class MainLogic : MonoBehaviour
     {
 
         Rain.GetComponent<Rain>().SetRain(ProgressLevel);
-        Water.GetComponent<Water>().SetProgress(ProgressLevel);
+       // Water.GetComponent<Water>().SetProgress(ProgressLevel);
        // TextPrigress.text = (SoulsRequiredToWin - ProgressLevel).ToString();
         //AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
     }

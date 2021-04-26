@@ -2457,6 +2457,7 @@ GameObject:
   - component: {fileID: 6391390662079299031}
   - component: {fileID: 892838699}
   - component: {fileID: 892838704}
+  - component: {fileID: 2714124601034270536}
   m_Layer: 8
   m_Name: zombiePrefab
   m_TagString: Untagged
@@ -2558,10 +2559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   attackCooldownTime: 2
-  EquippedWeapon: {fileID: 0}
-  WeaponSocket: {fileID: 0}
   state: 0
-  enemyType: 0
   Player: {fileID: 0}
   agent: {fileID: 7965051917849972290}
   playerDetector: {fileID: 3136452300658471381}
@@ -2601,6 +2599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: -4985820798604967565}
+  DeathSound: {fileID: 0}
 --- !u!114 &7965051917849972290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2684,6 +2683,27 @@ CircleCollider2D:
   m_Offset: {x: -0.01, y: 0.15}
   serializedVersion: 2
   m_Radius: 0.14879306
+--- !u!50 &2714124601034270536
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8786030857987491517}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &8874040223200988847
 GameObject:
   m_ObjectHideFlags: 0

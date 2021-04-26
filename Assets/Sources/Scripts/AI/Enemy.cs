@@ -7,10 +7,9 @@ public class Enemy : PawnBase
 
     // значние отрицательно т.к. метод, который считает HP добавляет отрицательное значение и уменьшает так хп
     public float attackCooldownTime = 2.0f;
-    public GameObject EquippedWeapon;
-    public Transform WeaponSocket;
+   
     public States state;
-    public EnemyTypes enemyType;
+    
     public GameObject Player;
     public Agent agent;
     public PlayerDetector playerDetector;
@@ -23,7 +22,7 @@ public class Enemy : PawnBase
     protected Rigidbody2D rb;
     protected bool isAttackCooldown = false;
     private Transform target;
-    private Transform bodySprite;
+
 
     public AudioSource AudioDead;
     public int currentWP;
@@ -37,9 +36,7 @@ public class Enemy : PawnBase
         target = GameObject.FindWithTag("Player").transform;
         state = (state != States.passive) ? States.lookingfor : States.passive;
         rb = GetComponent<Rigidbody2D> ();
-        //bodySprite = transform.Find("Body").transform;
-        //enemyAnimator = GetComponent <Animator> ();
-        //playerDetector = transform.Find("PlayerDetector").GetComponent<PlayerDetector>();
+
       
     }
 
@@ -55,10 +52,10 @@ public class Enemy : PawnBase
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f);
         
         
-         if(WeaponSocket != null)
+       /*  if(WeaponSocket != null)
         {
           rangedWeaponRotation();
-        }
+        }*/
         
         
       }
@@ -90,7 +87,7 @@ public class Enemy : PawnBase
         Vector2 lookDirection = GetLookAtDirection();
         float angle = Mathf.Atan2(lookDirection.y,lookDirection.x) * Mathf.Rad2Deg - 90f;
         //float angle = Mathf.Atan2(lookDirection.y,lookDirection.x) * Mathf.Rad2Deg;
-        WeaponSocket.eulerAngles = new Vector3(0,0, angle);
+       // WeaponSocket.eulerAngles = new Vector3(0,0, angle);
         
       }
     }
@@ -106,11 +103,18 @@ public class Enemy : PawnBase
 
   private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+      
+
+        if (other.gameObject.GetComponent<Bullet>() != null)
+        {
+          if (other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
         {
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();
 
             enemyActions.ChangeHP(-newBullet.Enemy);
+
+           
+        }
 
         }
     }
@@ -139,10 +143,4 @@ public enum States
   lookingfor,
   attackig,
   dead
-}
-
-public enum EnemyTypes
-{
-  ranged,
-  melee
 }

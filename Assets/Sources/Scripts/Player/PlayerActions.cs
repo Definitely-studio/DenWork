@@ -18,6 +18,7 @@ public class PlayerActions : MonoBehaviour
     public AudioSource DeathSound;
     public AudioSource MActive2;
     public AudioSource MActive3;
+    public GameMenu gameMenu;
 
     // Start is called before the first frame update
 
@@ -164,6 +165,8 @@ public class PlayerActions : MonoBehaviour
       }
       Destroy(gameObject);
       Debug.Log("Death");
+      if(gameMenu!= null)
+        gameMenu.ActivatePostPortus();
 
     }
 
