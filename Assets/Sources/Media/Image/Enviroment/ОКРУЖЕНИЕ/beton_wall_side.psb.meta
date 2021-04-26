@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5bd139a418c09a47a2706c704407950
+guid: 3a2852d0725b10448b7c5964e889a8db
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -91,7 +91,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: "\u0421\u043B\u043E\u0439 2"
+  - name: beton_wall_front
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -100,9 +100,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 17
-      height: 13
-    spriteID: 3f294df6147600346903c1109ad827cb
+      width: 32
+      height: 32
+    spriteID: 23dec518dadde8b45a8d7534f96f7712
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -113,28 +113,6 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
-  - name: "\u0421\u043B\u043E\u0439 1"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 25
-      width: 1
-      height: 1
-    spriteID: 8c69e648af273d944a1cf8464b3df00b
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 14}
   characterData:
     bones: []
     parts: []
@@ -148,66 +126,37 @@ ScriptedImporter:
     dimension: {x: 0, y: 0}
     characterGroups: []
     boneReadOnly: 0
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 32
-  importedTextureHeight: 32
-  documentSize: {x: 17, y: 13}
+  importedTextureWidth: 64
+  importedTextureHeight: 64
+  documentSize: {x: 32, y: 32}
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 32
-  textureActualHeight: 32
+  textureActualWidth: 64
+  textureActualHeight: 64
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: "\u0421\u043B\u043E\u0439 2"
-    spriteName: "\u0421\u043B\u043E\u0439 2"
+  - name: beton_wall_front
+    spriteName: beton_wall_front
     isGroup: 0
     parentIndex: -1
-    spriteID: 3f294df6147600346903c1109ad827cb
-    layerID: 52
+    spriteID: 23dec518dadde8b45a8d7534f96f7712
+    layerID: 3
     mosaicPosition: {x: 4, y: 4}
-  - name: "\u0421\u043B\u043E\u0439 1"
-    spriteName: "\u0421\u043B\u043E\u0439 1"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 8c69e648af273d944a1cf8464b3df00b
-    layerID: 46
-    mosaicPosition: {x: 4, y: 25}
   sharedRigPSDLayers: []
   generateGOHierarchy: 0
-  textureAssetName: pistol Texture
-  prefabAssetName: pistol Prefab
-  spriteLibAssetName: pistol Sprite Lib
-  skeletonAssetName: pistol Skeleton
+  textureAssetName: beton_wall_side Texture
+  prefabAssetName: beton_wall_side Prefab
+  spriteLibAssetName: beton_wall_side Sprite Lib
+  skeletonAssetName: beton_wall_side Skeleton
   secondarySpriteTextures: []

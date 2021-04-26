@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private FieldOfView field;
     [SerializeField] private PlayerActions playerActions;
     [SerializeField] private Transform playerRoot;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private int MaxHP = 100;
     private Gun _gun;
     private bool isDead = false;
@@ -28,7 +29,6 @@ public class Player : MonoBehaviour
         _gun = Instantiate(gun, this.transform);
         _gun.transform.SetParent(socket.transform);
       
-
 
         audioSource = this.GetComponent<AudioSource>();
     }
@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     {
          if (_gun != null){
         _gun.GetComponent<Gun>().Shoot();
+        if(audioSource.isPlaying != true)
             audioSource.PlayOneShot(_gun.GetAudioClip()); 
 
         }    

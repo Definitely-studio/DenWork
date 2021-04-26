@@ -9,7 +9,7 @@ public class Chase : NPCBaseFMS
     {
         NPC = animator.gameObject;
         agent = NPC.GetComponent<Agent>();
-        agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform);
+        agent.SetAgentDestination(NPC.GetComponent<Enemy>().GetComponent<Player>().GetRoot());
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

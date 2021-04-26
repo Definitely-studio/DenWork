@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject _bulletPoint;
     [SerializeField] private GameObject _aimGameObject;
     [SerializeField] private Bullet _bulletType;
-    [SerializeField] private GameObject _aimGameObject;
+ 
     [SerializeField] private int _enemy;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _shootingSpeed;
@@ -19,6 +19,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioSource ReloadClip;
     [SerializeField] private Crosshair crosshair;
     [SerializeField] private UIGameMode ui;
+    [SerializeField] private AudioClip sound;
     
 
 

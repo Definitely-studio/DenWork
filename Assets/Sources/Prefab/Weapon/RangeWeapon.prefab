@@ -67,22 +67,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1246559294273571018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea937fecd7b35d49ad197a24e8f2405, type: 3}
+  m_Script: {fileID: 11500000, guid: 35700272bc1835a418aaa3f717619637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPoint: {fileID: 3839917033640143887}
+  _aimGameObject: {fileID: 2423837915561441931}
   _bulletType: {fileID: 3441608959189364197, guid: 6ed167579702f6a4fb8baca9a685a392, type: 3}
-  _aimGameObject: {fileID: 3839917033640143887}
   _enemy: 10
-  _bulletSpeed: 10
+  _bulletSpeed: 5
   _shootingSpeed: 1
   _reloadingTime: 3
   _bulletsMaxCount: 10
-  weapon: {fileID: 6860953188805739359}
+  weapon: {fileID: 7670697199994259537}
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
-  ShootClip: {fileID: 241827161891385801}
-  ReloadClip: {fileID: 8705494052531946156}
+  ShootClip: {fileID: 0}
+  ReloadClip: {fileID: 0}
   crosshair: {fileID: 0}
+  ui: {fileID: 0}
+  sound: {fileID: 8300000, guid: 6cc72db64278ed644bff4f1cd4c45fb9, type: 3}
 --- !u!212 &6860953188805739359
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -210,12 +212,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8673569526648003675, guid: b5bd139a418c09a47a2706c704407950, type: 3}
+  m_Sprite: {fileID: -2588996169060052748, guid: b5bd139a418c09a47a2706c704407950, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.64021736}
+  m_Size: {x: 0.17, y: 0.13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -479,11 +481,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4291943031699242381, guid: ccad162e2715b254f96e3c9c536c9d4e, type: 3}
   m_PrefabInstance: {fileID: 2555811133292584064}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &8705494052531946156 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6604581736054906412, guid: ccad162e2715b254f96e3c9c536c9d4e, type: 3}
-  m_PrefabInstance: {fileID: 2555811133292584064}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3263203630302341609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -544,11 +541,6 @@ PrefabInstance:
 --- !u!4 &7161602947877638760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5632355543303371649, guid: dc0f4a70acf32be4f9fec6f0e50e537e, type: 3}
-  m_PrefabInstance: {fileID: 3263203630302341609}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &241827161891385801 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3319749875838228512, guid: dc0f4a70acf32be4f9fec6f0e50e537e, type: 3}
   m_PrefabInstance: {fileID: 3263203630302341609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6117544742444756016

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5bd139a418c09a47a2706c704407950
+guid: 9f66a3f8f5a112f429de819b2a0e907b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -91,7 +91,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: "\u0421\u043B\u043E\u0439 2"
+  - name: Layer 2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -100,9 +100,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 17
-      height: 13
-    spriteID: 3f294df6147600346903c1109ad827cb
+      width: 32
+      height: 32
+    spriteID: 8a757f7abda630d449b8f334ea571c8a
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -113,28 +113,6 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
-  - name: "\u0421\u043B\u043E\u0439 1"
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 25
-      width: 1
-      height: 1
-    spriteID: 8c69e648af273d944a1cf8464b3df00b
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 14}
   characterData:
     bones: []
     parts: []
@@ -176,38 +154,31 @@ ScriptedImporter:
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
-  importedTextureWidth: 32
-  importedTextureHeight: 32
-  documentSize: {x: 17, y: 13}
+  importedTextureWidth: 64
+  importedTextureHeight: 64
+  documentSize: {x: 32, y: 32}
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
   spriteCategoryList:
     categories: []
-  textureActualWidth: 32
-  textureActualHeight: 32
+  textureActualWidth: 64
+  textureActualHeight: 64
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: "\u0421\u043B\u043E\u0439 2"
-    spriteName: "\u0421\u043B\u043E\u0439 2"
+  - name: Layer 2
+    spriteName: Layer 2
     isGroup: 0
     parentIndex: -1
-    spriteID: 3f294df6147600346903c1109ad827cb
-    layerID: 52
+    spriteID: 8a757f7abda630d449b8f334ea571c8a
+    layerID: 3
     mosaicPosition: {x: 4, y: 4}
-  - name: "\u0421\u043B\u043E\u0439 1"
-    spriteName: "\u0421\u043B\u043E\u0439 1"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 8c69e648af273d944a1cf8464b3df00b
-    layerID: 46
-    mosaicPosition: {x: 4, y: 25}
   sharedRigPSDLayers: []
   generateGOHierarchy: 0
-  textureAssetName: pistol Texture
-  prefabAssetName: pistol Prefab
-  spriteLibAssetName: pistol Sprite Lib
-  skeletonAssetName: pistol Skeleton
+  textureAssetName: bochka Texture
+  prefabAssetName: bochka Prefab
+  spriteLibAssetName: bochka Sprite Lib
+  skeletonAssetName: bochka Skeleton
   secondarySpriteTextures: []
