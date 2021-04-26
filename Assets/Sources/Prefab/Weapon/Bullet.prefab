@@ -161,9 +161,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 340157824044698842, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.05581173
+      objectReference: {fileID: 0}
+    - target: {fileID: 340157824044698842, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340157824044698842, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5943396
+      objectReference: {fileID: 0}
     - target: {fileID: 7954510481825081744, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954510481825081744, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954510481825081744, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954510481825081744, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7954510481825081744, guid: 329269ace263e1f47a3096d9c1b8c4d8, type: 3}
       propertyPath: m_LocalPosition.x
