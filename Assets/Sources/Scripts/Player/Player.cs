@@ -119,12 +119,12 @@ public class Player : MonoBehaviour
             body.transform.eulerAngles = new Vector3(0f, 180f, 0f);             
         }
         if (lookDir.y > 0) {
-            f_body.SetActive(false);
-            b_body.SetActive(true);           
-        }
-        if (lookDir.y < 0) {
             f_body.SetActive(true);
             b_body.SetActive(false);           
+        }
+        if (lookDir.y < 0) {
+            f_body.SetActive(false);
+            b_body.SetActive(true);           
         }          
 
 
