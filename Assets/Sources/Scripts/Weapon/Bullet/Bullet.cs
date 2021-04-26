@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         explosion.gameObject.SetActive(false);
-        _rigidbody.AddForce(_rigidbody.transform.up * speed);
+        //_rigidbody.AddForce(_rigidbody.transform.up * speed);
         //Speed = _consSpeed;
     }
     private void Start()
@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
          //Destroy(gameObject, 10f);
     }
 
-    /*private void Move()
+    private void Move()
     {
         Vector2 velocity = transform.up * (speed * Time.fixedDeltaTime);
         _rigidbody.MovePosition(_rigidbody.position +  velocity);
@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-    }*/
+    }
 
     IEnumerator ExampleCoroutine()
     {

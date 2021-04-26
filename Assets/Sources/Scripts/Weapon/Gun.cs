@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPoint;
+    [SerializeField] private GameObject _aimGameObject;
     [SerializeField] private Bullet _bulletType;
     [SerializeField] private GameObject _aimGameObject;
     [SerializeField] private int _enemy;
@@ -43,16 +44,18 @@ public class Gun : MonoBehaviour
         canShoot = true;
         ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
     }
+    public AudioClip GetAudioClip()
+    {
+        return sound;
+    }
 
     private void GenerateBullet()
     {
         _bullets = new List<Bullet>();
         for (int i = 0; i < 10; i++)
         {
-            Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
+            Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
             newBullet.gameObject.SetActive(false);
-            if(this.GetComponentInParent<ParentfromBullet>() != null)
-                newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
             _bullets.Add(newBullet);
         }
     }
@@ -69,6 +72,10 @@ public class Gun : MonoBehaviour
          _rigidbody.transform.position = new Vector3(parentfrom.transform.position.x, parentfrom.transform.position.y, _rigidbody.transform.position.z);
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+        field.SetOrigin(_aimGameObject.transform.position);
+
+
 
         bool flipSprite = (weapon.flipY ? (targetDirection.x > 0.01f) : (targetDirection.x<0.01));
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
@@ -98,7 +105,6 @@ public class Gun : MonoBehaviour
         //�������� ��� ���������, ���� �� ����� �������, + ���������� ������ �����������
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
         newBullet.gameObject.SetActive(false);
-        newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
         newBullet.Enemy = _enemy;
         newBullet.Speed = _bulletSpeed;
         _bullets.Add(newBullet);

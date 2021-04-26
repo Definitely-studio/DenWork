@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
       
 
 
+        audioSource = this.GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -67,7 +68,8 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
          if (_gun != null){
-        _gun.Shoot();
+        _gun.GetComponent<Gun>().Shoot();
+            audioSource.PlayOneShot(_gun.GetAudioClip()); 
 
         }    
     }
