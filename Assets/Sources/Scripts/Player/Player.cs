@@ -74,6 +74,15 @@ public class Player : MonoBehaviour
 
         }    
     }
+    public void UpdateGun(Gun targetGun)
+    {
+        Gun i = _gun;
+        
+        _gun = Instantiate(targetGun, this.transform);
+        _gun.transform.SetParent(this.transform);
+        Destroy(i.gameObject);
+
+    }
 
     
 
