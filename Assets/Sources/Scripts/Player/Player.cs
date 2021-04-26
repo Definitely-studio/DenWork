@@ -16,6 +16,12 @@ public class Player : MonoBehaviour
     private int currentHP;
     private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;
+    public Animator f_Animator;
+    public Animator b_Animator;
+    public bool facingRight = true;
+
+    public GameObject f_body;
+    public GameObject b_body;
 
     private void Awake()
     {
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour
     Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
        if(_gun != null)
             _gun.SetAimPoint(AimPosition);
+            
     }
     private void FixedUpdate()
     {
@@ -81,15 +88,48 @@ public class Player : MonoBehaviour
         //Debug.Log(moveDirection);
 
         Movement(moveDirection);
+        Rotation(moveDirection);
+        
     }
 
     private void Movement(Vector2 move)
     {
         //move = move.normalized;
         Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
-        _rigidbody.transform.position = dir ;
+        _rigidbody.transform.position = dir ;     
         
        
+    }
+
+    private void Rotation(Vector2 dir) {
+        float move = dir.x;
+
+        if (move < 0 && facingRight) {
+            transform.Rotate(Vector3.up * 180);
+            facingRight = !facingRight;
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);            
+        }
+        if (move > 0 && !facingRight) {
+            transform.Rotate(Vector3.up * 180);
+            facingRight = !facingRight;
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);            
+        }
+        if (move == 0 && dir.y == 0) {
+            f_Animator.SetBool("isWalk", false);
+            b_Animator.SetBool("isWalk", false);               
+        }
+
+        if (dir.y > 0) {
+            f_body.SetActive(false);
+            b_body.SetActive(true);              
+        }        
+        if (dir.y <= 0) {
+            f_body.SetActive(true);
+            b_body.SetActive(false);              
+        }      
+
     }
 
 }
