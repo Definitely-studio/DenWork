@@ -24,12 +24,20 @@ public class Player : MonoBehaviour
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
         _gun = Instantiate(gun, this.transform);
-       
         _gun.transform.SetParent(this.transform);
 
         audioSource = this.GetComponent<AudioSource>();
     }
-   
+     public void UpdateGun(Gun targetGun)
+    {
+        Gun i = _gun;
+        
+        _gun = Instantiate(targetGun, this.transform);
+        _gun.transform.SetParent(this.transform);
+        Destroy(i.gameObject);
+
+    }
+
 
     private void OnEnable()
         {
