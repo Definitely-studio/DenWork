@@ -54,8 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4754075c6cfc80f45b0e944c127ae628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairAnimator: {fileID: 0}
+  crosshairAnimator: {fileID: 1515493832114509138}
   mainCamera: {fileID: 0}
+  translationSpeed: 5
 --- !u!95 &1515493832114509138
 Animator:
   serializedVersion: 3

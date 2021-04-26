@@ -5,22 +5,24 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]private float speed;
-    [SerializeField]private float enemy;
+    [SerializeField]private int enemy;
     [SerializeField]private int damage;
     [SerializeField] private ParticleSystem explosion;
 
     private Rigidbody2D _rigidbody;
     private int _consSpeed;
 
-    public float Enemy { get => enemy; set => enemy = value; }
+    public int Enemy { get => enemy; set => enemy = value; }
     public float Speed { get => speed; set => speed = value; }
     public int Damage { get => damage; set => damage = value; }
+    public string tag;
 
     private void Awake()
     {
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
         _rigidbody.gravityScale = 0f;
+       
         //_consSpeed = Speed;
     }
 
@@ -32,7 +34,7 @@ public class Bullet : MonoBehaviour
     }
     private void Start()
     {
-        
+         //Destroy(gameObject, 10f);
     }
 
     /*private void Move()
@@ -54,7 +56,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
+        if(collision.gameObject.tag != tag)
+        {
+             Speed = 0;
+                explosion.gameObject.SetActive(true);
+                StartCoroutine(ExampleCoroutine());
+        }
+        /*
          if ( collision.gameObject.GetComponent<ParentfromBullet>()
          != null && this.gameObject.GetComponentInParent<ParentfromBullet>() != null){
 
@@ -65,17 +74,7 @@ public class Bullet : MonoBehaviour
                 explosion.gameObject.SetActive(true);
                 //his.delay(explosion.duration);
 
-                /*if(collision.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer == "Player")
-                    {
-                        collision.gameObject.GetComponent<PlayerOld>().ChangeHP(damage);
-                    }*/
-
-                if(collision.gameObject.tag == "Enemy")
-                    {
-                        collision.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
-                        Debug.Log("DamagePlayer");
-                    }
-                if(collision.gameObject.tag == "Player")
+               /if(collision.gameObject.tag == "Player")
                     {
                         collision.gameObject.GetComponent<PlayerActions>().ChangeHP(damage);
                     }
@@ -85,5 +84,6 @@ public class Bullet : MonoBehaviour
                 
             }
          }
+         */
     }
 }

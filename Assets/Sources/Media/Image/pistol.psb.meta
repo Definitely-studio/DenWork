@@ -102,7 +102,7 @@ ScriptedImporter:
       y: 4
       width: 17
       height: 13
-    spriteID: cd52dab639bad354485f9086cdbc9689
+    spriteID: 3f294df6147600346903c1109ad827cb
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -124,7 +124,7 @@ ScriptedImporter:
       y: 25
       width: 1
       height: 1
-    spriteID: 94921cbff8b1c98488303995d9c889cd
+    spriteID: 8c69e648af273d944a1cf8464b3df00b
     internalID: 0
     spriteBone: []
     spriteOutline: []
@@ -194,14 +194,14 @@ ScriptedImporter:
     spriteName: "\u0421\u043B\u043E\u0439 2"
     isGroup: 0
     parentIndex: -1
-    spriteID: cd52dab639bad354485f9086cdbc9689
+    spriteID: 3f294df6147600346903c1109ad827cb
     layerID: 52
     mosaicPosition: {x: 4, y: 4}
   - name: "\u0421\u043B\u043E\u0439 1"
     spriteName: "\u0421\u043B\u043E\u0439 1"
     isGroup: 0
     parentIndex: -1
-    spriteID: 94921cbff8b1c98488303995d9c889cd
+    spriteID: 8c69e648af273d944a1cf8464b3df00b
     layerID: 46
     mosaicPosition: {x: 4, y: 25}
   sharedRigPSDLayers: []

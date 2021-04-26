@@ -7,9 +7,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
-    [SerializeField] private GameObject socket;
+    public GameObject socket;
     [SerializeField] private Gun gun;
     [SerializeField] private FieldOfView field;
+    [SerializeField] private PlayerActions playerActions;
+    [SerializeField] private Transform playerRoot;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private int MaxHP = 100;
     private Gun _gun;
     private bool isDead = false;
@@ -30,11 +33,11 @@ public class Player : MonoBehaviour
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-        _gun = Instantiate(gun, this.transform);
+        _gun = Instantiate(gun, socket.transform);
         _gun.transform.SetParent(socket.transform);
       
 
-
+        audioSource = this.GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -43,6 +46,10 @@ public class Player : MonoBehaviour
         Debug.Log(currentHP);
     }
     
+    public Transform GetRoot(){
+        return playerRoot;
+    }
+
     public bool GetIsDead(){
         return isDead;
     }
@@ -68,11 +75,27 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-         if (_gun != null){
+        if (_gun != null){
+            //_gun.GetComponent<Gun>().Shoot();
+        if(audioSource.isPlaying != true)
+            audioSource.PlayOneShot(_gun.GetAudioClip()); 
+
+        
+        
         _gun.Shoot();
             f_Animator.SetTrigger("Shot");   
-            b_Animator.SetTrigger("Shot");                    
-        }    
+            b_Animator.SetTrigger("Shot"); 
+        }
+    }
+    
+    public void UpdateGun(Gun targetGun)
+    {
+        Gun i = _gun;
+        
+        _gun = Instantiate(targetGun, this.transform);
+        _gun.transform.SetParent(this.transform);
+        Destroy(i.gameObject);
+
     }
 
     
@@ -102,8 +125,7 @@ public class Player : MonoBehaviour
     private void Movement(Vector2 move)
     {
         Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
-        _rigidbody.transform.position = dir ;  
-  
+        _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
         
        
     }
@@ -139,5 +161,29 @@ public class Player : MonoBehaviour
         }     
 
     }
+
+               private void OnTriggerEnter2D(Collider2D other)
+    {
+         //  Debug.Log(other.gameObject);
+           if(other.gameObject.tag == "bullet" )
+        {
+          if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
+          {
+                Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+
+            playerActions.ChangeHP(-newBullet.Damage);
+          }
+        }
+
+
+        /*if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+        {
+            Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+
+            playerActions.ChangeHP(-newBullet.Damage);
+
+        }*/
+    }
+
 
 }

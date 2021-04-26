@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9db2e84ff7a5154fa6a83f3c2c9d1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLenght: 10
+  rayLenght: 1
   playerDetect: {fileID: 248527660358268828}
   target: {fileID: 0}
   layerMask:
