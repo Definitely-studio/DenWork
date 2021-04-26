@@ -28,11 +28,13 @@ public class Agent : MonoBehaviour
         agent.SetDestination(target.position);
     }
 
+
     // Update is called once per frame
     void Update()
     {
 
         agent.SetDestination(target.position);
+        AnimateEnemy();
         
 
         enemy.animationsController.SetDistance(Vector2.Distance(transform.position, Player.position));
@@ -70,6 +72,15 @@ IEnumerator Waiting(float waitTime, Transform DestTarget)
         enemy.animationsController.SetIdleKey(true);
     }
   }
+
+    public void AnimateEnemy() {
+        if ((transform.position - target.transform.position).x > 0) {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
+        if ((transform.position - target.transform.position).x < 0) {
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        }        
+    } 
 
     
 

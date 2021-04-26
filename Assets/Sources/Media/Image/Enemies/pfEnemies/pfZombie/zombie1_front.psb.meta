@@ -3782,7 +3782,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 10
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 81
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0438\u043A\u0440\u0430 \u043B"
@@ -3803,7 +3803,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 10
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 79
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0433\u043E\u043B\u0435\u043D\u044C1"
@@ -3824,7 +3824,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 10
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 83
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0441\u0442\u0443\u043F\u043D\u044F \u043B"
@@ -3852,7 +3852,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 20
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 85
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0433\u043E\u043B\u0435\u043D\u044C2"
@@ -3873,7 +3873,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 20
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 87
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0438\u043A\u0440\u04302"
@@ -3894,7 +3894,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 20
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 89
     mosaicPosition: {x: 0, y: 0}
   - name: "\u0441\u0442\u0443\u043F\u043D\u044F2"
@@ -3964,7 +3964,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 36
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 73
     mosaicPosition: {x: 0, y: 0}
   - name: "\u043F\u043B\u0435\u0447\u043E \u043F"
@@ -3985,7 +3985,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 36
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 75
     mosaicPosition: {x: 0, y: 0}
   - name: "\u043A\u0438\u0441\u0442\u044C \u043F"
@@ -4006,7 +4006,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: 36
-    spriteID: 
+    spriteID: 00000000000000000000000000000000
     layerID: 77
     mosaicPosition: {x: 0, y: 0}
   - name: "\u043F\u0440\u0435\u0434\u043F\u043B\u0435\u0447\u044C\u0435\u043F "
