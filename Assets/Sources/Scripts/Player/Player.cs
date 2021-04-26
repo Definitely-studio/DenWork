@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject socket;
     [SerializeField] private Gun gun;
     [SerializeField] private FieldOfView field;
+    [SerializeField] private PlayerActions playerActions;
+    [SerializeField] private Transform playerRoot;
     [SerializeField] private int MaxHP = 100;
     private Gun _gun;
     private bool isDead = false;
@@ -35,6 +37,10 @@ public class Player : MonoBehaviour
         Debug.Log(currentHP);
     }
     
+    public Transform GetRoot(){
+        return playerRoot;
+    }
+
     public bool GetIsDead(){
         return isDead;
     }
@@ -91,5 +97,18 @@ public class Player : MonoBehaviour
         
        
     }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+        {
+            Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+
+            playerActions.ChangeHP(-newBullet.Damage);
+
+        }
+    }
+
 
 }

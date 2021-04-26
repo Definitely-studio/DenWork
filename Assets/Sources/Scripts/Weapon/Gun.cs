@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject _bulletPoint;
     [SerializeField] private Bullet _bulletType;
     [SerializeField] private GameObject _aimGameObject;
-    [SerializeField] private float _enemy;
+    [SerializeField] private int _enemy;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _reloadingTime;
     [SerializeField] private int _bulletsMaxCount;
@@ -15,10 +15,12 @@ public class Gun : MonoBehaviour
     [SerializeField] private FieldOfView field;
     [SerializeField] private AudioSource ShootClip;
     [SerializeField] private AudioSource ReloadClip;
+    [SerializeField] private Crosshair crosshair;
 
 
     private List<Bullet> _bullets;
     private int _bulletsCurrentCount;
+    private bool _isReloading;
     private Vector2 _aimPoint;
     private Rigidbody2D _rigidbody;
     private ParentfromBullet parentfrom;
@@ -30,6 +32,8 @@ public class Gun : MonoBehaviour
         parentfrom = this.GetComponentInParent<ParentfromBullet>();
         _rigidbody.gravityScale = 0;;
         GenerateBullet();
+        _bulletsCurrentCount = _bulletsMaxCount;
+        _isReloading = false;
     }
 
     private void GenerateBullet()
@@ -95,30 +99,45 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if(ShootClip != null)
+        if (_bulletsCurrentCount > 0)
         {
-            ShootClip.Play();
-            Debug.Log("ShootSound");
+            if(ShootClip != null)
+            {
+                ShootClip.Play();
+                Debug.Log("ShootSound");
+
+            }
+            if(crosshair != null)
+              crosshair.PlayShootingAnimate();
+                
+            
+            //����������� ���� �� ����� ���������
+            Bullet newBullet = GetBullet(_bullets);
+            newBullet.transform.position = _bulletPoint.gameObject.transform.position;
+            newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
+
+            //��������� ����
+            newBullet.gameObject.SetActive(true);
+            _bulletsCurrentCount--;
+
+           
 
         }
-            
-        
-        //����������� ���� �� ����� ���������
-        Bullet newBullet = GetBullet(_bullets);
-        newBullet.transform.position = _bulletPoint.gameObject.transform.position;
-        newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
-
-        //��������� ����
-        newBullet.gameObject.SetActive(true);
-        _bulletsCurrentCount--;
-        if(_bulletsCurrentCount <= 0){
-            StartCoroutine(Reloading());
+         else
+        {
+            StartCoroutine(Reloading(_reloadingTime));
         }
 
     }
 
     IEnumerator Reloading(float waitTime)
     {
+        if(crosshair != null)
+      {
+        crosshair.PlayReloadingAnimate();
+        crosshair.ResetShootingAnimate();
+      }
+     
          if(ReloadClip != null)
         {
             ReloadClip.Play();
@@ -127,5 +146,10 @@ public class Gun : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         _bulletsCurrentCount = _bulletsMaxCount;
+
+        if(crosshair != null)
+            crosshair.StopReloadingAnimate();
+
+        
     }
 }

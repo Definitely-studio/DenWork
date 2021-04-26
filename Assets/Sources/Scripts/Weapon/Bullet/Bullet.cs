@@ -5,14 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]private float speed;
-    [SerializeField]private float enemy;
+    [SerializeField]private int enemy;
     [SerializeField]private int damage;
     [SerializeField] private ParticleSystem explosion;
 
     private Rigidbody2D _rigidbody;
     private int _consSpeed;
 
-    public float Enemy { get => enemy; set => enemy = value; }
+    public int Enemy { get => enemy; set => enemy = value; }
     public float Speed { get => speed; set => speed = value; }
     public int Damage { get => damage; set => damage = value; }
 
@@ -65,20 +65,10 @@ public class Bullet : MonoBehaviour
                 explosion.gameObject.SetActive(true);
                 //his.delay(explosion.duration);
 
-                /*if(collision.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer == "Player")
-                    {
-                        collision.gameObject.GetComponent<PlayerOld>().ChangeHP(damage);
-                    }*/
-
-                if(collision.gameObject.tag == "Enemy")
-                    {
-                        collision.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
-                        Debug.Log("DamagePlayer");
-                    }
-                if(collision.gameObject.tag == "Player")
+               /* if(collision.gameObject.tag == "Player")
                     {
                         collision.gameObject.GetComponent<PlayerActions>().ChangeHP(damage);
-                    }
+                    }*/
 
 
                 StartCoroutine(ExampleCoroutine());

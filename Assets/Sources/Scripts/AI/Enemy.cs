@@ -104,16 +104,17 @@ public class Enemy : PawnBase
     }
 
 
-
-    void OnCollisionEnter2D(Collision2D other)
+  private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
+        {
+            Bullet newBullet = other.gameObject.GetComponent<Bullet>();
 
+            enemyActions.ChangeHP(-newBullet.Enemy);
+
+        }
     }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-    }
+  
 
     // кулдаун атаки
     public IEnumerator AttackCooldown(float waitTime)
@@ -125,7 +126,12 @@ public class Enemy : PawnBase
 
     }
 
+    
+
 }
+
+
+
 
 public enum States
 {

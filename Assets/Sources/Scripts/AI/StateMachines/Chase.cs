@@ -15,7 +15,7 @@ public class Chase : NPCBaseFMS
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform);
+            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponent<Player>().GetRoot());
 
     }
 

@@ -15,7 +15,7 @@ public class PlayerActions : MonoBehaviour
     public Inventory inventory;
     [SerializeField] private Input _input;
 
-    public AudioSource MActive1;
+    public AudioSource DeathSound;
     public AudioSource MActive2;
     public AudioSource MActive3;
 
@@ -151,8 +151,18 @@ public class PlayerActions : MonoBehaviour
 
     private void Death()
     {
-      gameObject.GetComponent<Collider2D>().enabled = false;
+      Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
+      foreach (Collider2D item in colliders)
+      {
+          item.enabled = false;
+      }
+      //gameObject.GetComponent<Collider2D>().enabled = false;
       player.SetIsDead(true);
+      if(DeathSound != null)
+      {
+        DeathSound.Play();
+      }
+      Destroy(gameObject);
       Debug.Log("Death");
 
     }

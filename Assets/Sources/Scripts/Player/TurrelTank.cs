@@ -6,7 +6,7 @@ public class TurrelTank : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPoint;
     [SerializeField] private Bullet _bulletType;
-    [SerializeField] private float _enemy;
+    [SerializeField] private int _enemy;
     [SerializeField] private float _angleVelocity;
 
 
@@ -62,7 +62,7 @@ public class TurrelTank : MonoBehaviour
                 return _bullets[i];
             }
         }
-        //Создание доп платформы, если не будет хватать, + исправляет жалобы компилятора
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, + пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
         newBullet.gameObject.SetActive(false);
         newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
@@ -72,12 +72,12 @@ public class TurrelTank : MonoBehaviour
 
     public void Shoot()
     {
-        //перемещение пули на точку появления
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Bullet newBullet = GetBullet(_bullets);
         newBullet.transform.position = _bulletPoint.gameObject.transform.position;
         newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
 
-        //включение пули
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         newBullet.gameObject.SetActive(true);
         
     }

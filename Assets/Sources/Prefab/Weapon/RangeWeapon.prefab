@@ -72,10 +72,14 @@ MonoBehaviour:
   _bulletType: {fileID: 3441608959189364197, guid: 6ed167579702f6a4fb8baca9a685a392, type: 3}
   _aimGameObject: {fileID: 3839917033640143887}
   _enemy: 50
-  _bulletSpeed: 100
+  _bulletSpeed: 50
+  _reloadingTime: 3
+  _bulletsMaxCount: 10
   weapon: {fileID: 6860953188805739359}
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
   ShootClip: {fileID: 3319749875838228512, guid: dc0f4a70acf32be4f9fec6f0e50e537e, type: 3}
+  ReloadClip: {fileID: 6604581736054906412, guid: ccad162e2715b254f96e3c9c536c9d4e, type: 3}
+  crosshair: {fileID: 3631876046264253223, guid: 7f56565093cb83c419d7eb0ea33a963a, type: 3}
 --- !u!212 &6860953188805739359
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,8 +157,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2423837915561441931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.576, y: -0.237, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 6665282572789689227}
   - {fileID: 8553482713557777159}
@@ -203,7 +207,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: c44e72413306f364bb3961bb596b1af1, type: 3}
+  m_Sprite: {fileID: -8673569526648003675, guid: b5bd139a418c09a47a2706c704407950, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -321,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3839917033640143887}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.742, y: 0.072, z: 0}
+  m_LocalPosition: {x: 0.086, y: 0.038, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1872668713102423390}

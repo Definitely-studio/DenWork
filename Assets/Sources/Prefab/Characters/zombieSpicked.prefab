@@ -1601,7 +1601,7 @@ MonoBehaviour:
   enemy: {fileID: 2731904605285083643}
   damage: 10
   AttackCooldown: 10
-  bullet: {fileID: 7221790135438144245, guid: 75b59535ca4792846b0622b2c8b4f723, type: 3}
+  bullet: {fileID: 8622567293268847585, guid: 6ed167579702f6a4fb8baca9a685a392, type: 3}
   isAttackCooldown: 0
 --- !u!1 &4015189990835891687
 GameObject:
@@ -2373,9 +2373,10 @@ GameObject:
   - component: {fileID: 3583794696192832279}
   - component: {fileID: 428175903}
   - component: {fileID: 428175904}
+  - component: {fileID: 5551010026119459377}
   m_Layer: 8
   m_Name: zombieSpicked
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2494,8 +2495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 100
-  maxSpeed: 0
-  LimitSoul: 100
   attackCooldownTime: 2
   EquippedWeapon: {fileID: 0}
   WeaponSocket: {fileID: 0}
@@ -2506,11 +2505,12 @@ MonoBehaviour:
   playerDetector: {fileID: 1477273191424046619}
   enemyActions: {fileID: 4115844035800484157}
   enemyMeleeWeapon: {fileID: 0}
-  destroyTime: 3
+  destroyTime: 1
   wayPoint:
   - {fileID: 0}
   animationsController: {fileID: 3019696153861668061}
   AudioDead: {fileID: 0}
+  currentWP: 0
 --- !u!114 &3019696153861668061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2605,6 +2605,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.16183043}
   serializedVersion: 2
   m_Radius: 0.15748522
+--- !u!50 &5551010026119459377
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072883711278766578}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &6239023069457268931
 GameObject:
   m_ObjectHideFlags: 0
