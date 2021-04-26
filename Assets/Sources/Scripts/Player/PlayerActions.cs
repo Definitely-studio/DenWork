@@ -65,34 +65,7 @@ public class PlayerActions : MonoBehaviour
 
     void InputActions()
     {
-    /*  if(Input.GetButton("Fire1"))
-      {
-            Attack();
-      }
-
-
-      if(Input.GetButtonDown("Submit"))
-      {
-
-      }
-
-      if(Input.GetButtonDown("Ability1"))
-      {
- 
-
-      }
-
-      if(Input.GetButtonDown("Ability2"))
-      {
-      
-        
-
-      }
-
-      if(Input.GetButtonDown("Ability3"))
-      {
-          
-      }*/
+    
 
     }
 
@@ -165,6 +138,7 @@ public class PlayerActions : MonoBehaviour
             {
             //enemy.enemyAnimator.SetTrigger("Damage");
             }
+            Debug.Log(player.GetHP());
             player.SetHP(player.GetHP() + deltaHP);
             Debug.Log(player.GetHP());
 

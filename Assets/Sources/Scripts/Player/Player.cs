@@ -7,9 +7,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
-    [SerializeField] private GameObject _gun;
-    
-    [SerializeField] private int MaxHP;
+    [SerializeField] private GameObject socket;
+    [SerializeField] private Gun gun;
+    [SerializeField] private FieldOfView field;
+    [SerializeField] private int MaxHP = 100;
+    private Gun _gun;
     private bool isDead = false;
     private int currentHP;
     private Rigidbody2D _rigidbody;
@@ -17,18 +19,25 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+         Instantiate(field);
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-    
+        _gun = Instantiate(gun, this.transform);
+        _gun.transform.SetParent(socket.transform);
+      
 
+
+    }
+    private void Start()
+    {
+        SetHP(MaxHP);
+        Debug.Log(currentHP);
     }
     
     public bool GetIsDead(){
         return isDead;
     }
-
-    
 
     public int GetHP()
     {
@@ -52,7 +61,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
          if (_gun != null){
-        _gun.GetComponent<Gun>().Shoot();
+        _gun.Shoot();
 
         }    
     }
@@ -64,7 +73,7 @@ public class Player : MonoBehaviour
          
     Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
        if(_gun != null)
-            _gun.GetComponent<Gun>().SetAimPoint(AimPosition);
+            _gun.SetAimPoint(AimPosition);
     }
     private void FixedUpdate()
     {

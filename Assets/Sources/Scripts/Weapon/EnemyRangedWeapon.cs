@@ -21,7 +21,7 @@ public class EnemyRangedWeapon : MonoBehaviour
       
       Vector3 targetDirection = (enemy.Player.transform.position - transform.position).normalized;
 
-      float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+      float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
 
       transform.eulerAngles = new Vector3(0,0, angle);
 

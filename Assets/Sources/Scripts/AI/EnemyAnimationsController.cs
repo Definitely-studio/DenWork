@@ -38,6 +38,10 @@ public class EnemyAnimationsController : MonoBehaviour
         animator.SetBool("LookFor", value);
     }
 
+    public void SetIdleKey(bool value)
+    {
+        animator.SetBool("isIdle", value);
+    }
 
 
 }

@@ -14,8 +14,8 @@ public class AudioMixed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScrollBarMusic.GetComponent<Scrollbar>().value = PlayerPrefs.GetFloat("MusicVolume", 1);
-        ScrollBarSound.GetComponent<Scrollbar>().value = PlayerPrefs.GetFloat("SoundVolume", 1);
+     //   ScrollBarMusic.GetComponent<Scrollbar>().value = PlayerPrefs.GetFloat("MusicVolume", 1);
+     //   ScrollBarSound.GetComponent<Scrollbar>().value = PlayerPrefs.GetFloat("SoundVolume", 1);
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class AudioMixed : MonoBehaviour
     {
 
     }
-    public void ChangeVolumeMusic(float volume)
+   /* public void ChangeVolumeMusic(float volume)
     {
         GlobalList.MusicValue = ScrollBarMusic.GetComponent<Scrollbar>().value;
 
@@ -39,5 +39,5 @@ public class AudioMixed : MonoBehaviour
         AudioMixer.audioMixer.SetFloat("SoundVolume", Mathf.Lerp(-80, 0, volume));
 
         PlayerPrefs.SetFloat("SoundVolume", volume);
-    }
+    }*/
 }

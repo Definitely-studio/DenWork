@@ -6,7 +6,7 @@ public class EnemyPatrol : NPCBaseFMS
 {
 
     GameObject[] waypoints;
-    int currentWP;
+    int currentWP = 0;
 
     void Awake(){
         
@@ -23,8 +23,8 @@ public class EnemyPatrol : NPCBaseFMS
         //Debug.Log(waypoints[currentWP]);
         agent.SetAgentDestination(waypoints[currentWP].transform); 
         //agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.transform); 
+   
 
-        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -41,6 +41,7 @@ public class EnemyPatrol : NPCBaseFMS
             {
                 currentWP = 0;
             }
+            
             agent.SetAgentDestinationDelay(2f, waypoints[currentWP].transform); 
         }
     }

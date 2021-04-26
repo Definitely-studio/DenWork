@@ -18,7 +18,9 @@ public class PlayerDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerDetect = transform;
         target = GameObject.FindWithTag("Player").transform;
+        enemy = GetComponentInParent<Enemy>();
 
     }
 
@@ -103,6 +105,7 @@ public class PlayerDetector : MonoBehaviour
     enemy.animationsController.SetPlayerLookFor(true);
     yield return new WaitForSeconds(waitTime);
     enemy.animationsController.SetPlayerLookFor(false);
+    //enemy.animationsController.SetPatrolKey(true);
     
   }
 

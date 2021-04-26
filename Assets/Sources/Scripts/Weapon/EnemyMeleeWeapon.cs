@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMeleeWeapon : MonoBehaviour
 {
     public Collider2D damageCollision;
-    public int damage = 10;
+    public int damage = -10;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +32,9 @@ public class EnemyMeleeWeapon : MonoBehaviour
       if(other.gameObject.tag == "Player"){
       
 
-            if (other.gameObject.GetComponent<PlayerOld> () != null)
+            if (other.gameObject.GetComponent<PlayerActions> () != null)
             {
-                other.gameObject.GetComponent<PlayerOld> ().ChangeHP(damage);
+                other.gameObject.GetComponent<PlayerActions> ().ChangeHP(damage);
             }
           }
 

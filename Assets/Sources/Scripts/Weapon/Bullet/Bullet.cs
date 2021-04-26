@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
+        _rigidbody.gravityScale = 0f;
         //_consSpeed = Speed;
     }
 
@@ -55,7 +56,7 @@ public class Bullet : MonoBehaviour
     {
 
          if ( collision.gameObject.GetComponent<ParentfromBullet>()
-         != null && this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != null){
+         != null && this.gameObject.GetComponentInParent<ParentfromBullet>() != null){
 
             if ( collision.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer
             != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)
@@ -72,6 +73,7 @@ public class Bullet : MonoBehaviour
                 if(collision.gameObject.tag == "Enemy")
                     {
                         collision.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
+                        Debug.Log("DamagePlayer");
                     }
                 if(collision.gameObject.tag == "Player")
                     {

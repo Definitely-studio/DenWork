@@ -26,11 +26,13 @@ public class Enemy : PawnBase
     private Transform bodySprite;
 
     public AudioSource AudioDead;
+    public int currentWP;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        currentWP = 0;
         Player = GameObject.FindWithTag("Player");
         target = GameObject.FindWithTag("Player").transform;
         state = (state != States.passive) ? States.lookingfor : States.passive;
@@ -62,6 +64,15 @@ public class Enemy : PawnBase
       }
 
 
+    }
+
+    public void SetCurrentWP(int value)
+    {
+      currentWP = value;
+    }
+    public int GetCurrentWP()
+    {
+      return currentWP;
     }
 
     public Rigidbody2D GetRigidBody(){

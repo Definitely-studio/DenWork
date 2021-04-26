@@ -79,7 +79,8 @@ public class PlayerOld : PawnBase
     public void RescaleHealPoint()
    {
      if(UI != null){
-      UI.GetComponent<UIGameMode>().ShowSoulLevel(GetSoul());
+      //
+      //UI.GetComponent<UIGameMode>().ShowSoulLevel(GetSoul());
       UI.GetComponent<UIGameMode>().SetHealSlider(GetCurrentHP());
      }
    }

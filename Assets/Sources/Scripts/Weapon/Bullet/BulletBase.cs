@@ -6,8 +6,7 @@ public class BulletBase : MonoBehaviour
 {
   public float speed = 10f;
   protected Rigidbody2D rb;
-  public int damage = 2;
-  public Transform barrel;
+  public int damage = 10;
   public float spreading = 0f;
   public float destroyTime = 20f;
   
@@ -20,7 +19,7 @@ public class BulletBase : MonoBehaviour
       trajectory.x += Random.Range(-spreading, spreading);
       trajectory.y += Random.Range(-spreading, spreading);
       rb.AddForce(trajectory.normalized * speed, ForceMode2D.Impulse);*/
-      //rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
+      rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
       //print (transform.rotation);
       Destroy(gameObject, destroyTime); // Destroy this after 20sec
   }
@@ -28,19 +27,14 @@ public class BulletBase : MonoBehaviour
   void OnTriggerEnter2D(Collider2D other)
   {
 
-      /*if (other.gameObject.tag == "Enemy" )
+      if (other.gameObject.tag == "Player" )
       {
 
-          if (other.gameObject.GetComponent<EnemyActions>() != null && other.gameObject.GetComponent<Enemy>() != null)
-          {
-            if(other.gameObject.GetComponent<Enemy> ().state != States.dead && !other.gameObject.GetComponent<Enemy> ().GetIsDead())
-            {
-              other.gameObject.GetComponent<EnemyActions>().ChangeHP(damage);
+          other.gameObject.GetComponent<PlayerActions>().ChangeHP(damage);
               Destroy(gameObject);
-            }
-          }
-      }*/
-
+            
+      }
+      
       if (other.gameObject.tag == "Wall")
       {
           Destroy(gameObject);

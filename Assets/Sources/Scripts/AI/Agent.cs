@@ -53,14 +53,22 @@ public class Agent : MonoBehaviour
     public void SetAgentDestinationDelay(float waitTime, Transform DestTarget)
     {
         StartCoroutine(Waiting( waitTime, DestTarget));
+        
 
     }
 
 IEnumerator Waiting(float waitTime, Transform DestTarget)
   {
+    enemy.animationsController.SetIdleKey(true);
+    Debug.Log("Idle true");
     yield return new WaitForSeconds(waitTime);
-     SetAgentDestination(DestTarget); 
-    
+    SetAgentDestination(DestTarget); 
+    enemy.animationsController.SetIdleKey(false);
+    Debug.Log("Idle false");
+    if(enemy.wayPoint.Length != 0)
+    {
+        enemy.animationsController.SetIdleKey(true);
+    }
   }
 
     
