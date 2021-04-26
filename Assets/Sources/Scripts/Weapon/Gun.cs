@@ -38,7 +38,6 @@ public class Gun : MonoBehaviour
         {
             Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
             newBullet.gameObject.SetActive(false);
-            newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
             _bullets.Add(newBullet);
         }
     }
@@ -85,7 +84,6 @@ public class Gun : MonoBehaviour
         //Создание доп платформы, если не будет хватать, + исправляет жалобы компилятора
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
         newBullet.gameObject.SetActive(false);
-        newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
         newBullet.Enemy = _enemy;
         newBullet.Speed = _bulletSpeed;
         _bullets.Add(newBullet);
