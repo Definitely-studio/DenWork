@@ -57,6 +57,22 @@ public class @Input : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FirstGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""6261b0f2-5e2e-4551-b297-d30c98c83c37"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SecondGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""af512387-04e4-46a1-8aec-976ec7408396"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -158,6 +174,28 @@ public class @Input : IInputActionCollection, IDisposable
                     ""action"": ""Invent"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f6bb8ad-adcd-4e3c-b7d5-2b8742d85fcd"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a9e6487-2e6f-49d6-8672-a111f8569fc4"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,6 +209,8 @@ public class @Input : IInputActionCollection, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
         m_Player_Invent = m_Player.FindAction("Invent", throwIfNotFound: true);
+        m_Player_FirstGun = m_Player.FindAction("FirstGun", throwIfNotFound: true);
+        m_Player_SecondGun = m_Player.FindAction("SecondGun", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +265,8 @@ public class @Input : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Submit;
     private readonly InputAction m_Player_Invent;
+    private readonly InputAction m_Player_FirstGun;
+    private readonly InputAction m_Player_SecondGun;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -234,6 +276,8 @@ public class @Input : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Submit => m_Wrapper.m_Player_Submit;
         public InputAction @Invent => m_Wrapper.m_Player_Invent;
+        public InputAction @FirstGun => m_Wrapper.m_Player_FirstGun;
+        public InputAction @SecondGun => m_Wrapper.m_Player_SecondGun;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +302,12 @@ public class @Input : IInputActionCollection, IDisposable
                 @Invent.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
                 @Invent.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
                 @Invent.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvent;
+                @FirstGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstGun;
+                @FirstGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstGun;
+                @FirstGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstGun;
+                @SecondGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondGun;
+                @SecondGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondGun;
+                @SecondGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondGun;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +327,12 @@ public class @Input : IInputActionCollection, IDisposable
                 @Invent.started += instance.OnInvent;
                 @Invent.performed += instance.OnInvent;
                 @Invent.canceled += instance.OnInvent;
+                @FirstGun.started += instance.OnFirstGun;
+                @FirstGun.performed += instance.OnFirstGun;
+                @FirstGun.canceled += instance.OnFirstGun;
+                @SecondGun.started += instance.OnSecondGun;
+                @SecondGun.performed += instance.OnSecondGun;
+                @SecondGun.canceled += instance.OnSecondGun;
             }
         }
     }
@@ -288,5 +344,7 @@ public class @Input : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnInvent(InputAction.CallbackContext context);
+        void OnFirstGun(InputAction.CallbackContext context);
+        void OnSecondGun(InputAction.CallbackContext context);
     }
 }
