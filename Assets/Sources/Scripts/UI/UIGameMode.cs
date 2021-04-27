@@ -8,6 +8,7 @@ public class UIGameMode : MonoBehaviour
 
     public GameObject HealPointScale;
     public Text BulletText;
+     public Text BulletText2;
 
     public Image M1Img;
     public Image M2Img;
@@ -35,14 +36,16 @@ public class UIGameMode : MonoBehaviour
 
     public void SetHealSlider(int value){
 
-      HealSlider.value = (float) value /100;
+      HealSlider.value = (float) value / 100;
     }
 
 
 
-    public void ShowBullet(int bullet, int maxBullet)
+    public void ShowBullet(int bullet, int maxBullet, int totalBullet)
     {
         BulletText.text = bullet.ToString() + "/" + maxBullet.ToString();
+        BulletText2.text = "Total " + totalBullet.ToString();
+
     }
 
     public void ShowHealPointLevel(int val)

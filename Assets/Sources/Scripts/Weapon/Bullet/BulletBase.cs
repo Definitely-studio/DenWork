@@ -14,11 +14,7 @@ public class BulletBase : MonoBehaviour
   void Start()
   {
       rb = GetComponent<Rigidbody2D>();
-      //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      /*Vector2 trajectory = mousePos - rb.position;
-      trajectory.x += Random.Range(-spreading, spreading);
-      trajectory.y += Random.Range(-spreading, spreading);
-      rb.AddForce(trajectory.normalized * speed, ForceMode2D.Impulse);*/
+      
       rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
       //print (transform.rotation);
       Destroy(gameObject, destroyTime); // Destroy this after 20sec

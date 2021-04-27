@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
 
     public GameObject Player;
+    public float offset = 0.4f;
     public float TopLimitWorld;
     public float RighttLimitWorld;
     public float BottomLimitWorld;
@@ -43,7 +44,7 @@ public class CameraMovement : MonoBehaviour
         }
         if (Player.transform.position.y < TopLimitWorld && Player.transform.position.y > BottomLimitWorld)
         {
-            cameraY = Player.transform.position.y;
+            cameraY = Player.transform.position.y + offset;
             OldPositionY = cameraY;
         }
 

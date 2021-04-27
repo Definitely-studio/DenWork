@@ -9,6 +9,8 @@ public class EnemyRangedWeapon : MonoBehaviour
     public float AttackCooldown = 10f;
     public GameObject bullet;
     public bool isAttackCooldown = false;
+    public AudioSource Audio;
+    public AudioClip ShootSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,10 @@ public class EnemyRangedWeapon : MonoBehaviour
 
     public void Shoot()
     {
-     
+      if(Audio!= null){
+        Audio.PlayOneShot(ShootSound);
+      }
+      
       GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation); 
 
       if(this.GetComponentInParent<ParentfromBullet>() != null)

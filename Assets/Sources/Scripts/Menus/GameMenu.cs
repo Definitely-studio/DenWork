@@ -5,16 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-
+    [SerializeField] private Input _input;
     public GameObject PanelOptions;
     public GameObject PanelPosthumous;
     public GameObject Inventory;
     public GameObject Crosshair;
+    private bool isPause = false;
 
     // Start is called before the first frame update
     void Start()
     {
       Cursor.visible = false;
+     
+    }
+    void Awake()
+    {
+     
+       _input = new Input();
+       
+        _input.Player.Pause.performed += context => Pause();
     }
 
     // Update is called once per frame
@@ -31,6 +40,16 @@ public class GameMenu : MonoBehaviour
                 OnOptions();
             }
         }*/
+    }
+    public void Pause(){
+        Debug.Log("pause");
+        if (isPause == true)
+        {
+            OffOptions();
+
+        }
+        else
+            OnOptions();
     }
 
     public void ToStartGame()
@@ -58,7 +77,7 @@ public class GameMenu : MonoBehaviour
 
     IEnumerator LoadYourAsyncSceneRestart()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameMode");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TEST LEVEL");
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
@@ -71,7 +90,6 @@ public class GameMenu : MonoBehaviour
     {
         Time.timeScale = 0;
         PanelPosthumous.SetActive(true);
-        Inventory.SetActive(false);
         Crosshair.SetActive(false);
         Cursor.visible = true;
 
@@ -81,7 +99,7 @@ public class GameMenu : MonoBehaviour
     {
 
         Time.timeScale = 0;
-        Inventory.SetActive(false);
+        isPause = true;
         PanelOptions.SetActive(true);
         Cursor.visible = true;
         Crosshair.SetActive(false);
@@ -90,9 +108,9 @@ public class GameMenu : MonoBehaviour
 
     public void OffOptions()
     {
+        isPause = false;
         Time.timeScale = 1;
         PanelOptions.SetActive(false);
-        Inventory.SetActive(true);
         Cursor.visible = false;
         Crosshair.SetActive(true);
     }

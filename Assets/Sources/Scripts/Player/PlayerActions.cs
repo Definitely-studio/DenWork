@@ -15,15 +15,16 @@ public class PlayerActions : MonoBehaviour
     public Inventory inventory;
     [SerializeField] private Input _input;
 
-    public AudioSource DeathSound;
-    public AudioSource MActive2;
-    public AudioSource MActive3;
+    public AudioSource Sound;
+    public AudioClip DeathSound;
+    public AudioClip DamageSound;
     public GameMenu gameMenu;
+    public UIGameMode ui;
 
     // Start is called before the first frame update
 
     private void Awake(){
-
+      ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
       /*_input = new Input();
       _input.Player.Invent.performed += context => ActivateInventory();*/
 		 
@@ -139,10 +140,16 @@ public class PlayerActions : MonoBehaviour
             {
             //enemy.enemyAnimator.SetTrigger("Damage");
             }
+
+            if(Sound != null)
+            {
+              Sound.PlayOneShot(DamageSound);
+            }
             Debug.Log(player.GetHP());
             player.SetHP(player.GetHP() + deltaHP);
             Debug.Log(player.GetHP());
 
+            ui.SetHealSlider(player.GetHP());
             if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
             {
                 Death();
@@ -159,14 +166,17 @@ public class PlayerActions : MonoBehaviour
       }
       //gameObject.GetComponent<Collider2D>().enabled = false;
       player.SetIsDead(true);
-      if(DeathSound != null)
-      {
-        DeathSound.Play();
-      }
+      if(Sound != null)
+        {
+          Sound.PlayOneShot(DeathSound);
+        }
       Destroy(gameObject);
       Debug.Log("Death");
       if(gameMenu!= null)
+      {
         gameMenu.ActivatePostPortus();
+        gameMenu.RestartGame();
+      }
 
     }
 

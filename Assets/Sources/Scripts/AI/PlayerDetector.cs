@@ -29,6 +29,7 @@ public class PlayerDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      if(!enemy.GetIsDead())
         DetectPlayer();
 
         if(playerisFound)
@@ -59,6 +60,7 @@ public class PlayerDetector : MonoBehaviour
         if(PlayerInfo.collider.gameObject.tag == "Player" )
         {
             playerisFound = true;
+            enemy.enemyActions.PlayRoar();
             StopCoroutine("LookForPlayer");
             enemy.animationsController.SetPlayerLookFor(false);
             enemy.animationsController.SetPlayerFound(true);
