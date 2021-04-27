@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa75457c28767d429160a6422904a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity: 2
+  _velocity: 1.5
   socket: {fileID: 5752703582141825335}
   gun: {fileID: 3551811998244872918, guid: ca4f97096b17bc845b2bd86544b479ff, type: 3}
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}

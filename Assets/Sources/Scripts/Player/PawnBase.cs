@@ -7,11 +7,11 @@ public class PawnBase : MonoBehaviour
 
 
     public int MaxHP = 100;
-    private int currentHP = 100;
+    public int currentHP = 100;
     private bool isDead = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         currentHP = MaxHP;
     }

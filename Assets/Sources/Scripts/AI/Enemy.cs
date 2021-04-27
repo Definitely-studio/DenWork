@@ -29,8 +29,9 @@ public class Enemy : PawnBase
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+      base.Start();
         currentWP = 0;
         Player = GameObject.FindWithTag("Player");
         target = GameObject.FindWithTag("Player").transform;
