@@ -14,6 +14,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _reloadingTime;
     [SerializeField] private int _bulletsMaxCount;
     [SerializeField] private SpriteRenderer weapon;
+    [SerializeField] private SpriteRenderer hand1;
+    [SerializeField] private SpriteRenderer hand2;
+
     [SerializeField] private FieldOfView field;
     [SerializeField] private AudioSource AudioSource;
     [SerializeField] private AudioSource ReloadClip;
@@ -89,6 +92,8 @@ public class Gun : MonoBehaviour
         if (flipSprite)
         {
             weapon.flipY = !weapon.flipY;
+            hand1.flipY = !hand1.flipY;
+            hand2.flipY = !hand2.flipY;
         }
 
         _rigidbody.SetRotation(angle);
