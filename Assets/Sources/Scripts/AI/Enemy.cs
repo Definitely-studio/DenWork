@@ -108,6 +108,7 @@ public class Enemy : PawnBase
         {
           if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
           {
+            Debug.Log("CollisionEnter");
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();
             playerDetector.SetLookForState();
             playerDetector.lastViewdPosition.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);

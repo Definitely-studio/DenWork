@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainLogic : MonoBehaviour
 {
-    public GameObject AllSpawn;
-    public GameObject AllEnemy;
+
     public GameObject Player;
     public int ProgressLevel = 0;
     public int SoulsRequiredToWin = 500;
@@ -31,31 +30,16 @@ public class MainLogic : MonoBehaviour
     void Start()
     {
        // RefrashProgressLevel();
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        FlashTimer -= Time.deltaTime;
-        if(Flash != null){
-        Flash.SetActive(false);
-        if (FlashTimer < 0)
-        {
-            FlashTimer = UnityEngine.Random.Range(5, 50);
-            if(ProgressLevel > 300)
-            {
-                AudioFlash.Play();
-                GetComponent<CameraMovement>().Shaking();
-                Flash.SetActive(true);
-            }
-        }
-        }
-    }
-
-    public void EnemyDead()
-    {
-        EnemyKill++;
-        //AllEnemy.GetComponent<PuppeteerEnemys>().FirstAttack();
+      
+      
+        GetComponent<CameraMovement>().Shaking();
+      
     }
 
     void RefrashProgressLevel()
@@ -67,24 +51,6 @@ public class MainLogic : MonoBehaviour
         //AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
     }
 
-    public void AddSoul()
-    {
-        if(ProgressLevel < SoulsRequiredToWin)
-        {
-            if(!AudioSoul.isPlaying)
-                AudioSoul.Play();
-
-            AudioMelody2.volume = ProgressLevel / (5000);
-            AudioMelodyMain.volume = 1 - ProgressLevel / (1000);
-            ProgressLevel++;
-            //Pawns.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
-        }
-        else
-        {
-            StartCoroutine(LoadYourAsyncScene());
-        }
-        RefrashProgressLevel();
-    }
 
     IEnumerator LoadYourAsyncScene()
     {

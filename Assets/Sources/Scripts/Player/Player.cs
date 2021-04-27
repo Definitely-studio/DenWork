@@ -18,24 +18,30 @@ public class Player : MonoBehaviour
     private bool isDead = false;
     private int currentHP;
     private Rigidbody2D _rigidbody;
+    private int ammoCount;
     private Vector2 moveDirection;
     public Animator f_Animator;
     public Animator b_Animator;
     public bool facingRight = true;
+    
+    private bool key = false;
 
     public GameObject body;
+    
     public GameObject f_body;
     public GameObject b_body;
 
     private void Awake()
-    {
+    {   
+        ammoCount = 15;
          Instantiate(field);
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
         _gun = Instantiate(gun, socket.transform);
         _gun.transform.SetParent(socket.transform);
-      
+       
+        _input.Player.Pause.performed += context => Pause();
 
         audioSource = this.GetComponent<AudioSource>();
     }
@@ -46,6 +52,30 @@ public class Player : MonoBehaviour
         Debug.Log(currentHP);
     }
     
+    void Pause(){
+         Debug.Log("Pause");
+        playerActions.gameMenu.Pause();
+    }
+
+    public void SetKey(bool value)
+    {
+        key = value;
+    }
+     public bool GetKey()
+    {
+        return key;
+    }
+    public void SetAmmo(int value)
+    {
+        _gun.ShowBullets();
+        ammoCount = value;
+    }
+     public int GetAmmo()
+    {
+          return ammoCount;
+    }
+
+
     public Transform GetRoot(){
         return playerRoot;
     }
@@ -57,6 +87,10 @@ public class Player : MonoBehaviour
     public int GetHP()
     {
         return currentHP;
+    }
+    public int GetMaxHP()
+    {
+        return MaxHP;
     }
 
      public void SetHP(int value)
@@ -77,8 +111,8 @@ public class Player : MonoBehaviour
     {
         if (_gun != null){
             //_gun.GetComponent<Gun>().Shoot();
-        if(audioSource.isPlaying != true)
-            audioSource.PlayOneShot(_gun.GetAudioClip()); 
+       
+            
 
         
         
@@ -167,7 +201,7 @@ public class Player : MonoBehaviour
          //  Debug.Log(other.gameObject);
            if(other.gameObject.tag == "bullet" )
         {
-          if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
+          if (other.gameObject.GetComponent<Bullet>().tag != "Player")
           {
                 Bullet newBullet = other.gameObject.GetComponent<Bullet>();
 

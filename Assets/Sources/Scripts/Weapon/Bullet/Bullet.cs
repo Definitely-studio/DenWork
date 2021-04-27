@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]private int enemy;
     [SerializeField]private int damage;
     [SerializeField] private ParticleSystem explosion;
+    [SerializeField] private SpriteRenderer sprite;
 
     private Rigidbody2D _rigidbody;
     private int _consSpeed;
@@ -51,16 +52,20 @@ public class Bullet : MonoBehaviour
     IEnumerator ExampleCoroutine()
     {
         yield return new WaitForSeconds(explosion.duration);
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
         this.gameObject.SetActive(false);
+        sprite.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.gameObject.tag != tag)
+        if(collision.gameObject.tag != tag && collision.gameObject.tag != gameObject.tag)
         {
              Speed = 0;
                 explosion.gameObject.SetActive(true);
+                this.gameObject.GetComponent<Collider2D>().enabled = false;
+                sprite.enabled = false;
                 StartCoroutine(ExampleCoroutine());
         }
         /*

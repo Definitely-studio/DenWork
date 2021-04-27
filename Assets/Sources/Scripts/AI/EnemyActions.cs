@@ -6,8 +6,10 @@ public class EnemyActions : MonoBehaviour
 {
 
     public Enemy enemy;
-    public AudioSource DamageSound;
-    public AudioSource DeathSound;
+    public AudioSource AudioSound;
+    public AudioClip DamageSound;
+    public AudioClip DeathSound;
+    public AudioClip RoarSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +29,9 @@ public class EnemyActions : MonoBehaviour
         
             if (deltaHP <0)
             {
-             if(DamageSound != null && !DamageSound.isPlaying)
+             if(AudioSound != null && !AudioSound.isPlaying)
              {
-                 DamageSound.Play();
+                 AudioSound.PlayOneShot(DamageSound);
              }
             }
             enemy.SetCurrentHP(enemy.GetCurrentHP() + deltaHP);
@@ -47,10 +49,11 @@ public class EnemyActions : MonoBehaviour
 
     private void Death(){
 
-
-
-        if(enemy.AudioDead != null)
-            enemy.AudioDead.Play();
+        if(AudioSound != null && !AudioSound.isPlaying)
+            {
+                AudioSound.PlayOneShot(DeathSound);
+            }
+            
         
          Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
 
@@ -63,15 +66,16 @@ public class EnemyActions : MonoBehaviour
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f + 5.0f);
 
         //enemy.enemyAnimator.SetBool("Death", true);
-        if(DeathSound != null)
-        {
-            DeathSound.Play();
-        }
+
 
         enemy.GetRigidBody().bodyType = RigidbodyType2D.Static;
         enemy.SetIsDead (true);
         Destroy(gameObject, enemy.destroyTime);
 
+    }
+
+    public void PlayRoar(){
+        AudioSound.PlayOneShot(RoarSound);
     }
 
     public virtual void AttackStart(){

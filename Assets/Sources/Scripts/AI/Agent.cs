@@ -32,8 +32,13 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        agent.SetDestination(target.position);
+        if(!enemy.GetIsDead())
+            agent.SetDestination(target.position);
+        else 
+        {
+            agent.SetDestination(transform.position);
+            enemy.animationsController.SetIdleKey(true);
+        }
         AnimateEnemy();
         
 

@@ -46,7 +46,8 @@ MonoBehaviour:
   rayLenght: 1
   playerDetect: {fileID: 248527660358268828}
   target: {fileID: 0}
+  lastViewdPosition: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 144
   enemy: {fileID: 0}
