@@ -81,6 +81,14 @@ public class @Input : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d1a4565-5a2f-48ca-9c79-c1eb635aead5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -213,6 +221,17 @@ public class @Input : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2679859e-90d3-47a3-8cda-08da368a2608"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -726,6 +745,7 @@ public class @Input : IInputActionCollection, IDisposable
         m_Player_FirstGun = m_Player.FindAction("FirstGun", throwIfNotFound: true);
         m_Player_SecondGun = m_Player.FindAction("SecondGun", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -795,6 +815,7 @@ public class @Input : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_FirstGun;
     private readonly InputAction m_Player_SecondGun;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Reload;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -807,6 +828,7 @@ public class @Input : IInputActionCollection, IDisposable
         public InputAction @FirstGun => m_Wrapper.m_Player_FirstGun;
         public InputAction @SecondGun => m_Wrapper.m_Player_SecondGun;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -840,6 +862,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -868,6 +893,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -987,6 +1015,7 @@ public class @Input : IInputActionCollection, IDisposable
         void OnFirstGun(InputAction.CallbackContext context);
         void OnSecondGun(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

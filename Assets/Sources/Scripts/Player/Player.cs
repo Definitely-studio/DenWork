@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
        
         _input.Player.Pause.performed += context => Pause();
 
+        _input.Player.Reload.performed += context => Reload();
+
         audioSource = this.GetComponent<AudioSource>();
     }
     private void Start()
@@ -64,10 +66,20 @@ public class Player : MonoBehaviour
     {
         return key;
     }
+    
+      public PlayerActions GetActions()
+    {
+        return playerActions;
+    }
     public void SetAmmo(int value)
     {
         _gun.ShowBullets();
         ammoCount = value;
+    }
+    public void Reload()
+    {
+        _gun.Reload();
+    
     }
      public int GetAmmo()
     {

@@ -157,6 +157,12 @@ public class Gun : MonoBehaviour
 
     }
 
+    public void Reload()
+    {
+        if(_bulletsCurrentCount != _bulletsMaxCount )
+            StartCoroutine(Reloading(_reloadingTime));
+    }
+
     IEnumerator Reloading(float waitTime)
     {
         _isReloading = true;
@@ -180,8 +186,9 @@ public class Gun : MonoBehaviour
         }
         else
         {
+            player.SetAmmo(player.GetAmmo() - (_bulletsMaxCount - _bulletsCurrentCount));
             _bulletsCurrentCount = _bulletsMaxCount;
-            player.SetAmmo(player.GetAmmo() - _bulletsMaxCount);
+            
         }
 
         ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
