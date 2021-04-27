@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     public Animator f_Animator;
     public Animator b_Animator;
-    public bool facingRight = true;
     
     private bool key = false;
 
@@ -184,14 +183,69 @@ public class Player : MonoBehaviour
         }          
 
 
-        if (moveDir.magnitude > 0) {
-            f_Animator.SetBool("isWalk", true);
-            b_Animator.SetBool("isWalk", true);              
+        if (moveDir.x > 0 && lookDir.x > 0) {
+            f_Animator.SetBool("isWalk", false);
+            b_Animator.SetBool("isWalk", false); 
+            f_Animator.SetBool("isWalkBack", true);
+            b_Animator.SetBool("isWalkBack", true);                         
         }
+
+        if (moveDir.x > 0 && lookDir.x < 0) {
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);            
+            f_Animator.SetBool("isWalkBack", false);
+            b_Animator.SetBool("isWalkBack", false);              
+        }
+
+        if (moveDir.x < 0 && lookDir.x < 0) {
+            f_Animator.SetBool("isWalk", false);
+            b_Animator.SetBool("isWalk", false);   
+            f_Animator.SetBool("isWalkBack", true);
+            b_Animator.SetBool("isWalkBack", true);                       
+        }
+
+        if (moveDir.x < 0 && lookDir.x > 0) {
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);             
+            f_Animator.SetBool("isWalkBack", false);
+            b_Animator.SetBool("isWalkBack", false);              
+        }
+
+        if (moveDir.y > 0 && lookDir.y > 0) {
+            f_Animator.SetBool("isWalk", false);
+            b_Animator.SetBool("isWalk", false); 
+            f_Animator.SetBool("isWalkBack", true);
+            b_Animator.SetBool("isWalkBack", true);                         
+        }
+
+        if (moveDir.y > 0 && lookDir.y < 0) {
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);            
+            f_Animator.SetBool("isWalkBack", false);
+            b_Animator.SetBool("isWalkBack", false);              
+        }
+
+        if (moveDir.y < 0 && lookDir.y < 0) {
+            f_Animator.SetBool("isWalk", false);
+            b_Animator.SetBool("isWalk", false);   
+            f_Animator.SetBool("isWalkBack", true);
+            b_Animator.SetBool("isWalkBack", true);                       
+        }
+
+        if (moveDir.y < 0 && lookDir.y > 0) {
+            f_Animator.SetBool("isWalk", true);
+            b_Animator.SetBool("isWalk", true);             
+            f_Animator.SetBool("isWalkBack", false);
+            b_Animator.SetBool("isWalkBack", false);              
+        }
+
+
 
         if (moveDir.magnitude == 0) {
             f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false);               
+            b_Animator.SetBool("isWalk", false);  
+            f_Animator.SetBool("isWalkBack", false);
+            b_Animator.SetBool("isWalkBack", false);                          
         }     
 
     }

@@ -65,7 +65,7 @@ public class EnemyActions : MonoBehaviour
 
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f + 5.0f);
 
-        //enemy.enemyAnimator.SetBool("Death", true);
+        enemy.animationsController.SetDeathTrigger(); // Death animation
 
 
         enemy.GetRigidBody().bodyType = RigidbodyType2D.Static;
