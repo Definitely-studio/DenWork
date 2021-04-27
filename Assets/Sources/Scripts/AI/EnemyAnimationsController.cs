@@ -43,5 +43,13 @@ public class EnemyAnimationsController : MonoBehaviour
         animator.SetBool("isIdle", value);
     }
 
+    public void SetOuchTrigger()
+    {
+        animator.SetTrigger("Ouch");
+    }
 
+    public void SetDeathTrigger()
+    {
+        animator.SetTrigger("Death");
+    }    
 }

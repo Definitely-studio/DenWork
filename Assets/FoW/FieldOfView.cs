@@ -17,13 +17,13 @@ public class FieldOfView : MonoBehaviour {
      private void Start() {
          mesh = new Mesh();
          GetComponent<MeshFilter>().mesh = mesh;
-         fov = 75f;
+         fov = 90f;
          viewDistance = 20f;
          origin = Vector3.zero;
      }
 
      private void LateUpdate() {
-         int rayCount = 50;
+         int rayCount = 35;
          float angle = startingAngle;
          float angleIncrease = fov / rayCount;
 

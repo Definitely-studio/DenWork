@@ -50,6 +50,7 @@ public class Enemy : PawnBase
       if(state != States.dead && state != States.passive)
       {
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f);
+      }
         
         
        /*  if(WeaponSocket != null)
@@ -58,7 +59,7 @@ public class Enemy : PawnBase
         }*/
         
         
-      }
+      
 
 
     }
@@ -108,6 +109,7 @@ public class Enemy : PawnBase
         {
           if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
           {
+            animationsController.SetOuchTrigger();
             Debug.Log("CollisionEnter");
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();
             playerDetector.SetLookForState();
