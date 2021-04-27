@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPoint: {fileID: 3839917033640143887}
-  _aimGameObject: {fileID: 2423837915561441931}
+  _aimGameObject: {fileID: 1246559294273571018}
   _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
   _enemy: 40
   _bulletSpeed: 5
