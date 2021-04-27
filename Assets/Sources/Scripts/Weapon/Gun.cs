@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip ReloadSound;
     
 
-
+    public GameObject hands;
     private List<Bullet> _bullets;
     private bool canShoot;
     private int _bulletsCurrentCount;
