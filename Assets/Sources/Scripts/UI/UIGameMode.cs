@@ -34,9 +34,9 @@ public class UIGameMode : MonoBehaviour
     }
 
 
-    public void SetHealSlider(int value){
+    public void SetHealSlider(int value, int maxHP){
 
-      HealSlider.value = (float) value / 100;
+      HealSlider.value = (float) value / maxHP;
     }
 
 

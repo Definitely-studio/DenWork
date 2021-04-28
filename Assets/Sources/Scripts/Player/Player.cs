@@ -24,30 +24,26 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     public Animator f_Animator;
     public Animator b_Animator;
-    
     private bool key = false;
-
     public GameObject body;
-    
     public GameObject f_body;
     public GameObject b_body;
 
     private void Awake()
     {   
         ammoCount = 15;
-         Instantiate(field);
+        Instantiate(field);
         _input = new Input();
         _rigidbody = this.GetComponent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
         _gun = Instantiate(gun, socket.transform);
         _gun.transform.SetParent(socket.transform);
-       
         _input.Player.Pause.performed += context => Pause();
-
         _input.Player.Reload.performed += context => Reload();
 
         audioSource = this.GetComponent<AudioSource>();
     }
+
     private void Start()
     {
         b_body.SetActive(false);
@@ -59,7 +55,6 @@ public class Player : MonoBehaviour
          //Debug.Log("Pause");
         playerActions.gameMenu.Pause();
     }
-
     public void SetKey(bool value)
     {
         key = value;
@@ -68,7 +63,6 @@ public class Player : MonoBehaviour
     {
         return key;
     }
-    
       public PlayerActions GetActions()
     {
         return playerActions;
@@ -87,12 +81,9 @@ public class Player : MonoBehaviour
     {
           return ammoCount;
     }
-
-
     public Transform GetRoot(){
         return playerRoot;
     }
-
     public bool GetIsDead(){
         return isDead;
     }
@@ -110,20 +101,18 @@ public class Player : MonoBehaviour
     {
          currentHP = value;
     }
-
     public void SetIsDead(bool value){
         isDead = value;
     }
 
     private void OnEnable()
-        {
-            _input.Enable();
-        }
+    {
+        _input.Enable();
+    }
 
     private void Shoot()
     {
         if (_gun != null){
-            //_gun.GetComponent<Gun>().Shoot();
         meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, 0));
         _gun.Shoot();
             f_Animator.SetTrigger("Shot");   

@@ -18,7 +18,6 @@ public class Agent : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetRoot();
-        
         target = transform;
         enemyActions = GetComponentInChildren<EnemyActions>();
         enemy = GetComponentInChildren<Enemy>();
@@ -35,17 +34,12 @@ public class Agent : MonoBehaviour
         if(!enemy.GetIsDead()) {
             agent.SetDestination(target.position);
             AnimateEnemy();
-            enemy.animationsController.SetDistance(Vector2.Distance(transform.position, Player.position));
+            enemy.animationsController.SetDistance(Vector2.Distance(transform.position, Player.position)); // Set Distance key in Animator
         }
         else 
         {
             agent.SetDestination(transform.position);
         }
-        
-        
-
-        
-
     }
 
 
@@ -53,9 +47,7 @@ public class Agent : MonoBehaviour
         return agent;
     }
 
-     public void SetAgentDestination(Transform DestTarget){
-        //Debug.Log(DestTarget.position);
-        
+     public void SetAgentDestination(Transform DestTarget){   
         target = DestTarget;
     }
 
@@ -66,28 +58,29 @@ public class Agent : MonoBehaviour
 
     }
 
+
+// Wait few seconds between patrol points
 IEnumerator Waiting(float waitTime, Transform DestTarget)
   {
     enemy.animationsController.SetIdleKey(true);
-    Debug.Log("Idle true");
     yield return new WaitForSeconds(waitTime);
     SetAgentDestination(DestTarget); 
     enemy.animationsController.SetIdleKey(false);
-    Debug.Log("Idle false");
     if(enemy.wayPoint.Length != 0)
     {
         enemy.animationsController.SetIdleKey(true);
     }
   }
 
-    public void AnimateEnemy() {
-        if ((transform.position - target.transform.position).x > 0) {
-            transform.eulerAngles = new Vector3(0f, 180f, 0f);
-        }
-        if ((transform.position - target.transform.position).x < 0) {
-            transform.eulerAngles = new Vector3(0f, 0f, 0f);
-        }        
-    } 
+// Rotate enemy due to movement direction
+public void AnimateEnemy() {
+    if ((transform.position - target.transform.position).x > 0) {
+        transform.eulerAngles = new Vector3(0f, 180f, 0f);
+    }
+    if ((transform.position - target.transform.position).x < 0) {
+        transform.eulerAngles = new Vector3(0f, 0f, 0f);
+    }        
+} 
 
     
 

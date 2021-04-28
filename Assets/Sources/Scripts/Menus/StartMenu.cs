@@ -26,7 +26,7 @@ public class StartMenu : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TEST LEVEL");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MAIN LEVEL");
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)

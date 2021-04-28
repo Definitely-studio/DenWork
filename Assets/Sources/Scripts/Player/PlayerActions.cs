@@ -149,7 +149,7 @@ public class PlayerActions : MonoBehaviour
             player.SetHP(player.GetHP() + deltaHP);
             Debug.Log(player.GetHP());
 
-            ui.SetHealSlider(player.GetHP());
+            ui.SetHealSlider(player.GetHP(), player.GetMaxHP());
             if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
             {
                 Death();

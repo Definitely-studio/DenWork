@@ -3151,7 +3151,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "@RedneckChan - Gamedesign/Code\n@Woolchara - Art\n@Mdma - Code/Animations\n@Sali
-    Odabashi\r - Code.\n@Dmitry Sander (Vanvill\r) - Sound/Music\n@TG_SlasH - Art"
+    Odabashi\r - Code.\n@Dmitry Sander - Sound/Music\n@TG_SlasH - Art/Animations"
 --- !u!222 &2093331661
 CanvasRenderer:
   m_ObjectHideFlags: 0

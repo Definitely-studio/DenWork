@@ -406,7 +406,7 @@ MonoBehaviour:
   ReloadClip: {fileID: 351916891156311920}
   crosshair: {fileID: 0}
   ui: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: 8d369a8c410922140a5c01d76051c36e, type: 3}
+  shootSound: {fileID: 8300000, guid: 6cc72db64278ed644bff4f1cd4c45fb9, type: 3}
   ReloadSound: {fileID: 8300000, guid: 9b00f030deac3c042b5d0d81803010bd, type: 3}
   fowCenter: {fileID: 0}
   weapon: {fileID: 5830338825116136687}

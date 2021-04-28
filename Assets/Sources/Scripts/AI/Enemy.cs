@@ -10,7 +10,6 @@ public class Enemy : PawnBase
    
     public States state;
     public GameObject Root;
-    
     public GameObject Player;
     public Agent agent;
     public PlayerDetector playerDetector;
@@ -38,31 +37,17 @@ public class Enemy : PawnBase
         target = GameObject.FindWithTag("Player").transform;
         state = (state != States.passive) ? States.lookingfor : States.passive;
         rb = GetComponent<Rigidbody2D> ();
-
-      
     }
-
 
     // Update is called once per frame
     public virtual void Update()
     {
-
 
       // проверяем, что ИИ не мертв
       if(state != States.dead && state != States.passive)
       {
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f);
       }
-        
-        
-       /*  if(WeaponSocket != null)
-        {
-          rangedWeaponRotation();
-        }*/
-        
-        
-      
-
 
     }
 
@@ -102,24 +87,20 @@ public class Enemy : PawnBase
       else
         return Vector2.zero;
     }
-
-
   private void OnTriggerEnter2D(Collider2D other)
     {
-      
         if(other.gameObject.tag == "bullet" )
         {
           if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
           {
-            Debug.Log(gameObject.tag);
             animationsController.SetOuchTrigger();
            // Debug.Log(other.gameObject);
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();
+            //animationsController.SetPlayerLookFor(true);
+            enemyActions.ChangeHP(-newBullet.Damage);
             playerDetector.SetLookForState();
             playerDetector.lastViewdPosition.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
             agent.SetAgentDestination(playerDetector.lastViewdPosition);
-            //animationsController.SetPlayerLookFor(true);
-            enemyActions.ChangeHP(-newBullet.Damage);
           }
         }
        /* if (other.gameObject.GetComponent<Bullet>() != null)
