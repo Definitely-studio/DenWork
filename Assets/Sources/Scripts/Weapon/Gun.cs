@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+
     [SerializeField] private GameObject _bulletPoint; // point where bullet will spawn
     [SerializeField] private GameObject _aimGameObject; // HZ
     [SerializeField] private Bullet _bulletType; // bullet reference
  
     [SerializeField] private int shots; // number of shots | 1 if just pistol or etc
-    [SerializeField] private float spreading; // optimail is 0.1f
+    [SerializeField] private float spreading; // optimal is 0.1f
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _shootingSpeed; // delay between shots
     [SerializeField] private float _reloadingTime;
@@ -116,6 +117,8 @@ public class Gun : MonoBehaviour
                
 
                 }
+
+
                 if(crosshair != null)
                 crosshair.PlayShootingAnimate();
                     

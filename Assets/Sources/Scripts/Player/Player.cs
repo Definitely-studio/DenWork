@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject meshParticlesSystem; // to spawn shell     
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
     public GameObject socket;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerRoot;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private int MaxHP = 100;
+    
     private Gun _gun;
     private bool isDead = false;
     private int currentHP;
@@ -122,11 +124,7 @@ public class Player : MonoBehaviour
     {
         if (_gun != null){
             //_gun.GetComponent<Gun>().Shoot();
-       
-            
-
-        
-        
+        meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, 0));
         _gun.Shoot();
             f_Animator.SetTrigger("Shot");   
             b_Animator.SetTrigger("Shot"); 
@@ -147,7 +145,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-         
+
     Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
        if(_gun != null)
        {
