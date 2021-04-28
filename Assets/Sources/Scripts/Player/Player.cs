@@ -185,11 +185,11 @@ public class Player : MonoBehaviour
         if (lookDir.x > 0) {
             body.transform.eulerAngles = new Vector3(0f, 180f, 0f);             
         }
-        if (lookDir.y > 0) {
+        if (lookDir.y > -0.25) {
             f_body.SetActive(true);
             b_body.SetActive(false);           
         }
-        if (lookDir.y < 0) {
+        if (lookDir.y < -0.25) {
             f_body.SetActive(false);
             b_body.SetActive(true);           
         }          

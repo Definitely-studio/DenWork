@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GameObject _bulletPoint;
-    [SerializeField] private GameObject _aimGameObject;
-    [SerializeField] private Bullet _bulletType;
+    [SerializeField] private GameObject _bulletPoint; // point where bullet will spawn
+    [SerializeField] private GameObject _aimGameObject; // HZ
+    [SerializeField] private Bullet _bulletType; // bullet reference
  
-    [SerializeField] private int _enemy;
+    [SerializeField] private int shots; // number of shots | 1 if just pistol or etc
+    [SerializeField] private float spreading; // optimail is 0.1f
     [SerializeField] private float _bulletSpeed;
-    [SerializeField] private float _shootingSpeed;
+    [SerializeField] private float _shootingSpeed; // delay between shots
     [SerializeField] private float _reloadingTime;
     [SerializeField] private int _bulletsMaxCount;
-    [SerializeField] private SpriteRenderer weapon;
-    [SerializeField] private SpriteRenderer hand1;
-    [SerializeField] private SpriteRenderer hand2;
+//   [SerializeField] private SpriteRenderer weapon;
+//   [SerializeField] private SpriteRenderer hand1;
+//   [SerializeField] private SpriteRenderer hand2;
 
-    [SerializeField] private FieldOfView field;
+    [SerializeField] private FieldOfView field; // FoW reference
     [SerializeField] private AudioSource AudioSource;
     [SerializeField] private AudioSource ReloadClip;
     [SerializeField] private Crosshair crosshair;
@@ -26,7 +27,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip ReloadSound;
     
 
-    public GameObject hands;
+    public GameObject fowCenter; // FoW center where from rays will start
+    public GameObject weapon;
     private List<Bullet> _bullets;
     private bool canShoot;
     private int _bulletsCurrentCount;
@@ -45,7 +47,7 @@ public class Gun : MonoBehaviour
         _rigidbody = rigidbody2D1;
         parentfrom = this.GetComponentInParent<ParentfromBullet>();
         _rigidbody.gravityScale = 0;
-        GenerateBullet();
+
         _bulletsCurrentCount = _bulletsMaxCount;
         _isReloading = false;
         crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
@@ -55,18 +57,6 @@ public class Gun : MonoBehaviour
          ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
     }
 
-
-    private void GenerateBullet()
-    {
-        _bullets = new List<Bullet>();
-        for (int i = 0; i < 10; i++)
-        {
-            Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform);
-            newBullet.gameObject.transform.SetParent(null);
-            newBullet.gameObject.SetActive(false);
-            _bullets.Add(newBullet);
-        }
-    }
 
     public void SetAimPoint(Vector2 aimPoint)
     {
@@ -81,45 +71,38 @@ public class Gun : MonoBehaviour
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        field.SetOrigin(_aimGameObject.transform.position);
+        field.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
 
 
+        //field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+        // field.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y,10));
 
-        bool flipSprite = (weapon.flipY ? (targetDirection.x > 0.01f) : (targetDirection.x<0.01));
-        field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        field.SetOrigin(new Vector3(_aimGameObject.transform.position.x,_aimGameObject.transform.position.y,10));
-
-        if (flipSprite)
-        {
-            weapon.flipY = !weapon.flipY;
-            hand1.flipY = !hand1.flipY;
-            hand2.flipY = !hand2.flipY;
-        }
 
         _rigidbody.SetRotation(angle);
 
+// weapon flip
+        if (targetDirection.x > 0) {
+        weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+    	}
+        if (targetDirection.x < 0) {
+        weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+    	} 
+
+
+
 
     }
-
-    public Bullet GetBullet(List<Bullet> _bullets)
+// bullet instantiation on shot
+    public void GetBullet(GameObject _bulletPoint)
     {
-        for (int i = 0; i < _bullets.Count; i++)
-        {
-            if (!_bullets[i].gameObject.activeInHierarchy)
-            {
-                _bullets[i].Enemy = _enemy;
-                _bullets[i].Speed = _bulletSpeed;
-                return _bullets[i];
-            }
-        }
-        //???????????????????????? ????????? ???????????????????????????, ???????????? ?????? ??????????????? ?????????????????????, + ?????????????????????????????? ?????????????????? ?????????????????????????????????
-        Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform, true);
+        Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
+
         newBullet.gameObject.transform.SetParent(null);
-        newBullet.gameObject.SetActive(false);
-        newBullet.Enemy = _enemy;
         newBullet.Speed = _bulletSpeed;
-        _bullets.Add(newBullet);
-        return newBullet;
+
+        newBullet._rigidbody.AddForce((_bulletPoint.transform.up + new Vector3(Random.Range(-spreading, spreading), Random.Range(-spreading, spreading), 0)) * _bulletSpeed);
+        
+
     }
 
     public void Shoot()
@@ -138,12 +121,13 @@ public class Gun : MonoBehaviour
                     
                 
                 //????????????????????????????????? ???????????? ?????? ??????????????? ???????????????????????????
-                Bullet newBullet = GetBullet(_bullets);
-                newBullet.transform.position = _bulletPoint.gameObject.transform.position;
-                newBullet.transform.rotation = _bulletPoint.gameObject.transform.rotation;
+		        for (int i = 0; i < shots; i++)
+		        {
+                GetBullet(_bulletPoint);
+            	}
+
 
                 //??????????????????????????? ????????????
-                newBullet.gameObject.SetActive(true);
                 _bulletsCurrentCount--;
                 ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
                 StartCoroutine(WaitBeetwenShoots(_shootingSpeed));

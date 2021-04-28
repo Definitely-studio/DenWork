@@ -117,7 +117,7 @@ public class Enemy : PawnBase
             playerDetector.lastViewdPosition.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
             agent.SetAgentDestination(playerDetector.lastViewdPosition);
             //animationsController.SetPlayerLookFor(true);
-            enemyActions.ChangeHP(-newBullet.Enemy);
+            enemyActions.ChangeHP(-newBullet.Damage);
           }
         }
        /* if (other.gameObject.GetComponent<Bullet>() != null)

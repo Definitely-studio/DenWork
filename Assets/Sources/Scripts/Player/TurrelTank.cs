@@ -6,7 +6,7 @@ public class TurrelTank : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPoint;
     [SerializeField] private Bullet _bulletType;
-    [SerializeField] private int _enemy;
+    [SerializeField] private int _gamage;
     [SerializeField] private float _angleVelocity;
 
 
@@ -58,7 +58,7 @@ public class TurrelTank : MonoBehaviour
         {
             if (!_bullets[i].gameObject.activeInHierarchy)
             {
-                _bullets[i].Enemy = _enemy;
+                _bullets[i].Damage = _gamage;
                 return _bullets[i];
             }
         }

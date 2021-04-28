@@ -5,23 +5,21 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]private float speed;
-    [SerializeField]private int enemy;
     [SerializeField]private int damage;
     [SerializeField] private ParticleSystem explosion;
     [SerializeField] private SpriteRenderer sprite;
 
-    private Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
     private int _consSpeed;
 
-    public int Enemy { get => enemy; set => enemy = value; }
     public float Speed { get => speed; set => speed = value; }
     public int Damage { get => damage; set => damage = value; }
     public string tag;
 
     private void Awake()
     {
-        Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
-        _rigidbody = rigidbody2D1;
+         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
+         _rigidbody = rigidbody2D1;
         _rigidbody.gravityScale = 0f;
        
         //_consSpeed = Speed;
@@ -30,7 +28,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         explosion.gameObject.SetActive(false);
-        _rigidbody.AddForce(_rigidbody.transform.up * speed);
+        //_rigidbody.AddForce(_rigidbody.transform.up * speed);
         //Speed = _consSpeed;
     }
     private void Start()
