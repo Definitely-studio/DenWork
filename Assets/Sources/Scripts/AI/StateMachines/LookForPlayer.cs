@@ -8,10 +8,11 @@ public class LookForPlayer : NPCBaseFMS
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        NPC = animator.gameObject;
+        base.OnStateEnter(animator, stateInfo,layerIndex);
+        //NPC = animator.gameObject;
         trans = new GameObject().transform;
         trans.position = new Vector3(NPC.GetComponent<Enemy>().Player.transform.position.x, NPC.GetComponent<Enemy>().Player.transform.position.y, NPC.GetComponent<Enemy>().Player.transform.position.z);
-        agent = NPC.GetComponent<Agent>();
+        //agent = NPC.GetComponent<Agent>();
         agent.SetAgentDestination(NPC.GetComponent<Enemy>().playerDetector.lastViewdPosition);
     }
 

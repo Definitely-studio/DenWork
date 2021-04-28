@@ -7,8 +7,9 @@ public class Chase : NPCBaseFMS
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        NPC = animator.gameObject;
-        agent = NPC.GetComponent<Agent>();
+        base.OnStateEnter(animator, stateInfo,layerIndex);
+        //NPC = animator.gameObject;
+        //agent = NPC.GetComponent<Agent>();
         
        
         

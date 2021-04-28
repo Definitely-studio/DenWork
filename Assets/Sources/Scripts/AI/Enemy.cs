@@ -9,6 +9,7 @@ public class Enemy : PawnBase
     public float attackCooldownTime = 2.0f;
    
     public States state;
+    public GameObject Root;
     
     public GameObject Player;
     public Agent agent;
@@ -110,8 +111,9 @@ public class Enemy : PawnBase
         {
           if (other.gameObject.GetComponent<Bullet>().tag != "Enemy")
           {
+            Debug.Log(gameObject.tag);
             animationsController.SetOuchTrigger();
-            Debug.Log("CollisionEnter");
+           // Debug.Log(other.gameObject);
             Bullet newBullet = other.gameObject.GetComponent<Bullet>();
             playerDetector.SetLookForState();
             playerDetector.lastViewdPosition.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);

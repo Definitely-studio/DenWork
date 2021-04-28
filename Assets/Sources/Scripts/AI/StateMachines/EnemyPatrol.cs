@@ -15,10 +15,10 @@ public class EnemyPatrol : NPCBaseFMS
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
-        NPC = animator.gameObject;
+       base.OnStateEnter(animator, stateInfo,layerIndex);
+        //NPC = animator.gameObject;
         waypoints = NPC.GetComponent<Enemy>().wayPoint;
-        agent = NPC.GetComponent<Agent>();
+        //agent = NPC.GetComponent<Agent>();
         currentWP = 0;
         //Debug.Log(waypoints[currentWP]);
         agent.SetAgentDestination(waypoints[currentWP].transform); 

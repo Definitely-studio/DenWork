@@ -14,6 +14,7 @@ public class NPCBaseFMS : StateMachineBehaviour
     {
         NPC = animator.gameObject;
         Destination = animator.gameObject;
+        agent = NPC.GetComponent<Enemy>().agent;
     }
 
 }

@@ -6,9 +6,10 @@ public class Idle : NPCBaseFMS
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        NPC = animator.gameObject;
+        base.OnStateEnter(animator, stateInfo,layerIndex);
+        //NPC = animator.gameObject;
        
-        agent = NPC.GetComponent<Agent>();
+        //agent = NPC.GetComponent<Agent>();
         
     }
 

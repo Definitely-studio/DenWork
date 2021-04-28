@@ -58,13 +58,26 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
+        
         if(collision.gameObject.tag != tag && collision.gameObject.tag != gameObject.tag)
         {
-             Speed = 0;
-                explosion.gameObject.SetActive(true);
-                this.gameObject.GetComponent<Collider2D>().enabled = false;
-                sprite.enabled = false;
-                StartCoroutine(ExampleCoroutine());
+            if(collision.gameObject.tag == "Player")
+            {
+                collision.gameObject.GetComponent<PlayerActions>().ChangeHP(-Damage);
+
+            }
+            
+            /*else if(collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<Enemy>().enemyActions.ChangeHP(-Damage);
+
+            }*/
+            //Debug.Log(collision.gameObject.tag);
+            transform.gameObject.GetComponent<Collider2D>().enabled = false;
+            Speed = 0;
+            explosion.gameObject.SetActive(true);
+            sprite.enabled = false;
+            StartCoroutine(ExampleCoroutine());
         }
         /*
          if ( collision.gameObject.GetComponent<ParentfromBullet>()

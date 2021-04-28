@@ -36,9 +36,11 @@ public class EnemyRangedWeapon : MonoBehaviour
       }
       
       GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation); 
-
-      if(this.GetComponentInParent<ParentfromBullet>() != null)
-          newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);
+      newBullet.transform.SetParent(null);
+  
+      newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.up * newBullet.GetComponent<Bullet>().Speed);
+      /*if(this.GetComponentInParent<ParentfromBullet>() != null)
+          newBullet.transform.SetParent(this.GetComponentInParent<ParentfromBullet>().transform);*/
         
     }
     

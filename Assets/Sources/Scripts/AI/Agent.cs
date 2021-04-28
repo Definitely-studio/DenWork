@@ -20,8 +20,8 @@ public class Agent : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetRoot();
         
         target = transform;
-        enemyActions = GetComponent<EnemyActions>();
-        enemy = GetComponent<Enemy>();
+        enemyActions = GetComponentInChildren<EnemyActions>();
+        enemy = GetComponentInChildren<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;

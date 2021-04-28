@@ -98,9 +98,9 @@ public class Gun : MonoBehaviour
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
 
         newBullet.gameObject.transform.SetParent(null);
-        newBullet.Speed = _bulletSpeed;
+        //newBullet.Speed = _bulletSpeed;
 
-        newBullet._rigidbody.AddForce((_bulletPoint.transform.up + new Vector3(Random.Range(-spreading, spreading), Random.Range(-spreading, spreading), 0)) * _bulletSpeed);
+        newBullet._rigidbody.AddForce((_bulletPoint.transform.up + new Vector3(Random.Range(-spreading, spreading), Random.Range(-spreading, spreading), 0)) * newBullet.Speed);
         
 
     }
@@ -148,7 +148,7 @@ public class Gun : MonoBehaviour
 
     public void Reload()
     {
-        if(_bulletsCurrentCount != _bulletsMaxCount )
+        if(_bulletsCurrentCount != _bulletsMaxCount && player.GetAmmo() > 0)
             StartCoroutine(Reloading(_reloadingTime));
     }
 

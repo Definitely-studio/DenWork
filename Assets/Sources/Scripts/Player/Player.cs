@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     }
     
     void Pause(){
-         Debug.Log("Pause");
+         //Debug.Log("Pause");
         playerActions.gameMenu.Pause();
     }
 
@@ -262,10 +262,10 @@ public class Player : MonoBehaviour
 
     }
 
-               private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
          //  Debug.Log(other.gameObject);
-           if(other.gameObject.tag == "bullet" )
+         /*  if(other.gameObject.tag == "bullet" )
         {
           if (other.gameObject.GetComponent<Bullet>().tag != "Player")
           {
@@ -273,7 +273,7 @@ public class Player : MonoBehaviour
 
             playerActions.ChangeHP(-newBullet.Damage);
           }
-        }
+        }*/
 
 
         /*if (other.gameObject.GetComponent<Bullet>() != null && other.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer != this.gameObject.GetComponentInParent<ParentfromBullet>().gameObject.layer)

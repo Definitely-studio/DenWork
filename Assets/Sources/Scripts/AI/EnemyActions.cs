@@ -55,9 +55,16 @@ public class EnemyActions : MonoBehaviour
             }
             
         
-         Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
+        Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
 
         foreach (Collider2D item in colliders)
+        {
+            item.enabled = false;
+        }
+
+        Collider2D[] collidersInParent =  gameObject.GetComponentsInParent<Collider2D>();
+
+        foreach (Collider2D item in collidersInParent)
         {
             item.enabled = false;
         }
@@ -70,7 +77,7 @@ public class EnemyActions : MonoBehaviour
 
         enemy.GetRigidBody().bodyType = RigidbodyType2D.Static;
         enemy.SetIsDead (true);
-        Destroy(gameObject, enemy.destroyTime);
+        Destroy(enemy.Root, enemy.destroyTime);
 
     }
 
