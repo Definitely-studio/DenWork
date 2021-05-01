@@ -18,14 +18,4 @@ public class FinalMenu : MonoBehaviour
         }*/
     }
 
-    IEnumerator LoadYourAsyncScene()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartMenu");
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
 }

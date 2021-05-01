@@ -55,12 +55,17 @@ public class GameMenu : MonoBehaviour
     public void ToStartGame()
     {
         Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncScene());
+        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
+    }
+     public void ToStartMenu()
+    {
+        Time.timeScale = 1;
+        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
     }
 
-    IEnumerator LoadYourAsyncScene()
+    IEnumerator LoadYourAsyncScene(string sceneName)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartMenu");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
@@ -72,19 +77,9 @@ public class GameMenu : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncSceneRestart());
+        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
     }
 
-    IEnumerator LoadYourAsyncSceneRestart()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TEST LEVEL");
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
 
     public void ActivatePostPortus()
     {

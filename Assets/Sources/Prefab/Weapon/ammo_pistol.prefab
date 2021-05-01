@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7541e7a1bd2da094496a1730e02f71b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoCount: 5
+  ammoCount: 7
   player: {fileID: 0}
   Sounds: {fileID: 5422505623675994144}
   pickUp: {fileID: 8300000, guid: a08ebcfdf89a2f346ab2c4c0c9189e88, type: 3}

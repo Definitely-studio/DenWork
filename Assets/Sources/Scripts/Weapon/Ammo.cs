@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ammo : MonoBehaviour
+{
+    public int ammoCount = 5;
+    public Player player;
+    public AudioSource Sounds;
+    public AudioClip pickUp;
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        
+        if (other.gameObject.tag == "Player")
+        {
+            player.SetAmmo(player.GetAmmo() + ammoCount);
+            Sounds.PlayOneShot(pickUp);
+            Destroy(transform.gameObject);
+        }
+    }
+
+}
