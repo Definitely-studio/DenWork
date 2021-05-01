@@ -398,7 +398,7 @@ MonoBehaviour:
   shots: 1
   spreading: 0.05
   _bulletSpeed: 10
-  _shootingSpeed: 1
+  _shootingSpeed: 0.35
   _reloadingTime: 2
   _bulletsMaxCount: 10
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
