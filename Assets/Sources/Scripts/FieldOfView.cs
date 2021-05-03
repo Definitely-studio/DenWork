@@ -23,7 +23,7 @@ public class FieldOfView : MonoBehaviour {
      }
 
      private void LateUpdate() {
-         int rayCount = 35;
+         int rayCount = 180; // Количество лучей
          float angle = startingAngle;
          float angleIncrease = fov / rayCount;
 

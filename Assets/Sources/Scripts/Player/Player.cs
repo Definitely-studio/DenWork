@@ -113,7 +113,8 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         if (_gun != null){
-        meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, 0));
+            //_gun.GetComponent<Gun>().Shoot();
+        meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, -0.15f));
         _gun.Shoot();
             f_Animator.SetTrigger("Shot");   
             b_Animator.SetTrigger("Shot"); 
