@@ -73,7 +73,7 @@ public class EnemyActions : MonoBehaviour
         transform.position = new Vector3 (transform.position.x,  transform.position.y, transform.position.y * 0.01f + 5.0f);
 
         enemy.animationsController.SetDeathTrigger(); // Death animation
-
+        Debug.Log("Death");
 
         enemy.GetRigidBody().bodyType = RigidbodyType2D.Static;
         enemy.SetIsDead (true);

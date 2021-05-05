@@ -210,7 +210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 597e99640f3dd0f45a01f3d913a37a22, type: 2}
   m_audioClip: {fileID: 8300000, guid: e4309d3a6a8b02c4eaea11f407a1aefd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   shots: 1
   spreading: 0.05
   _bulletSpeed: 10
-  _shootingSpeed: 0.35
+  _shootingSpeed: 1.3
   _reloadingTime: 2
   _bulletsMaxCount: 10
   field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}

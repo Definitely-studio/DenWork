@@ -24,7 +24,8 @@ public class Ammo : MonoBehaviour
         
         if (other.gameObject.tag == "Player")
         {
-            player.SetAmmo(player.GetAmmo() + ammoCount);
+            Debug.Log("pickup ammo");
+            other.gameObject.GetComponent<Player>().SetAmmo(player.GetAmmo() + ammoCount);
             Sounds.PlayOneShot(pickUp);
             Destroy(transform.gameObject);
         }

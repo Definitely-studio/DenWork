@@ -101,7 +101,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Distance
-    m_EventTreshold: 2.5
+    m_EventTreshold: 0.4
   - m_ConditionMode: 2
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
@@ -402,7 +402,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 2.5
+    m_EventTreshold: 0.4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3531627223239078147}
   m_Solo: 0
@@ -529,7 +529,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: zombieSpicked
+  m_Name: ZombieSpicked
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isMoving
@@ -603,7 +603,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Distance
-    m_EventTreshold: 2.5
+    m_EventTreshold: 0.4
   - m_ConditionMode: 2
     m_ConditionEvent: LookFor
     m_EventTreshold: 0
@@ -675,7 +675,7 @@ AnimatorStateMachine:
     m_Position: {x: -70, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4652835827095182042}
-    m_Position: {x: -200, y: 490, z: 0}
+    m_Position: {x: -190, y: 490, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 3639360923164516983}

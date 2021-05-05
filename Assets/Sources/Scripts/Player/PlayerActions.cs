@@ -138,14 +138,15 @@ public class PlayerActions : MonoBehaviour
         
             if (deltaHP <0)
             {
+              if(Sound != null)
+              {
+                Sound.PlayOneShot(DamageSound);
+              }
             //enemy.enemyAnimator.SetTrigger("Damage");
             }
 
-            if(Sound != null)
-            {
-              Sound.PlayOneShot(DamageSound);
-            }
-            Debug.Log(player.GetHP());
+            
+            
             player.SetHP(player.GetHP() + deltaHP);
             Debug.Log(player.GetHP());
 

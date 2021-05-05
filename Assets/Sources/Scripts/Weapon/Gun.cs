@@ -120,13 +120,13 @@ public class Gun : MonoBehaviour
 
 
                 if(crosshair != null)
-                crosshair.PlayShootingAnimate();
+                    crosshair.PlayShootingAnimate();
                     
                 
                 //????????????????????????????????? ???????????? ?????? ??????????????? ???????????????????????????
 		        for (int i = 0; i < shots; i++)
 		        {
-                GetBullet(_bulletPoint);
+                    GetBullet(_bulletPoint);
             	}
 
 
@@ -167,19 +167,22 @@ public class Gun : MonoBehaviour
          if(AudioSource != null && ReloadSound != null)
         {
             AudioSource.PlayOneShot(ReloadSound); 
-            Debug.Log("ReloadSound");
+           
 
         }
         yield return new WaitForSeconds(waitTime);
-        if(_bulletsMaxCount > player.GetAmmo())
+        
+        if(_bulletsMaxCount - _bulletsCurrentCount > player.GetAmmo())
         {
-            _bulletsCurrentCount = player.GetAmmo();
+            _bulletsCurrentCount = player.GetAmmo() + _bulletsCurrentCount;
             player.SetAmmo(0);
+             Debug.Log("Ammo less than max");
         }
         else
         {
             player.SetAmmo(player.GetAmmo() - (_bulletsMaxCount - _bulletsCurrentCount));
             _bulletsCurrentCount = _bulletsMaxCount;
+             Debug.Log("Ammo more than max");
             
         }
 

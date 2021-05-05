@@ -5,7 +5,7 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
 
-    public Transform newPosition;
+    public Vector3 newPosition;
     public Player player;
     public AudioSource Sounds;
     public AudioClip door;
@@ -25,11 +25,26 @@ public class Teleport : MonoBehaviour
         
         if (other.gameObject.tag == "Player" && player.GetKey() == true)
         {
-            player.SetKey(false);
-            other.gameObject.transform.position = newPosition.position;
-            player.GetActions().ChangeHP(player.GetMaxHP());
+            player.canMove = false;
+            other.gameObject.transform.position = newPosition;
+            if(other.gameObject.transform.position == newPosition)
+                player.SetKey(false);
+
+            player.canMove = true;
+            Debug.Log("teleport");
+            Debug.Log(other.gameObject.transform.position);
+             Debug.Log(other.gameObject);
+            Debug.Log(newPosition);
+            player.GetActions().ChangeHP(player.GetMaxHP() - player.GetHP());
             Sounds.PlayOneShot(door);
            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        
+        if (other.gameObject.tag == "Player")
+        {
+            
         }
     }
 

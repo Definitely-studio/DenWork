@@ -12,10 +12,24 @@ public class FinalMenu : MonoBehaviour
 
     void Update()
     {
-       /* if (Input.GetKeyDown(KeyCode.Escape))
+       
+    }
+
+      IEnumerator LoadYourAsyncScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
         {
-            StartCoroutine(LoadYourAsyncScene());
-        }*/
+            yield return null;
+        }
+    }
+
+    public void toMainMenu(string sceneName)
+    {
+        Time.timeScale = 1;
+        StartCoroutine(LoadYourAsyncScene(sceneName));
     }
 
 }

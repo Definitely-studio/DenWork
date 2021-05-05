@@ -34,7 +34,7 @@ public class EnemyMeleeWeapon : MonoBehaviour
 
             if (other.gameObject.GetComponent<PlayerActions> () != null)
             {
-                other.gameObject.GetComponent<PlayerActions> ().ChangeHP(damage);
+                other.gameObject.GetComponent<PlayerActions> ().ChangeHP(-damage);
             }
           }
 

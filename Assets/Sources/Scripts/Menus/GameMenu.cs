@@ -55,13 +55,9 @@ public class GameMenu : MonoBehaviour
     public void ToStartGame()
     {
         Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
+        StartCoroutine(LoadYourAsyncScene("MAIN LEVEL"));
     }
-     public void ToStartMenu()
-    {
-        Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
-    }
+   
 
     IEnumerator LoadYourAsyncScene(string sceneName)
     {
@@ -77,7 +73,13 @@ public class GameMenu : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncScene("TEST LEVEL"));
+        StartCoroutine(LoadYourAsyncScene("MAIN LEVEL"));
+    }
+
+    public void LoadFinalScene()
+    {
+        
+        StartCoroutine(LoadYourAsyncScene("FINAL LEVEL"));
     }
 
 

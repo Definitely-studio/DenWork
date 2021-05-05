@@ -24,10 +24,12 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     public Animator f_Animator;
     public Animator b_Animator;
-    private bool key = false;
+    public bool key = false;
     public GameObject body;
+    public GameObject target;
     public GameObject f_body;
     public GameObject b_body;
+    public bool canMove = true;
 
     private void Awake()
     {   
@@ -114,8 +116,11 @@ public class Player : MonoBehaviour
     {
         if (_gun != null){
             //_gun.GetComponent<Gun>().Shoot();
-        meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, -0.15f));
-        _gun.Shoot();
+            if (meshParticlesSystem!= null )
+                if (meshParticlesSystem.GetComponent<MeshParticlesSystem>() != null )
+                    meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, -0.15f));
+            
+            _gun.Shoot();
             f_Animator.SetTrigger("Shot");   
             b_Animator.SetTrigger("Shot"); 
         }
@@ -157,10 +162,11 @@ public class Player : MonoBehaviour
 
     private void Movement(Vector2 move)
     {
-        Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
-        _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
-        
-       
+        if(canMove){
+            Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
+            _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
+        }
+       Debug.Log(_rigidbody.transform.position);
     }
 
     private void Rotation(Vector2 MouseDir, Vector2 moveDir) {

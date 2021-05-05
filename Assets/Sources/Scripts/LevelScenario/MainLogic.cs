@@ -11,8 +11,6 @@ public class MainLogic : MonoBehaviour
     public int ProgressLevel = 0;
     public int SoulsRequiredToWin = 500;
     public int EnemyKill = 0;
-    public GameObject Rain;
-    
 
     public TMP_Text TextPrigress;
 
@@ -24,8 +22,7 @@ public class MainLogic : MonoBehaviour
     public GameObject Flash;
     public AudioSource AudioFlash;
 
-    public GameObject Pawns;
-
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -45,16 +42,13 @@ public class MainLogic : MonoBehaviour
     void RefrashProgressLevel()
     {
 
-        Rain.GetComponent<Rain>().SetRain(ProgressLevel);
-       // Water.GetComponent<Water>().SetProgress(ProgressLevel);
-       // TextPrigress.text = (SoulsRequiredToWin - ProgressLevel).ToString();
-        //AllSpawn.GetComponent<PuppeteerSpawn>().SetProgress(ProgressLevel);
+       
     }
 
 
     IEnumerator LoadYourAsyncScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Final");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("FINAL LEVEL");
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
