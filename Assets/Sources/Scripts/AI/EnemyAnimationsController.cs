@@ -31,7 +31,7 @@ public class EnemyAnimationsController : MonoBehaviour
         animator.SetBool("PlayerFound", value);
     }
       public void SetDistance(float value){
-        animator.SetFloat("Distance", value);
+        animator.SetFloat("DistanceToTarget", value);
     }
 
     public void SetPlayerLookFor(bool value){

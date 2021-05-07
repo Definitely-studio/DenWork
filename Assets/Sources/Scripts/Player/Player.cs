@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Gun gun;
     [SerializeField] private FieldOfView field;
     [SerializeField] private PlayerActions playerActions;
-    [SerializeField] private Transform playerRoot;
+    [SerializeField] private Transform playerLeftSide;
+    [SerializeField] private Transform playerRightSide;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private int MaxHP = 100;
+    [SerializeField] private PlayerMovement MovementComponent;
     
     private Gun _gun;
     private bool isDead = false;
@@ -27,6 +29,8 @@ public class Player : MonoBehaviour
     public bool key = false;
     public GameObject body;
     public GameObject target;
+    public Transform[] targets;
+
     public GameObject f_body;
     public GameObject b_body;
     public bool canMove = true;
@@ -36,14 +40,15 @@ public class Player : MonoBehaviour
         ammoCount = 15;
         Instantiate(field);
         _input = new Input();
-        _rigidbody = this.GetComponent<Rigidbody2D>();
+        _rigidbody = this.GetComponentInParent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
         _gun = Instantiate(gun, socket.transform);
         _gun.transform.SetParent(socket.transform);
         _input.Player.Pause.performed += context => Pause();
         _input.Player.Reload.performed += context => Reload();
-
         audioSource = this.GetComponent<AudioSource>();
+        MovementComponent = GetComponentInParent<PlayerMovement>();
+        
     }
 
     private void Start()
@@ -83,8 +88,11 @@ public class Player : MonoBehaviour
     {
           return ammoCount;
     }
-    public Transform GetRoot(){
-        return playerRoot;
+    public Transform GetLeftSide(){
+        return playerLeftSide;
+    }
+    public Transform GetRightSide(){
+        return playerRightSide;
     }
     public bool GetIsDead(){
         return isDead;
@@ -153,108 +161,16 @@ public class Player : MonoBehaviour
         moveDirection = _input.Player.Move.ReadValue<Vector2>();
         Vector2 mousePosition = _input.Player.MousePosition.ReadValue<Vector2>();
         //Debug.Log(moveDirection);
+         if(canMove){
+        MovementComponent.Movement(moveDirection, _velocity);
+         }
 
-        Movement(moveDirection);
-
-        Rotation(mousePosition, moveDirection);        
+        MovementComponent.Rotation(mousePosition, moveDirection);        
         
     }
 
-    private void Movement(Vector2 move)
-    {
-        if(canMove){
-            Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
-            _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
-        }
-       Debug.Log(_rigidbody.transform.position);
-    }
-
-    private void Rotation(Vector2 MouseDir, Vector2 moveDir) {
-        Vector3 worldPosMouse = Camera.main.ScreenToWorldPoint(MouseDir);
-        Vector3 lookDir = ( new Vector3(_rigidbody.position.x, _rigidbody.position.y ,0) - worldPosMouse);
-
-        if (lookDir.x < 0) {
-            body.transform.eulerAngles = new Vector3(0f, 0f, 0f);          
-        }
-        if (lookDir.x > 0) {
-            body.transform.eulerAngles = new Vector3(0f, 180f, 0f);             
-        }
-        if (lookDir.y > -0.25) {
-            f_body.SetActive(true);
-            b_body.SetActive(false);           
-        }
-        if (lookDir.y < -0.25) {
-            f_body.SetActive(false);
-            b_body.SetActive(true);           
-        }          
-
-
-        if (moveDir.x > 0 && lookDir.x > 0) {
-            f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false); 
-            f_Animator.SetBool("isWalkBack", true);
-            b_Animator.SetBool("isWalkBack", true);                         
-        }
-
-        if (moveDir.x > 0 && lookDir.x < 0) {
-            f_Animator.SetBool("isWalk", true);
-            b_Animator.SetBool("isWalk", true);            
-            f_Animator.SetBool("isWalkBack", false);
-            b_Animator.SetBool("isWalkBack", false);              
-        }
-
-        if (moveDir.x < 0 && lookDir.x < 0) {
-            f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false);   
-            f_Animator.SetBool("isWalkBack", true);
-            b_Animator.SetBool("isWalkBack", true);                       
-        }
-
-        if (moveDir.x < 0 && lookDir.x > 0) {
-            f_Animator.SetBool("isWalk", true);
-            b_Animator.SetBool("isWalk", true);             
-            f_Animator.SetBool("isWalkBack", false);
-            b_Animator.SetBool("isWalkBack", false);              
-        }
-
-        if (moveDir.y > 0 && lookDir.y > 0) {
-            f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false); 
-            f_Animator.SetBool("isWalkBack", true);
-            b_Animator.SetBool("isWalkBack", true);                         
-        }
-
-        if (moveDir.y > 0 && lookDir.y < 0) {
-            f_Animator.SetBool("isWalk", true);
-            b_Animator.SetBool("isWalk", true);            
-            f_Animator.SetBool("isWalkBack", false);
-            b_Animator.SetBool("isWalkBack", false);              
-        }
-
-        if (moveDir.y < 0 && lookDir.y < 0) {
-            f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false);   
-            f_Animator.SetBool("isWalkBack", true);
-            b_Animator.SetBool("isWalkBack", true);                       
-        }
-
-        if (moveDir.y < 0 && lookDir.y > 0) {
-            f_Animator.SetBool("isWalk", true);
-            b_Animator.SetBool("isWalk", true);             
-            f_Animator.SetBool("isWalkBack", false);
-            b_Animator.SetBool("isWalkBack", false);              
-        }
-
-
-
-        if (moveDir.magnitude == 0) {
-            f_Animator.SetBool("isWalk", false);
-            b_Animator.SetBool("isWalk", false);  
-            f_Animator.SetBool("isWalkBack", false);
-            b_Animator.SetBool("isWalkBack", false);                          
-        }     
-
-    }
+   
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {

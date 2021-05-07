@@ -22,7 +22,7 @@ public class Enemy : PawnBase
     protected Rigidbody2D rb;
     protected bool isAttackCooldown = false;
     private Transform target;
-
+    public bool canAttack;
 
     public AudioSource AudioDead;
     public int currentWP;
@@ -51,6 +51,7 @@ public class Enemy : PawnBase
 
     }
 
+    
     public void SetCurrentWP(int value)
     {
       currentWP = value;

@@ -12,14 +12,23 @@ public class Chase : NPCBaseFMS
         //agent = NPC.GetComponent<Agent>();
         
        
-        
-        agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponent<Player>().GetRoot());
+        if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
+            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
+        else
+        {
+             agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponent<Player>().GetRoot());
+        if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
+            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
+        else
+        {
+             agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+        }
 
     }
 

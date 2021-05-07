@@ -10,13 +10,13 @@ public class RangedEnemyAttack : NPCBaseFMS
         base.OnStateEnter(animator, stateInfo,layerIndex);
         //NPC = animator.gameObject;
         //agent = NPC.GetComponent<Agent>();
-        agent.SetAgentDestination(animator.gameObject.transform);
+        agent.SetAgentDestination(NPC.GetComponent<Enemy>().Root.transform);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       agent.SetAgentDestination(animator.gameObject.transform);
+       agent.SetAgentDestination(NPC.GetComponent<Enemy>().Root.transform);
        
     }
 

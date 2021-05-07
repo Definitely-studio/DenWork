@@ -25,6 +25,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Awake(){
       ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
+      gameMenu = GameObject.Find("CanvasUI").GetComponent<GameMenu>();
       /*_input = new Input();
       _input.Player.Invent.performed += context => ActivateInventory();*/
 		 
@@ -148,7 +149,7 @@ public class PlayerActions : MonoBehaviour
             
             
             player.SetHP(player.GetHP() + deltaHP);
-            Debug.Log(player.GetHP());
+           // Debug.Log(player.GetHP());
 
             ui.SetHealSlider(player.GetHP(), player.GetMaxHP());
             if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)

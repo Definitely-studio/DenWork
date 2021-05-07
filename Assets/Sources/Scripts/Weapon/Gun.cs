@@ -42,7 +42,7 @@ public class Gun : MonoBehaviour
    
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
          field = FindObjectOfType<FieldOfView>();
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
@@ -54,7 +54,7 @@ public class Gun : MonoBehaviour
         crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
         canShoot = true;
         ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
-        socket = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().socket.transform;
+        socket = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>().socket.transform;
          ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
     }
 
