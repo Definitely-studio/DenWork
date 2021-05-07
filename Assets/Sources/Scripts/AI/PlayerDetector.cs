@@ -20,7 +20,7 @@ public class PlayerDetector : MonoBehaviour
     void Start()
     {
         playerDetect = transform;
-        target = GameObject.FindWithTag("Player").GetComponent<Player>().target.transform;
+        target = GameObject.FindWithTag("Player").GetComponentInChildren<Player>().target.transform;
         enemy = GetComponentInParent<Enemy>();
         lastViewdPosition = target;
 

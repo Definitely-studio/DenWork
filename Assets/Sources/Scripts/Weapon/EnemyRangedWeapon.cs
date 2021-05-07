@@ -21,7 +21,7 @@ public class EnemyRangedWeapon : MonoBehaviour
     void Update()
     {
       
-      Vector3 targetDirection = (enemy.Player.GetComponent<Player>().target.transform.position - transform.position).normalized;
+      Vector3 targetDirection = (enemy.Player.GetComponentInChildren<Player>().target.transform.position - transform.position).normalized;
 
       float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
 

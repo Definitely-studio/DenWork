@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMeleeWeapon : MonoBehaviour
 {
     public Collider2D damageCollision;
+    public AudioClip HitSound;
     public int damage = -10;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class EnemyMeleeWeapon : MonoBehaviour
     public void SetActiveCollider(bool value){
 
       damageCollision.enabled = value;
+      //GetComponentInParent<AudioSource>().PlayOneShot(HitSound);
 
     }
 
