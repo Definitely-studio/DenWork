@@ -55,7 +55,7 @@ public class EnemyActions : MonoBehaviour
             }
             
         
-        Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
+        Collider2D[] colliders =  transform.parent.gameObject.GetComponentsInChildren<Collider2D>();
 
         foreach (Collider2D item in colliders)
         {

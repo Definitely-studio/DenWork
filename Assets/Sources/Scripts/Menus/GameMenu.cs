@@ -55,7 +55,7 @@ public class GameMenu : MonoBehaviour
     public void ToStartGame()
     {
         Time.timeScale = 1;
-        StartCoroutine(LoadYourAsyncScene("MAIN LEVEL"));
+        StartCoroutine(LoadYourAsyncScene("StartMenu"));
     }
    
 

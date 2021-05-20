@@ -53,8 +53,8 @@ public class Crosshair : MonoBehaviour
         Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
         Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(AimPosition);
         transform.position = Vector2.MoveTowards( transform.position, new Vector2(mouseWordPosition.x, mouseWordPosition.y), translationSpeed * Time.deltaTime);
-        Debug.Log(AimPosition);
-        Debug.Log(mouseWordPosition);
+        //Debug.Log(AimPosition);
+        //Debug.Log(mouseWordPosition);
     }
       
   }

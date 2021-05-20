@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private int MaxHP = 100;
     [SerializeField] private PlayerMovement MovementComponent;
+    public GameObject Root;
+    public List<GameObject> WeaponList;
     
     private Gun _gun;
     private bool isDead = false;
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
          //Debug.Log("Pause");
         playerActions.gameMenu.Pause();
     }
+
     public void SetKey(bool value)
     {
         key = value;
@@ -105,6 +108,10 @@ public class Player : MonoBehaviour
     public int GetMaxHP()
     {
         return MaxHP;
+    }
+    public void SetGun(Gun gun)
+    {
+        this._gun = gun;
     }
 
      public void SetHP(int value)

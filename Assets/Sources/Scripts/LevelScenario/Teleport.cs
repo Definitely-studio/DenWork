@@ -26,15 +26,15 @@ public class Teleport : MonoBehaviour
         if (other.gameObject.tag == "Player" && player.GetKey() == true)
         {
             player.canMove = false;
-            other.gameObject.transform.position = newPosition;
+            other.gameObject.GetComponent<Player>().Root.transform.position = newPosition;
             if(other.gameObject.transform.position == newPosition)
                 player.SetKey(false);
 
             player.canMove = true;
-            Debug.Log("teleport");
-            Debug.Log(other.gameObject.transform.position);
-             Debug.Log(other.gameObject);
-            Debug.Log(newPosition);
+           //Debug.Log("teleport");
+           // Debug.Log(other.gameObject.transform.position);
+           // Debug.Log(other.gameObject);
+           // Debug.Log(newPosition);
             player.GetActions().ChangeHP(player.GetMaxHP() - player.GetHP());
             Sounds.PlayOneShot(door);
            
