@@ -7,12 +7,9 @@ public class UIGameMode : MonoBehaviour
 {
 
     public GameObject HealPointScale;
-    public Text BulletText;
-     public Text BulletText2;
+    public Text BulletTextInMagazine;
+     public Text BulletTextTotal;
 
-    public Image M1Img;
-    public Image M2Img;
-    public Image M3Img;
 
     public int machineGunSoulsDemand =  25;
     public int shootGunSoulsDemand = 35;
@@ -43,8 +40,8 @@ public class UIGameMode : MonoBehaviour
 
     public void ShowBullet(int bullet, int maxBullet, int totalBullet)
     {
-        BulletText.text = bullet.ToString() + "/" + maxBullet.ToString();
-        BulletText2.text = "Total " + totalBullet.ToString();
+        BulletTextInMagazine.text = bullet.ToString() + "/" + maxBullet.ToString();
+        BulletTextTotal.text = "Total " + totalBullet.ToString();
 
     }
 

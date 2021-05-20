@@ -14,13 +14,9 @@ public class MainLogic : MonoBehaviour
 
     public TMP_Text TextPrigress;
 
-    public AudioSource AudioSoul;
     public AudioSource AudioMelody2;
     public AudioSource AudioMelodyMain;
 
-    private float FlashTimer = 50;
-    public GameObject Flash;
-    public AudioSource AudioFlash;
 
   
     // Start is called before the first frame update

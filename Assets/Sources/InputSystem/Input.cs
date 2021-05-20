@@ -259,7 +259,7 @@ public class @Input : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Cancel"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4bf27d1c-13e0-4523-b7ea-cac3c2fff641"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

@@ -51,11 +51,13 @@ public class Gun : MonoBehaviour
 
         _bulletsCurrentCount = _bulletsMaxCount;
         _isReloading = false;
-        crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
+        if(crosshair!= null)
+            crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
         canShoot = true;
         ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
         socket = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>().socket.transform;
-         ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
+        if(ui != null)
+            ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
     }
 
 
