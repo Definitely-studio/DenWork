@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Item {
+
+public class Item : MonoBehaviour {
 	public enum ItemType {
 		RangedWeaponItem,
 		MeleeWeaponItem,
@@ -12,7 +15,22 @@ public class Item {
 		AmmoItem,
 		KeyItem
 	}
-	public ItemType itemType;
-	public string itemLabel = "Default item label";
-	public int amount;
+	public ItemType Type;
+	public string ItemLabel = "Default item label";
+	public string Name;
+	public int Amount;
+	public int Id;
+
+	public Sprite Icon;
+
+
+	protected Item(ItemType type, string label, int amount, int id, string name, Sprite icon)
+	{
+		Type = type;
+		ItemLabel = label;
+		Amount = amount;
+		Id = id;
+		Name = name;
+		Icon = icon;
+	}
 }

@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private UIGameMode ui;
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip ReloadSound;
+    [SerializeField] private Animator animator;
     
 
     public GameObject fowCenter; // FoW center where from rays will start
@@ -43,7 +44,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>();
-         field = FindObjectOfType<FieldOfView>();
+        
         Rigidbody2D rigidbody2D1 = this.gameObject.GetComponent<Rigidbody2D>();
         _rigidbody = rigidbody2D1;
         parentfrom = this.GetComponentInParent<ParentfromBullet>();
@@ -60,11 +61,10 @@ public class Gun : MonoBehaviour
             ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
     }
 
-
-    public void SetAimPoint(Vector2 aimPoint)
-    {
-        _aimPoint = aimPoint;
+    private void Start() {
+        field = FindObjectOfType<FieldOfView>();
     }
+   
 
     private void FixedUpdate()
     {
@@ -75,11 +75,11 @@ public class Gun : MonoBehaviour
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
         field.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
+        Debug.Log(mouseWordPosition);
+        Debug.Log(targetDirection);
+        Debug.Log(angle);
 
-
-        //field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        // field.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y,10));
-
+      
 
         _rigidbody.SetRotation(angle);
 
@@ -91,10 +91,13 @@ public class Gun : MonoBehaviour
         weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
     	} 
 
-
-
-
     }
+
+     public void SetAimPoint(Vector2 aimPoint)
+    {
+        _aimPoint = aimPoint;
+    }
+
 // bullet instantiation on shot
     public void GetBullet(GameObject _bulletPoint)
     {
@@ -116,21 +119,19 @@ public class Gun : MonoBehaviour
                 if(AudioSource != null)
                 {
                     AudioSource.PlayOneShot(shootSound); 
-               
-
+            
                 }
-
-
                 if(crosshair != null)
                     crosshair.PlayShootingAnimate();
                     
-                
+                if(animator != null)
+                    animator.SetTrigger("Shoot");
+                    
                 //????????????????????????????????? ???????????? ?????? ??????????????? ???????????????????????????
 		        for (int i = 0; i < shots; i++)
 		        {
                     GetBullet(_bulletPoint);
             	}
-
 
                 //??????????????????????????? ????????????
                 _bulletsCurrentCount--;

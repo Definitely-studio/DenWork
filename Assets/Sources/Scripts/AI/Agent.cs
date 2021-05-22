@@ -12,7 +12,7 @@ public class Agent : MonoBehaviour
     [SerializeField] GameObject Player;
     [SerializeField] Enemy enemy;
     [SerializeField] EnemyActions enemyActions;
-    [SerializeField] float minDistanceToPlayer = 2f;
+
     [SerializeField] Transform PlayerTargetTransfrom;
     private NavMeshAgent agent;
     // Start is called before the first frame update
@@ -51,7 +51,6 @@ public class Agent : MonoBehaviour
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(target.position, (float) 0.1);
-       // Gizmos.DrawSphere(PlayerTargetTransfrom.position, (float) 0.1);
         Gizmos.DrawSphere(Root.position, (float) 0.1);
     }
 

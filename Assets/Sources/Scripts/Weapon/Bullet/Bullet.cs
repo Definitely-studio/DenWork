@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
 
     public float Speed { get => speed; set => speed = value; }
     public int Damage { get => damage; set => damage = value; }
-    public string tag;
+    public new string tag;
 
     private void Awake()
     {

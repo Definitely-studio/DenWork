@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 6465475779747367370}
   - component: {fileID: 6465475779747367371}
   - component: {fileID: 5422505623675994144}
-  m_Layer: 0
-  m_Name: ammo_pistol
+  m_Layer: 6
+  m_Name: AmmoPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,6 +207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7541e7a1bd2da094496a1730e02f71b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 5
+  ItemLabel: Ammo
+  Name: Ammo
+  Amount: 7
+  Id: 0
+  Icon: {fileID: 21300000, guid: 10f6b1acff56f494da9ea62755f40471, type: 3}
   ammoCount: 7
   player: {fileID: 0}
   Sounds: {fileID: 5422505623675994144}

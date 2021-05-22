@@ -131,8 +131,8 @@ MonoBehaviour:
   - {fileID: 27763788904100558}
   - {fileID: 4589408316766466973}
   m_Bounds:
-    m_Center: {x: -0.08189593, y: 0.23317574, z: 0}
-    m_Extent: {x: 0.07172394, y: 0.060839996, z: 0}
+    m_Center: {x: -0.08189626, y: 0.23317589, z: 0}
+    m_Extent: {x: 0.07172407, y: 0.060839996, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -148,7 +148,7 @@ GameObject:
   m_Layer: 0
   m_Name: Socket
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 3816538368183805385}
   - component: {fileID: 7196898053075749022}
   - component: {fileID: 8863008110691252884}
+  - component: {fileID: 7797212476307072311}
   m_Layer: 0
   m_Name: WeaponPistol
   m_TagString: Untagged
@@ -408,8 +409,28 @@ MonoBehaviour:
   ui: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 6cc72db64278ed644bff4f1cd4c45fb9, type: 3}
   ReloadSound: {fileID: 8300000, guid: 9b00f030deac3c042b5d0d81803010bd, type: 3}
+  animator: {fileID: 7797212476307072311}
   fowCenter: {fileID: 0}
   weapon: {fileID: 5830338825116136687}
+--- !u!95 &7797212476307072311
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548035038108721324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1de02fe06ae2968448f179deba5c0353, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6559962002636456791
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,11 +635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5737871461096171184, guid: b5bd139a418c09a47a2706c704407950, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.481
+      value: 0.247
       objectReference: {fileID: 0}
     - target: {fileID: 5737871461096171184, guid: b5bd139a418c09a47a2706c704407950, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.069
+      value: 0.035
       objectReference: {fileID: 0}
     - target: {fileID: 5737871461096171184, guid: b5bd139a418c09a47a2706c704407950, type: 3}
       propertyPath: m_LocalPosition.z

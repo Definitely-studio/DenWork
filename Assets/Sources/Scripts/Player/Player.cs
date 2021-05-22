@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Input _input;
     [SerializeField] private float _velocity;
     public GameObject socket;
-    [SerializeField] private Gun gun;
+    [SerializeField] private Gun _gun;
     [SerializeField] private FieldOfView field;
     [SerializeField] private PlayerActions playerActions;
     [SerializeField] private Transform playerLeftSide;
@@ -19,8 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement MovementComponent;
     public GameObject Root;
     public List<GameObject> WeaponList;
-    
-    private Gun _gun;
+
     private bool isDead = false;
     private int currentHP;
     private Rigidbody2D _rigidbody;
@@ -44,8 +43,7 @@ public class Player : MonoBehaviour
         _input = new Input();
         _rigidbody = this.GetComponentInParent<Rigidbody2D>();
         _input.Player.Shoot.performed += context => Shoot();
-        _gun = Instantiate(gun, socket.transform);
-        _gun.transform.SetParent(socket.transform);
+    
         _input.Player.Pause.performed += context => Pause();
         _input.Player.Reload.performed += context => Reload();
         audioSource = this.GetComponent<AudioSource>();
@@ -57,14 +55,33 @@ public class Player : MonoBehaviour
     {
         b_body.SetActive(false);
         SetHP(MaxHP);
-        Debug.Log(currentHP);
+       
     }
     
-    void Pause(){
-         //Debug.Log("Pause");
-        playerActions.gameMenu.Pause();
+    private void Update()
+    {
+        Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
+        Debug.Log(_gun);
+        if(_gun != null)
+        {
+            Debug.Log($"AimPosition  {AimPosition}");
+            _gun.SetAimPoint(AimPosition);
+        }              
+    }
+    private void FixedUpdate()
+    {
+        moveDirection = _input.Player.Move.ReadValue<Vector2>();
+        Vector2 mousePosition = _input.Player.MousePosition.ReadValue<Vector2>();
+        //Debug.Log(moveDirection);
+        if(canMove){
+            MovementComponent.Movement(moveDirection, _velocity);
+        }
+        MovementComponent.Rotation(mousePosition, moveDirection);        
     }
 
+    #region SetterGetters
+    
+    
     public void SetKey(bool value)
     {
         key = value;
@@ -82,11 +99,7 @@ public class Player : MonoBehaviour
         _gun.ShowBullets();
         ammoCount = value;
     }
-    public void Reload()
-    {
-        _gun.Reload();
     
-    }
      public int GetAmmo()
     {
           return ammoCount;
@@ -121,65 +134,50 @@ public class Player : MonoBehaviour
     public void SetIsDead(bool value){
         isDead = value;
     }
+    #endregion
+    
+    public void Reload()
+    {
+        if(_gun != null)
+            _gun.Reload();
+    }
 
     private void OnEnable()
     {
         _input.Enable();
     }
+    void Pause(){
+        
+        playerActions.gameMenu.Pause();
+    }
 
     private void Shoot()
     {
         if (_gun != null){
-            //_gun.GetComponent<Gun>().Shoot();
+         
             if (meshParticlesSystem!= null )
                 if (meshParticlesSystem.GetComponent<MeshParticlesSystem>() != null )
                     meshParticlesSystem.GetComponent<MeshParticlesSystem>().SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, -0.15f));
             
             _gun.Shoot();
-            f_Animator.SetTrigger("Shot");   
-            b_Animator.SetTrigger("Shot"); 
+            //f_Animator.SetTrigger("Shot");   
+            //b_Animator.SetTrigger("Shot"); 
         }
     }
     
     public void UpdateGun(Gun targetGun)
     {
-        Gun i = _gun;
+        if(_gun != null){
+            Gun i = _gun;
         
         _gun = Instantiate(targetGun, this.transform);
         _gun.transform.SetParent(this.transform);
         Destroy(i.gameObject);
-
-    }
-
-    
-
-    private void Update()
-    {
-
-    Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
-       if(_gun != null)
-       {
-            _gun.SetAimPoint(AimPosition);
-        }           
-            
-    }
-    private void FixedUpdate()
-    {
-        moveDirection = _input.Player.Move.ReadValue<Vector2>();
-        Vector2 mousePosition = _input.Player.MousePosition.ReadValue<Vector2>();
-        //Debug.Log(moveDirection);
-         if(canMove){
-        MovementComponent.Movement(moveDirection, _velocity);
-         }
-
-        MovementComponent.Rotation(mousePosition, moveDirection);        
+        }
         
     }
 
-   
-    
-
-    private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter2D(Collider2D other)
     {
          //  Debug.Log(other.gameObject);
          /*  if(other.gameObject.tag == "bullet" )
