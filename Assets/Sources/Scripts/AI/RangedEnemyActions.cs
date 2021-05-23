@@ -28,7 +28,7 @@ public class RangedEnemyActions : EnemyActions
 
     public override void AttackStart(){
       
-        Debug.Log("Attack");
+      
        // enemy.state = States.attackig;
         enemy.animationsController.SetAttackAnimatorKey(true);
 
@@ -36,7 +36,7 @@ public class RangedEnemyActions : EnemyActions
     }
 
      public override void AttackEnd(){
-        Debug.Log("AttackEnd");
+ 
        // enemy.state = States.attackig;
         enemy.animationsController.SetAttackAnimatorKey(false);
         

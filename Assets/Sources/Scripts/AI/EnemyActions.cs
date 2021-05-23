@@ -35,11 +35,11 @@ public class EnemyActions : MonoBehaviour
              }
             }
             enemy.SetCurrentHP(enemy.GetCurrentHP() + deltaHP);
-            Debug.Log(enemy.GetCurrentHP());
+          
 
             if(enemy.GetCurrentHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
             {
-                //SetIsDead(true);
+
                 Death();
             }
         }

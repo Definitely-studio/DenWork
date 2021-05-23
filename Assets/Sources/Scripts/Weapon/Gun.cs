@@ -6,20 +6,13 @@ public class Gun : MonoBehaviour
 {
 
     [SerializeField] private GameObject _bulletPoint; // point where bullet will spawn
-    [SerializeField] private GameObject _aimGameObject; // HZ
     [SerializeField] private Bullet _bulletType; // bullet reference
- 
     [SerializeField] private int shots; // number of shots | 1 if just pistol or etc
     [SerializeField] private float spreading; // optimal is 0.1f
-    [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _shootingSpeed; // delay between shots
     [SerializeField] private float _reloadingTime;
     [SerializeField] private int _bulletsMaxCount;
-//   [SerializeField] private SpriteRenderer weapon;
-//   [SerializeField] private SpriteRenderer hand1;
-//   [SerializeField] private SpriteRenderer hand2;
-
-    [SerializeField] private FieldOfView field; // FoW reference
+    [SerializeField] private FieldOfView fieldOfView; // FoW reference
     [SerializeField] private AudioSource AudioSource;
     [SerializeField] private AudioSource ReloadClip;
     [SerializeField] private Crosshair crosshair;
@@ -27,8 +20,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip ReloadSound;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject hands;
     
-
+    public bool isEquipped = false;
     public GameObject fowCenter; // FoW center where from rays will start
     public GameObject weapon;
     private List<Bullet> _bullets;
@@ -40,6 +34,7 @@ public class Gun : MonoBehaviour
     private ParentfromBullet parentfrom;
     private Transform socket;
     private Player player;
+   
    
     private void Awake()
     {
@@ -62,38 +57,31 @@ public class Gun : MonoBehaviour
     }
 
     private void Start() {
-        field = FindObjectOfType<FieldOfView>();
+        fieldOfView = FindObjectOfType<FieldOfView>();
     }
    
-
     private void FixedUpdate()
     {
-        Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
-        Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
-         _rigidbody.transform.position = new Vector3(socket.position.x, socket.position.y, _rigidbody.transform.position.z);
+        if(isEquipped)
+        {
+            Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
+            Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
+            _rigidbody.transform.position = new Vector3(socket.position.x, socket.position.y, _rigidbody.transform.position.z);
+            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+            //fieldOfView.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+            //fieldOfView.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
+        
+            _rigidbody.SetRotation(angle);
 
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-        field.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        field.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
-        Debug.Log(mouseWordPosition);
-        Debug.Log(targetDirection);
-        Debug.Log(angle);
-
-      
-
-        _rigidbody.SetRotation(angle);
-
-// weapon flip
-        if (targetDirection.x > 0) {
-        weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-    	}
-        if (targetDirection.x < 0) {
-        weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
-    	} 
-
+            // weapon flip
+            if (targetDirection.x > 0) weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (targetDirection.x < 0) weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+            
+        }
+       
     }
 
-     public void SetAimPoint(Vector2 aimPoint)
+    public void SetAimPoint(Vector2 aimPoint)
     {
         _aimPoint = aimPoint;
     }
@@ -104,7 +92,6 @@ public class Gun : MonoBehaviour
         Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
 
         newBullet.gameObject.transform.SetParent(null);
-        //newBullet.Speed = _bulletSpeed;
 
         newBullet._rigidbody.AddForce((_bulletPoint.transform.up + new Vector3(Random.Range(-spreading, spreading), Random.Range(-spreading, spreading), 0)) * newBullet.Speed);
         
@@ -127,13 +114,11 @@ public class Gun : MonoBehaviour
                 if(animator != null)
                     animator.SetTrigger("Shoot");
                     
-                //????????????????????????????????? ???????????? ?????? ??????????????? ???????????????????????????
 		        for (int i = 0; i < shots; i++)
 		        {
                     GetBullet(_bulletPoint);
             	}
 
-                //??????????????????????????? ????????????
                 _bulletsCurrentCount--;
                 ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
                 StartCoroutine(WaitBeetwenShoots(_shootingSpeed));
@@ -161,37 +146,32 @@ public class Gun : MonoBehaviour
     IEnumerator Reloading(float waitTime)
     {
         _isReloading = true;
+
         if(crosshair != null)
       {
         crosshair.PlayReloadingAnimate();
         crosshair.ResetShootingAnimate();
       }
      
-         if(AudioSource != null && ReloadSound != null)
-        {
-            AudioSource.PlayOneShot(ReloadSound); 
-           
-
-        }
+        if(AudioSource != null && ReloadSound != null) AudioSource.PlayOneShot(ReloadSound); 
+        
         yield return new WaitForSeconds(waitTime);
         
         if(_bulletsMaxCount - _bulletsCurrentCount > player.GetAmmo())
         {
             _bulletsCurrentCount = player.GetAmmo() + _bulletsCurrentCount;
             player.SetAmmo(0);
-             Debug.Log("Ammo less than max");
         }
         else
         {
             player.SetAmmo(player.GetAmmo() - (_bulletsMaxCount - _bulletsCurrentCount));
             _bulletsCurrentCount = _bulletsMaxCount;
-             Debug.Log("Ammo more than max");
-            
         }
 
         ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
-        if(crosshair != null)
-            crosshair.StopReloadingAnimate();
+
+        if(crosshair != null) crosshair.StopReloadingAnimate();
+
         _isReloading = false;
         
     }
@@ -207,4 +187,8 @@ public class Gun : MonoBehaviour
         ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, player.GetAmmo());
     }
 
+    public void ShowHideHands(bool value)
+    {
+        hands.SetActive(value);
+    }
 }

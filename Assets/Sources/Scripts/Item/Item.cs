@@ -20,7 +20,6 @@ public class Item : MonoBehaviour {
 	public string Name;
 	public int Amount;
 	public int Id;
-
 	public Sprite Icon;
 
 

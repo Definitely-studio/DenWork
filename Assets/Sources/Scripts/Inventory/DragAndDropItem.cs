@@ -10,33 +10,19 @@ using UnityEngine.EventSystems;
 public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private InventorySlot oldSlot;
-    [SerializeField] private Input input;
     [SerializeField] private GameObject player;
-    
      void Awake()
     {
-        input = new Input();
-        /*input.UI.Clicl.performed += context => ClickPresed();
-        input.UI.LeftMouseRelease.performed += context => ClickReleased();
-        input.UI.LeftMouseHold.performed += context => Hold();*/
+  
         oldSlot = transform.GetComponentInParent<InventorySlot>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    /* void ClickPresed()
-    {
-        lmbIsPresed = true;
-        if(hittedNode != null){
-            firstNode = hittedNode;
-        }
 
-    }*/
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag Event");
-        Debug.Log("oldSlot.ItemObject");
-        // Если слот пустой, то мы не выполняем то что ниже return;
+
         //if (oldSlot.ItemObject == null)
            // return;
         Vector2 newPosition = new Vector2(eventData.delta.x, eventData.delta.y);
@@ -45,9 +31,9 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-         Debug.Log("OnPointerDown Event");
-        if (oldSlot.ItemObject == null)
-            return;
+ 
+        if (oldSlot.ItemObject == null) return;
+
         //Делаем картинку прозрачнее
         GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0.75f);
         // Делаем так чтобы нажатия мышкой не игнорировали эту картинку
@@ -58,9 +44,9 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp Event");
-        if (oldSlot.ItemObject == null)
-            return;
+        
+        if (oldSlot.ItemObject == null) return;
+
         // Делаем картинку опять не прозрачной
         GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1f);
         // И чтобы мышка опять могла ее засечь
@@ -69,32 +55,40 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         //Поставить DraggableObject обратно в свой старый слот
         transform.SetParent(oldSlot.transform);
         transform.position = oldSlot.transform.position;
-        //Если мышка отпущена над объектом по имени UIPanel, то...
         
         if (eventData.pointerCurrentRaycast.gameObject.name == "InventoryOut")
         {
-
             oldSlot.ItemObject.transform.position = player.transform.position;
             oldSlot.ItemObject.SetActive(true);
             
             // Устанавливаем количество объектов такое какое было в слоте
             oldSlot.ItemObject.GetComponent<Item>().Amount = oldSlot.Amount;
-            //itemObject.GetComponent<Item>().amount = oldSlot.amount;
+            oldSlot.ItemObject.GetComponent<Collider2D>().enabled = true;
             // убираем значения InventorySlot
             NullifySlotData();
-
-            
         }
-        else if( eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.GetComponent<InventorySlot>() != null)
+        else if(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.TryGetComponent(out InventorySlot newSlot))
         {
-            if(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.GetComponent<InventorySlot>() != oldSlot)
+            if(newSlot != oldSlot)
             {
-                //Перемещаем данные из одного слота в другой
-                ExchangeSlotData(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.GetComponent<InventorySlot>());
+                if(oldSlot.Item.Type == Item.ItemType.RangedWeaponItem && newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
+                    {
+                        if(newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
+                        {
+                            ExchangeSlotData(newSlot);
+                            return;
+                        }
+                    }
+                else if(oldSlot.Item.Type != Item.ItemType.RangedWeaponItem && newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
+                {
+                    return;
+                }
+                else
+                {
+                    ExchangeSlotData(newSlot);
+                }
             }
-            
         }
-       
     }
 
 
@@ -110,7 +104,6 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         oldSlot.AmountText.enabled = false;
 
     }
-
 
     void ExchangeSlotData(InventorySlot newSlot)
     {
@@ -137,18 +130,17 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             newSlot.Amount = oldSlot.Amount;
             newSlot.ItemObject = oldSlot.ItemObject;
             newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            newSlot.AmountText.enabled = true;
+            //newSlot.AmountText.enabled = true;
         }
         else
         {
             newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 0);
             newSlot.IconImage.GetComponent<Image>().sprite = null;
-            newSlot.AmountText.enabled = false;
+            //newSlot.AmountText.enabled = false;
         }
         
         // Заменяем значения oldSlot на значения newSlot сохраненные в переменных
        
-
         oldSlot.Item = item;
         oldSlot.IconImage.sprite = icon;
         oldSlot.Amount = amount;
@@ -157,12 +149,12 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (itemObject != null)
         {
             newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            oldSlot.AmountText.enabled = true;
+            //oldSlot.AmountText.enabled = true;
         }
         else
         {
             oldSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-            oldSlot.AmountText.enabled = false;
+            //oldSlot.AmountText.enabled = false;
             oldSlot.IconImage.GetComponent<Image>().sprite = null;
             
         }     

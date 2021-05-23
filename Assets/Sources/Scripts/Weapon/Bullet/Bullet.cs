@@ -67,12 +67,6 @@ public class Bullet : MonoBehaviour
 
             }
             
-            /*else if(collision.gameObject.tag == "Enemy")
-            {
-                collision.gameObject.GetComponent<Enemy>().enemyActions.ChangeHP(-Damage);
-
-            }*/
-            //Debug.Log(collision.gameObject.tag);
             transform.gameObject.GetComponent<Collider2D>().enabled = false;
             Speed = 0;
             explosion.gameObject.SetActive(true);

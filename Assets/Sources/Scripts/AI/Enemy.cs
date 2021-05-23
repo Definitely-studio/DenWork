@@ -72,11 +72,10 @@ public class Enemy : PawnBase
     {
 
       if(target != null && !GetIsDead()){
-        //Debug.Log("rangedWeaponRotation");
+       
         Vector2 lookDirection = GetLookAtDirection();
         float angle = Mathf.Atan2(lookDirection.y,lookDirection.x) * Mathf.Rad2Deg - 90f;
-        //float angle = Mathf.Atan2(lookDirection.y,lookDirection.x) * Mathf.Rad2Deg;
-       // WeaponSocket.eulerAngles = new Vector3(0,0, angle);
+      
         
       }
     }

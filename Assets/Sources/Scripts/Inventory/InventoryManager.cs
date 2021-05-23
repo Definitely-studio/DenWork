@@ -21,15 +21,20 @@ public class InventoryManager : MonoBehaviour
 
   private void Awake()
     {
+
         _input = new Input();
         _input.Player.Invent.performed += context => ActivateInventory();
 		_input.Player.Submit.performed += context => Pickup();
+
     }
-	private void Start() {
+
+	private void Start() 
+	{
 		CollectSlots();
 	}
 
-	public InventoryManager() {
+	public InventoryManager() 
+	{
 		
 	}
 	  private void OnEnable()
@@ -57,8 +62,6 @@ public class InventoryManager : MonoBehaviour
 			if(StoryItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot))
 				StoryItemSlots.Add(slot);
 		}
-		
-
 	}
 
 
@@ -79,7 +82,7 @@ public class InventoryManager : MonoBehaviour
 				isInventoryActive = true;
 				Cursor.visible = true;
         		crosshair.SetActive(false);
-				Time.timeScale = 1.0f;
+				Time.timeScale = 0.0f;
 			}	
 	}
 
@@ -87,22 +90,38 @@ public class InventoryManager : MonoBehaviour
 	{
 		if(OverlapedItem != null)
 		{
-			
 			AddItem(OverlapedItem);
-        	OverlapedItem.SetActive(false);
+			OverlapedItem.SetActive(false);
 		}
 	}
 
-	public int AddItem(GameObject itemObject) {
+	public void AddItem(GameObject itemObject) {
 
 		Item item = itemObject.GetComponent<Item>();
+		if(item.Type == Item.ItemType.RangedWeaponItem)
+		{
+			foreach (InventorySlot slot in EquippedItemSlots)
+			{
+				if(slot.Item == null){
+					
+					slot.Item = item;
+					slot.ItemObject = itemObject;
+					slot.Amount = item.Amount;	
+					slot.IconImage.sprite = item.Icon;	
+					slot.IconImage.color = new Color(1,1,1,1);
+					slot.AmountText.enabled = true;
+					return;
+				}
+			}
+		}
+
 		foreach (InventorySlot slot in CollectedItemSlots)
 		{
 			if(slot.Item != null){
 				if(slot.Item.Type == item.Type)
 				{
 					slot.Amount += item.Amount;
-					return 0;		
+					return;		
 				}
 			}
 		}
@@ -118,16 +137,15 @@ public class InventoryManager : MonoBehaviour
 				slot.IconImage.sprite = item.Icon;	
 				slot.IconImage.color = new Color(1,1,1,1);
 				slot.AmountText.enabled = true;
-				return 0;
+				return;
 			}
 		}
-		return 0;
+		return;
 	}
 
-		
 	public void OverlapItem(GameObject OverlapedItem)
 	{
-		Debug.Log("PickUp");
+		Debug.Log("OverlapItem");
 		this.OverlapedItem = OverlapedItem;
 	}
 
@@ -135,35 +153,5 @@ public class InventoryManager : MonoBehaviour
 	{
 		this.OverlapedItem = null;
 	}
-
-
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-    	// Pickuping item func
-        if(collider.gameObject.TryGetComponent(out Item item))
-        {
-		  Debug.Log("PickUp");
-		
-		  OverlapedItem = collider.gameObject;
-
-        }   
-
-              
-    }
-	void OnTriggerExit2D(Collider2D collider)
-    {
-    	// Pickuping item func
-        if(collider.gameObject.TryGetComponent(out Item item))
-        {
-		  OverlapedItem = null;
-		  
-
-        }   
-
-              
-    }
-
-
 
 }

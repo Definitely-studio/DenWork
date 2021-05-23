@@ -6,14 +6,16 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D _rigidbody;
-
     [SerializeField] private Player player;
+    [SerializeField] private FieldOfView fieldOfView; // FoW reference
+    private Vector2 _aimPoint;
  
     // Start is called before the first frame update
     void Start()
     {
          _rigidbody = this.GetComponent<Rigidbody2D>();
          player = GetComponentInChildren<Player>();
+         fieldOfView = FindObjectOfType<FieldOfView>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,16 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void SetAimPoint(Vector2 aimPoint)
+    {
+        _aimPoint = aimPoint;
+    }
+    private void FixedUpdate() {
+        Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
+        Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
+        fieldOfView.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+        fieldOfView.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
+    }
 
     public void Movement(Vector2 move, float _velocity)
     {
@@ -38,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 lookDir = ( new Vector3(_rigidbody.position.x, _rigidbody.position.y ,0) - worldPosMouse);
 
         
+
         if (lookDir.x < 0) {
             player.body.transform.eulerAngles = new Vector3(0f, 0f, 0f);          
         }

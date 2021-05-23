@@ -48,13 +48,11 @@ public class Crosshair : MonoBehaviour
     {
       if(mainCamera != null)
       {
-        //transform.position = Vector3.MoveTowards( transform.position,new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, mainCamera.ScreenToWorldPoint(Input.mousePosition).y,transform.position.z), translationSpeed * Time.deltaTime);
-        //transform.position = new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, mainCamera.ScreenToWorldPoint(Input.mousePosition).y,transform.position.z);
+        
         Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
         Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(AimPosition);
         transform.position = Vector2.MoveTowards( transform.position, new Vector2(mouseWordPosition.x, mouseWordPosition.y), translationSpeed * Time.deltaTime);
-        //Debug.Log(AimPosition);
-        //Debug.Log(mouseWordPosition);
+
     }
       
   }

@@ -10,8 +10,6 @@ public class PlayerActions : MonoBehaviour
   public GameObject equippedweapon;
   private Player player;
   public Camera cam;
-  private bool keyhere = false;
-  private string keystring;
   public InventoryManager Inventory;
   [SerializeField] private Input _input;
 
@@ -26,11 +24,11 @@ public class PlayerActions : MonoBehaviour
     // Start is called before the first frame update
 
   private void Awake(){
+    
     ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
     gameMenu = GameObject.Find("CanvasUI").GetComponent<GameMenu>();
     Inventory = GameObject.Find("CanvasUI").GetComponentInChildren<InventoryManager>();
-    
-    
+
   }
 
 
@@ -53,32 +51,6 @@ public class PlayerActions : MonoBehaviour
 
   void OnTriggerStay2D(Collider2D collider) {
 
-    // Door opening
-      /*if(col.gameObject.tag == "Door")
-      {
-          
-          // Check if key is need
-          if(col.gameObject.GetComponent<DoorController>().keyName != null) {
-          // Check if player have needed key
-
-          keystring = col.gameObject.GetComponent<DoorController>().keyName;
-
-          // search for key
-          foreach(Item it in player.GetComponent<Inventory>().itemList) {
-            if (it.itemLabel == keystring)
-            {keyhere = true;}
-          }
-
-          // open door
-          if( Input.GetKeyDown( KeyCode.E )) {
-            
-            if(keyhere){
-            Destroy(col.gameObject);
-            }
-            else {uiText.text = "You don't have the nessesary key";}
-          }
-        }
-      }*/
   }
 
     void OnTriggerExit2D(Collider2D collider) {

@@ -12,19 +12,7 @@ public class TargetWeapon : MonoBehaviour
     {
         inputs = new Input();
         inputs.Enable();
-        inputs.Player.FirstGun.performed += context => GetGun1();
-        inputs.Player.SecondGun.performed += context => GetGun2();
-        
-    }
 
-    private void GetGun1()
-    {
-        player.UpdateGun(gun1);
-    }
-
-    private void GetGun2()
-    {
-        player.UpdateGun(gun2);
     }
 
 }

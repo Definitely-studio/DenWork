@@ -39,8 +39,6 @@ public class PlayerDetector : MonoBehaviour
         else
           canWeAttack = false;
 
-        //Debug.Log("Player is" + playerisFound);
-
     }
 
     // детектирование через рэйкаст, временно не используется
@@ -51,9 +49,6 @@ public class PlayerDetector : MonoBehaviour
       RaycastHit2D PlayerInfo = Physics2D.Raycast(playerDetect.position, lookDirection, rayLenght, layerMask);
 
       Debug.DrawRay(playerDetect.position, lookDirection * rayLenght, Color.red);
-
-      
-      //Debug.Log(PlayerInfo.collider);
 
       if(PlayerInfo.collider != null && playerisFound == false){
 
