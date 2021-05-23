@@ -70,26 +70,17 @@ public class PlayerActions : MonoBehaviour
   #endregion
 
 
-
   public void ChangeHP(int deltaHP)
   {
     if(player!= null ){
 
-      if (deltaHP <0)
-      {
-        if(Sound != null)
-        {
-          Sound.PlayOneShot(DamageSound);
-        }
-      }
-
+      if (deltaHP < 0 && Sound != null) Sound.PlayOneShot(DamageSound);
+      
       player.SetHP(player.GetHP() + deltaHP);
-    
       ui.SetHealSlider(player.GetHP(), player.GetMaxHP());
-      if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
-      {
-          Death();
-      }
+
+      if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true) Death();
+      
     }
   }
 
@@ -103,11 +94,10 @@ public class PlayerActions : MonoBehaviour
     
     player.SetIsDead(true);
 
-    if(Sound != null)
-      {
-        Sound.PlayOneShot(DeathSound);
-      }
+    if(Sound != null) Sound.PlayOneShot(DeathSound);
+
     Destroy(gameObject);
+    
     if(gameMenu!= null)
     {
       gameMenu.ActivatePostPortus();

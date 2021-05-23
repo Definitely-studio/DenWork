@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class Ammo : Item
 {
+    public enum AmmoTypes
+    {
+        pistol,
+        shotgun
+    }
+
+    public AmmoTypes AmmoType;
     public int ammoCount = 5;
     public Player player;
     public AudioSource Sounds;
@@ -21,20 +28,9 @@ public class Ammo : Item
         
     }
 
-    Ammo(ItemType type, string label, int amount, int id, string name, Sprite icon) : base(type, label, amount, id, name, icon)
+   /* Ammo(ItemType type, int amount, int id, string name, Sprite icon) : base(type, label, amount, id, name, icon)
     {
         
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        
-      /*  if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("pickup ammo");
-            other.gameObject.GetComponent<Player>().SetAmmo(player.GetAmmo() + ammoCount);
-            Sounds.PlayOneShot(pickUp);
-            Destroy(transform.gameObject);
-        }*/
-    }
+    }*/
 
 }

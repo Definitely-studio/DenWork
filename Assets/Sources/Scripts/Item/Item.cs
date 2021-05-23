@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.EventSystems;
 
 
 public class Item : MonoBehaviour {
+
+	
 	public enum ItemType {
 		RangedWeaponItem,
 		MeleeWeaponItem,
@@ -15,21 +18,32 @@ public class Item : MonoBehaviour {
 		AmmoItem,
 		KeyItem
 	}
+	
+	[Header("Item Base Variables")]
+
 	public ItemType Type;
-	public string ItemLabel = "Default item label";
 	public string Name;
-	public int Amount;
+	
+	public int Amount = 1;
+	/*{
+		get {return amount;}
+		set {
+			amount = value;
+			if(amount == 0) Destroy(gameObject);
+		}
+	}*/
 	public int Id;
 	public Sprite Icon;
+	//protected int amount;
 
 
-	protected Item(ItemType type, string label, int amount, int id, string name, Sprite icon)
+/*
+	protected Item(ItemType type, int amount, int id, string name, Sprite icon)
 	{
 		Type = type;
-		ItemLabel = label;
 		Amount = amount;
 		Id = id;
 		Name = name;
 		Icon = icon;
-	}
+	}*/
 }

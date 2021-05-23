@@ -106,10 +106,11 @@ public class InventoryManager : MonoBehaviour
 					
 					slot.Item = item;
 					slot.ItemObject = itemObject;
+					slot.AmountText.enabled = true;
 					slot.Amount = item.Amount;	
+					slot.AmountText.text = slot.Amount.ToString();
 					slot.IconImage.sprite = item.Icon;	
 					slot.IconImage.color = new Color(1,1,1,1);
-					slot.AmountText.enabled = true;
 					return;
 				}
 			}
@@ -121,6 +122,7 @@ public class InventoryManager : MonoBehaviour
 				if(slot.Item.Type == item.Type)
 				{
 					slot.Amount += item.Amount;
+					slot.AmountText.text = slot.Amount.ToString();
 					return;		
 				}
 			}
@@ -132,11 +134,12 @@ public class InventoryManager : MonoBehaviour
 
 				slot.Item = item;
 				slot.ItemObject = itemObject;
+				slot.AmountText.enabled = true;
 				slot.Amount = item.Amount;	
-
+				slot.AmountText.text = slot.Amount.ToString();
 				slot.IconImage.sprite = item.Icon;	
 				slot.IconImage.color = new Color(1,1,1,1);
-				slot.AmountText.enabled = true;
+				
 				return;
 			}
 		}

@@ -14,10 +14,9 @@ public class InventorySlot : MonoBehaviour {
         Quickslot
     }
 
-
     public Image IconImage;
-    public int Amount
-    {
+    public int Amount;
+    /*{
         get
         {
             return amount;
@@ -27,20 +26,27 @@ public class InventorySlot : MonoBehaviour {
             AmountText.text = amount.ToString();
 
             if(amount > 1) AmountText.enabled = true;   
+            else if(amount < 1) NullifySlotData();
             else AmountText.enabled = false; 
         }
-    }
+    }*/
 
     public Text AmountText;
     public GameObject ItemObject;
+    
     public Item Item;
     public SlotTypes SlotType = SlotTypes.Backpack;
     [SerializeField] private int amount;
 
-    private void Start() {
-        //Item = GetComponent<Item>();
+    public void NullifySlotData()
+    {
+        Item = null;
+        Amount = 0;
+        IconImage.sprite = null;
+        IconImage.color = new Color(1, 1, 1, 0f);;
+        ItemObject = null;
+        Amount = 0;
+        AmountText.enabled = false;
     }
 
-    private void Update() {
-    }
 }

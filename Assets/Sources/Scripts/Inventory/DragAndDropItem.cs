@@ -13,7 +13,6 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField] private GameObject player;
      void Awake()
     {
-  
         oldSlot = transform.GetComponentInParent<InventorySlot>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -65,20 +64,21 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             oldSlot.ItemObject.GetComponent<Item>().Amount = oldSlot.Amount;
             oldSlot.ItemObject.GetComponent<Collider2D>().enabled = true;
             // убираем значения InventorySlot
-            NullifySlotData();
+            oldSlot.NullifySlotData();
         }
+
         else if(eventData.pointerCurrentRaycast.gameObject.transform.parent.parent.TryGetComponent(out InventorySlot newSlot))
         {
             if(newSlot != oldSlot)
             {
                 if(oldSlot.Item.Type == Item.ItemType.RangedWeaponItem && newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
+                {
+                    if(newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
                     {
-                        if(newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
-                        {
-                            ExchangeSlotData(newSlot);
-                            return;
-                        }
+                        ExchangeSlotData(newSlot);
+                        return;
                     }
+                }
                 else if(oldSlot.Item.Type != Item.ItemType.RangedWeaponItem && newSlot.SlotType == InventorySlot.SlotTypes.Weapon)
                 {
                     return;
@@ -102,7 +102,6 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         oldSlot.ItemObject = null;
         oldSlot.Amount = 0;
         oldSlot.AmountText.enabled = false;
-
     }
 
     void ExchangeSlotData(InventorySlot newSlot)
@@ -128,15 +127,16 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             newSlot.Item =   oldSlot.Item;;
             newSlot.IconImage.sprite = oldSlot.IconImage.sprite;
             newSlot.Amount = oldSlot.Amount;
+            newSlot.AmountText.text =  newSlot.Amount.ToString();
             newSlot.ItemObject = oldSlot.ItemObject;
             newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            //newSlot.AmountText.enabled = true;
+            newSlot.AmountText.enabled = true;
         }
         else
         {
             newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 0);
             newSlot.IconImage.GetComponent<Image>().sprite = null;
-            //newSlot.AmountText.enabled = false;
+            newSlot.AmountText.enabled = false;
         }
         
         // Заменяем значения oldSlot на значения newSlot сохраненные в переменных
@@ -148,13 +148,14 @@ public class DragAndDropItem : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
         if (itemObject != null)
         {
-            newSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            //oldSlot.AmountText.enabled = true;
+            oldSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            oldSlot.AmountText.enabled = true;
+            oldSlot.AmountText.text =  oldSlot.Amount.ToString();
         }
         else
         {
             oldSlot.IconImage.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-            //oldSlot.AmountText.enabled = false;
+            oldSlot.AmountText.enabled = false;
             oldSlot.IconImage.GetComponent<Image>().sprite = null;
             
         }     

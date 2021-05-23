@@ -58,8 +58,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        
-        if(collision.gameObject.tag != tag && collision.gameObject.tag != gameObject.tag)
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player")
+         || collision.gameObject.layer == LayerMask.NameToLayer("Enemy")
+          || collision.gameObject.layer == LayerMask.NameToLayer("World")
+          || collision.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            if(collision.gameObject.tag != tag && collision.gameObject.tag != gameObject.tag)
         {
             if(collision.gameObject.tag == "Player")
             {
@@ -73,6 +77,8 @@ public class Bullet : MonoBehaviour
             sprite.enabled = false;
             StartCoroutine(ExampleCoroutine());
         }
+        }
+        
         /*
          if ( collision.gameObject.GetComponent<ParentfromBullet>()
          != null && this.gameObject.GetComponentInParent<ParentfromBullet>() != null){

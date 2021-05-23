@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
 
     private bool isDead = false;
     private int currentHP;
-    private Rigidbody2D _rigidbody;
     private int ammoCount;
+    private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;
 
     private void Awake()
@@ -55,17 +55,15 @@ public class Player : MonoBehaviour
         _rigidbody = this.GetComponentInParent<Rigidbody2D>();
         audioSource = this.GetComponent<AudioSource>();
         MovementComponent = GetComponentInParent<PlayerMovement>();
-        
+        InventoryManager = FindObjectOfType<InventoryManager>();
     }
 
     private void Start()
     {
-        InventoryManager = FindObjectOfType<InventoryManager>();
 
         b_body.SetActive(false);
         SetHP(MaxHP);
-        if(_gun != null && InventoryManager != null)
-            InventoryManager.AddItem(_gun.gameObject);
+        if(_gun != null && InventoryManager != null) InventoryManager.AddItem(_gun.gameObject);
     }
     
     private void Update()
@@ -88,7 +86,6 @@ public class Player : MonoBehaviour
     }
 
     #region SetterGetters
-    
     
     public void SetKey(bool value)
     {
@@ -158,6 +155,7 @@ public class Player : MonoBehaviour
                 gunInSlot.transform.SetParent(socket.transform);
                 gunInSlot.transform.position = Vector3.zero;
                 _gun.isEquipped = true;
+                _gun.ShowHideHands(true);
                 gunInSlot.GetComponent<Collider2D>().enabled = false;
             }
         }
@@ -165,8 +163,7 @@ public class Player : MonoBehaviour
 
     public void Reload()
     {
-        if(_gun != null)
-            _gun.Reload();
+        if(_gun != null) _gun.Reload();
     }
 
     private void OnEnable()
@@ -189,7 +186,5 @@ public class Player : MonoBehaviour
             _gun.Shoot();
         }
     }
-
-
 
 }

@@ -372,7 +372,6 @@ GameObject:
   - component: {fileID: 7196898053075749022}
   - component: {fileID: 8863008110691252884}
   - component: {fileID: 7797212476307072311}
-  - component: {fileID: 6263323170975698689}
   - component: {fileID: 8302962325554030366}
   m_Layer: 6
   m_Name: WeaponPistol
@@ -431,13 +430,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35700272bc1835a418aaa3f717619637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPoint: {fileID: 5828309867917560310}
-  _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
-  shots: 1
+  Type: 0
+  Name: 
+  Amount: 1
+  Id: 0
+  Icon: {fileID: -2588996169060052748, guid: b5bd139a418c09a47a2706c704407950, type: 3}
+  isEquipped: 1
+  AmmoType: 0
+  shotsCount: 1
   spreading: 0.05
   _shootingSpeed: 1.3
   _reloadingTime: 2
   _bulletsMaxCount: 10
+  fowCenter: {fileID: 0}
+  weapon: {fileID: 5830338825116136687}
+  AmmoIcon: {fileID: 21300000, guid: 10f6b1acff56f494da9ea62755f40471, type: 3}
+  _bulletPoint: {fileID: 5828309867917560310}
+  _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
   fieldOfView: {fileID: 0}
   AudioSource: {fileID: 4323003837876921738}
   ReloadClip: {fileID: 351916891156311920}
@@ -447,9 +456,6 @@ MonoBehaviour:
   ReloadSound: {fileID: 8300000, guid: 9b00f030deac3c042b5d0d81803010bd, type: 3}
   animator: {fileID: 7797212476307072311}
   hands: {fileID: 5629834156176783592}
-  isEquipped: 0
-  fowCenter: {fileID: 0}
-  weapon: {fileID: 5830338825116136687}
 --- !u!95 &7797212476307072311
 Animator:
   serializedVersion: 3
@@ -469,24 +475,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6263323170975698689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6548035038108721324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f304033b3352b4691f8588bc702304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  ItemLabel: 
-  Name: Pistol
-  Amount: 1
-  Id: 0
-  Icon: {fileID: -2588996169060052748, guid: b5bd139a418c09a47a2706c704407950, type: 3}
 --- !u!58 &8302962325554030366
 CircleCollider2D:
   m_ObjectHideFlags: 0

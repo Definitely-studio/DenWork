@@ -513,7 +513,6 @@ GameObject:
   - component: {fileID: 3816538368183805385}
   - component: {fileID: 7196898053075749022}
   - component: {fileID: 8863008110691252884}
-  - component: {fileID: 5717219675048436230}
   - component: {fileID: 3452753295677577364}
   - component: {fileID: 8188649032812955046}
   m_Layer: 0
@@ -573,13 +572,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35700272bc1835a418aaa3f717619637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPoint: {fileID: 5828309867917560310}
-  _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
-  shots: 10
-  spreading: 0.1
+  Type: 0
+  Name: 
+  Amount: 1
+  Id: 0
+  Icon: {fileID: 1782328826373837149, guid: e155cfd001873764183ed7f40d80fac1, type: 3}
+  isEquipped: 0
+  AmmoType: 1
+  shotsCount: 7
+  spreading: 0.2
   _shootingSpeed: 1
   _reloadingTime: 2
   _bulletsMaxCount: 10
+  fowCenter: {fileID: 6548035038108721324}
+  weapon: {fileID: 8234080894447373210}
+  AmmoIcon: {fileID: 21300000, guid: 717466d7aec94cd4c9573543526dd28a, type: 3}
+  _bulletPoint: {fileID: 5828309867917560310}
+  _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
   fieldOfView: {fileID: 0}
   AudioSource: {fileID: 4323003837876921738}
   ReloadClip: {fileID: 351916891156311920}
@@ -587,29 +596,8 @@ MonoBehaviour:
   ui: {fileID: 0}
   shootSound: {fileID: 8300000, guid: a72f1ce9b42c0ba41a5c021242301465, type: 3}
   ReloadSound: {fileID: 8300000, guid: 68cae600df41ef047b5d53157ddda68a, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: 3452753295677577364}
   hands: {fileID: 359109676950220218}
-  isEquipped: 1
-  fowCenter: {fileID: 6548035038108721324}
-  weapon: {fileID: 8234080894447373210}
---- !u!114 &5717219675048436230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6548035038108721324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f304033b3352b4691f8588bc702304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  ItemLabel: 
-  Name: 
-  Amount: 1
-  Id: 0
-  Icon: {fileID: 1782328826373837149, guid: e155cfd001873764183ed7f40d80fac1, type: 3}
 --- !u!95 &3452753295677577364
 Animator:
   serializedVersion: 3
@@ -620,7 +608,7 @@ Animator:
   m_GameObject: {fileID: 6548035038108721324}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c850382900dd27b41bd5780db4bb27f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
