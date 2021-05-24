@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7803253312427377031}
+  fieldOfView: {fileID: 0}
 --- !u!81 &2050666523
 AudioListener:
   m_ObjectHideFlags: 0
@@ -480,19 +481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa75457c28767d429160a6422904a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshParticlesSystem: {fileID: 0}
-  _velocity: 1.5
-  socket: {fileID: 5752703582141825335}
-  gun: {fileID: 8863008110691252884, guid: 816fbd6a4a079114eaed4a6d5d405194, type: 3}
-  field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
-  playerActions: {fileID: 8908258553127709349}
-  playerLeftSide: {fileID: 5223473861146874637}
-  playerRightSide: {fileID: 2444178237439719797}
-  audioSource: {fileID: 76539652418744595}
-  MaxHP: 100
-  MovementComponent: {fileID: 1873554656520750774}
   Root: {fileID: 7020218519102414575}
   WeaponList: []
+  WeaponSocket: {fileID: 5752703582141825335}
   f_Animator: {fileID: 2358412025353324165}
   b_Animator: {fileID: 1455365967909069138}
   key: 1
@@ -502,6 +493,18 @@ MonoBehaviour:
   f_body: {fileID: 6167038197446899917}
   b_body: {fileID: 1682480489909694193}
   canMove: 1
+  InventoryManager: {fileID: 0}
+  UI: {fileID: 0}
+  meshParticlesSystem: {fileID: 0}
+  velocity: 10
+  gun: {fileID: 0}
+  field: {fileID: 6656914717172099594, guid: 706df92baf9ac984682614a3eeea5939, type: 3}
+  playerActions: {fileID: 8908258553127709349}
+  playerLeftSide: {fileID: 5223473861146874637}
+  playerRightSide: {fileID: 2444178237439719797}
+  audioSource: {fileID: 76539652418744595}
+  MaxHP: 100
+  MovementComponent: {fileID: 1873554656520750774}
 --- !u!114 &5997842546784220726
 MonoBehaviour:
   m_ObjectHideFlags: 0

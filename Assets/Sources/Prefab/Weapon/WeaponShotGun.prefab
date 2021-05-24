@@ -578,17 +578,19 @@ MonoBehaviour:
   Id: 0
   Icon: {fileID: 1782328826373837149, guid: e155cfd001873764183ed7f40d80fac1, type: 3}
   isEquipped: 0
+  canShoot: 1
   AmmoType: 1
   shotsCount: 7
   spreading: 0.2
-  _shootingSpeed: 1
-  _reloadingTime: 2
-  _bulletsMaxCount: 10
+  shootingSpeed: 2
+  reloadingTime: 3
+  bulletsMaxCount: 5
   fowCenter: {fileID: 6548035038108721324}
   weapon: {fileID: 8234080894447373210}
   AmmoIcon: {fileID: 21300000, guid: 717466d7aec94cd4c9573543526dd28a, type: 3}
+  socket: {fileID: 7435755598404042923}
   _bulletPoint: {fileID: 5828309867917560310}
-  _bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
+  bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
   fieldOfView: {fileID: 0}
   AudioSource: {fileID: 4323003837876921738}
   ReloadClip: {fileID: 351916891156311920}

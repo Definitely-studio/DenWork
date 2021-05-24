@@ -48,5 +48,4 @@ public class InventorySlot : MonoBehaviour {
         Amount = 0;
         AmountText.enabled = false;
     }
-
 }

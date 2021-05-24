@@ -15,7 +15,7 @@ public class UIGameMode : MonoBehaviour
     public int shootGunSoulsDemand = 35;
     public int healSoulsDemand = 40;
     public Image BulletImage;
-
+    public Image WeaponImage;
 
     public Slider HealSlider;
 
@@ -44,7 +44,11 @@ public class UIGameMode : MonoBehaviour
         BulletTextInMagazine.text = bullet.ToString() + "/" + maxBullet.ToString();
         BulletTextTotal.text = "Total " + totalBullet.ToString();
         BulletImage.sprite = AmmoIcon;
+    }
 
+    public void ShowWeapon(Sprite weaponIcon)
+    {
+        WeaponImage.sprite = weaponIcon;
     }
 
     public void ShowHealPointLevel(int val)

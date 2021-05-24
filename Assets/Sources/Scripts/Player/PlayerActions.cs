@@ -11,7 +11,7 @@ public class PlayerActions : MonoBehaviour
   private Player player;
   public Camera cam;
   public InventoryManager Inventory;
-  [SerializeField] private Input _input;
+  [SerializeField] private Input input;
 
   public AudioSource Sound;
   public AudioClip DeathSound;

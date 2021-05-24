@@ -11,13 +11,17 @@ public class InventoryManager : MonoBehaviour
 	public Transform CollectedItem;
 	public Transform EquippedItem;
 	public Transform StoryItem;
+
     public List<Item> ItemList = new List<Item>();
 	public GameObject inventoryUI;
+	public Player Player;
+
 	[SerializeField] private Input _input;
 	[SerializeField] private GameObject crosshair;
+	[SerializeField] private UIGameMode ui;
+
 	private bool isInventoryActive = true;
 	private GameObject OverlapedItem;
-
 
   private void Awake()
     {
@@ -25,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         _input = new Input();
         _input.Player.Invent.performed += context => ActivateInventory();
 		_input.Player.Submit.performed += context => Pickup();
-
+		Player = FindObjectOfType<Player>();
     }
 
 	private void Start() 
@@ -47,43 +51,42 @@ public class InventoryManager : MonoBehaviour
 	{
 		for (int i = 0; i< EquippedItem.childCount; i++)
 		{
-			if(EquippedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot))
+			if(EquippedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
 				EquippedItemSlots.Add(slot);
 		}
 
 		for (int i = 0; i< CollectedItem.childCount; i++)
 		{
-			if(CollectedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot))
+			if(CollectedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
 				CollectedItemSlots.Add(slot);
 		}
 
 		for (int i = 0; i< StoryItem.childCount; i++)
 		{
-			if(StoryItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot))
+			if(StoryItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
 				StoryItemSlots.Add(slot);
 		}
 	}
 
-
-
 	private void ActivateInventory()
 	{
 	
-		if (isInventoryActive)  {
-				inventoryUI.SetActive(false);
-				isInventoryActive = false;
-				Cursor.visible = false;
-        		crosshair.SetActive(true);
-    
-				Time.timeScale = 1.0f;
-			}
-				else{
-				inventoryUI.SetActive(true);
-				isInventoryActive = true;
-				Cursor.visible = true;
-        		crosshair.SetActive(false);
-				Time.timeScale = 0.0f;
-			}	
+		if (isInventoryActive)  
+		{
+			inventoryUI.SetActive(false);
+			isInventoryActive = false;
+			Cursor.visible = false;
+			crosshair.SetActive(true);
+			Time.timeScale = 1.0f;
+		}
+		else
+		{
+			inventoryUI.SetActive(true);
+			isInventoryActive = true;
+			Cursor.visible = true;
+			crosshair.SetActive(false);
+			Time.timeScale = 0.0f;
+		}	
 	}
 
 	private void Pickup()
@@ -91,7 +94,7 @@ public class InventoryManager : MonoBehaviour
 		if(OverlapedItem != null)
 		{
 			AddItem(OverlapedItem);
-			OverlapedItem.SetActive(false);
+		
 		}
 	}
 
@@ -111,6 +114,9 @@ public class InventoryManager : MonoBehaviour
 					slot.AmountText.text = slot.Amount.ToString();
 					slot.IconImage.sprite = item.Icon;	
 					slot.IconImage.color = new Color(1,1,1,1);
+					if(slot.ItemObject.TryGetComponent(out Gun gun))
+						if(!gun.isEquipped) slot.ItemObject.SetActive(false);
+					
 					return;
 				}
 			}
@@ -118,11 +124,17 @@ public class InventoryManager : MonoBehaviour
 
 		foreach (InventorySlot slot in CollectedItemSlots)
 		{
-			if(slot.Item != null){
+			if(slot.Item != null)
+			{
 				if(slot.Item.Type == item.Type)
 				{
+					
 					slot.Amount += item.Amount;
+					slot.Item.Amount += item.Amount;
+					Destroy(itemObject);
 					slot.AmountText.text = slot.Amount.ToString();
+					if(slot.Item.Type == Item.ItemType.AmmoItem) Player.GetGun().ShowBullets();
+					
 					return;		
 				}
 			}
@@ -131,7 +143,8 @@ public class InventoryManager : MonoBehaviour
 		foreach (InventorySlot slot in CollectedItemSlots)
 		{
 			if(slot.Item == null){
-
+				
+				
 				slot.Item = item;
 				slot.ItemObject = itemObject;
 				slot.AmountText.enabled = true;
@@ -139,7 +152,8 @@ public class InventoryManager : MonoBehaviour
 				slot.AmountText.text = slot.Amount.ToString();
 				slot.IconImage.sprite = item.Icon;	
 				slot.IconImage.color = new Color(1,1,1,1);
-				
+				slot.ItemObject.SetActive(false);
+				if(slot.Item.Type == Item.ItemType.AmmoItem) Player.GetGun().ShowBullets();
 				return;
 			}
 		}
@@ -148,7 +162,6 @@ public class InventoryManager : MonoBehaviour
 
 	public void OverlapItem(GameObject OverlapedItem)
 	{
-		Debug.Log("OverlapItem");
 		this.OverlapedItem = OverlapedItem;
 	}
 

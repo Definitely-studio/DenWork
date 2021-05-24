@@ -10,27 +10,31 @@ public class Gun : Item
     // Gun values
 
     public bool isEquipped = false;
+    public bool canShoot = true;
     public Ammo.AmmoTypes AmmoType;
     
     
     [SerializeField] private int shotsCount; // number of shots | 1 if just pistol or etc
     [SerializeField] private float spreading; // optimal is 0.1f
-    [SerializeField] private float _shootingSpeed; // delay between shots
-    [SerializeField] private float _reloadingTime;
-    [SerializeField] private int _bulletsMaxCount;
+    [SerializeField] private float shootingSpeed; // delay between shots
+    [SerializeField] private float reloadingTime;
+    [SerializeField] private int bulletsMaxCount;
 
-    private bool canShoot;
-    private int _bulletsCurrentCount;
-    private bool _isReloading;
+    
+    private int bulletsCurrentCount;
+    private bool isReloading;
 
     [Space(20)] // other object references 
 
     public GameObject fowCenter; // FoW center where from rays will start
     public GameObject weapon;
     public Sprite AmmoIcon;
+    public Sprite WeaponIcon;
+    public Transform RootSocket;
+    public Transform WeaponSocket;
 
     [SerializeField] private GameObject _bulletPoint; // point where bullet will spawn
-    [SerializeField] private Bullet _bulletType; // bullet reference
+    [SerializeField] private Bullet bulletType; // bullet reference
     [SerializeField] private FieldOfView fieldOfView; // FoW reference
     [SerializeField] private AudioSource AudioSource;
     [SerializeField] private AudioSource ReloadClip;
@@ -45,7 +49,6 @@ public class Gun : Item
     private Vector2 _aimPoint;
     private Rigidbody2D _rigidbody;
     private ParentfromBullet parentfrom;
-    private Transform socket;
     private Player player;
     
 
@@ -60,14 +63,12 @@ public class Gun : Item
         _rigidbody.gravityScale = 0;
         parentfrom = this.GetComponentInParent<ParentfromBullet>();
 
-        _bulletsCurrentCount = _bulletsMaxCount;
-        _isReloading = false;
+        bulletsCurrentCount = bulletsMaxCount;
+        isReloading = false;
         if(crosshair == null) crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
 
-        canShoot = true;
-
         ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
-        socket = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>().socket.transform;
+        WeaponSocket = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Player>().WeaponSocket.transform;
 
         
     }
@@ -84,13 +85,13 @@ public class Gun : Item
         {
             Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
             Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
-            _rigidbody.transform.position = new Vector3(socket.position.x, socket.position.y, _rigidbody.transform.position.z);
+            _rigidbody.transform.position = new Vector3(WeaponSocket.position.x, WeaponSocket.position.y, _rigidbody.transform.position.z);
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
             _rigidbody.SetRotation(angle);
 
             // weapon flip
-            if (targetDirection.x > 0) weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            else if (targetDirection.x < 0) weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+           /* if (targetDirection.x > 0) weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (targetDirection.x < 0) weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);*/
         }
        
     }
@@ -103,7 +104,7 @@ public class Gun : Item
 // bullet instantiation on shot
     public void GetBullet(GameObject _bulletPoint)
     {
-        Bullet newBullet = Instantiate(_bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
+        Bullet newBullet = Instantiate(bulletType, _bulletPoint.transform.position, _bulletPoint.transform.rotation);
 
         newBullet.gameObject.transform.SetParent(null);
 
@@ -113,9 +114,11 @@ public class Gun : Item
 
     public void Shoot()
     {
+
+        Debug.Log(canShoot);
         if(canShoot){
             
-            if (_bulletsCurrentCount > 0)
+            if (bulletsCurrentCount > 0)
             {
                 if(AudioSource != null) AudioSource.PlayOneShot(shootSound); 
             
@@ -123,33 +126,29 @@ public class Gun : Item
                     
                 if(animator != null)  animator.SetTrigger("Shoot");
                     
-		        for (int i = 0; i < shotsCount; i++)
-		        {
-                    GetBullet(_bulletPoint);
-            	}
+		        for (int i = 0; i < shotsCount; i++) GetBullet(_bulletPoint);
 
-                _bulletsCurrentCount--;
+                bulletsCurrentCount--;
                 ShowBullets();
-                StartCoroutine(WaitBeetwenShoots(_shootingSpeed));
+                StartCoroutine(WaitBeetwenShoots(60.0f / shootingSpeed));
 
-                if(_bulletsCurrentCount <= 0) StartCoroutine(Reloading(_reloadingTime));
+                if(bulletsCurrentCount <= 0) StartCoroutine(Reloading(reloadingTime));
                 
             }
-            else if(GetAmmo() > 0 && !_isReloading) StartCoroutine(Reloading(_reloadingTime));
-    
+            else if(GetAmmo() > 0 && !isReloading) StartCoroutine(Reloading(reloadingTime));
         }
 
     }
 
     public void Reload()
     {
-        if(_bulletsCurrentCount != _bulletsMaxCount && GetAmmo() > 0)
-            StartCoroutine(Reloading(_reloadingTime));
+        if(bulletsCurrentCount != bulletsMaxCount && GetAmmo() > 0)
+            StartCoroutine(Reloading(reloadingTime));
     }
 
     IEnumerator Reloading(float waitTime)
     {
-        _isReloading = true;
+        isReloading = true;
 
         if(crosshair != null)
         {
@@ -161,22 +160,22 @@ public class Gun : Item
         
         yield return new WaitForSeconds(waitTime);
         
-        if(_bulletsMaxCount - _bulletsCurrentCount > GetAmmo())
+        if(bulletsMaxCount - bulletsCurrentCount > GetAmmo())
         {
-            _bulletsCurrentCount = GetAmmo() + _bulletsCurrentCount;
-            SetAmmo(_bulletsMaxCount - _bulletsCurrentCount);
+            bulletsCurrentCount = GetAmmo() + bulletsCurrentCount;
+            SetAmmo(bulletsMaxCount - bulletsCurrentCount);
         }
         else
         {
-            SetAmmo(_bulletsMaxCount - _bulletsCurrentCount);
-            _bulletsCurrentCount = _bulletsMaxCount;
+            SetAmmo(bulletsMaxCount - bulletsCurrentCount);
+            bulletsCurrentCount = bulletsMaxCount;
         }
 
         ShowBullets();
 
         if(crosshair != null) crosshair.StopReloadingAnimate();
 
-        _isReloading = false;
+        isReloading = false;
         
     }
 
@@ -188,7 +187,7 @@ public class Gun : Item
     }
     public void ShowBullets()
     {
-        ui.ShowBullet(_bulletsCurrentCount, _bulletsMaxCount, GetAmmo(), AmmoIcon);
+        ui.ShowBullet(bulletsCurrentCount, bulletsMaxCount, GetAmmo(), AmmoIcon);
     }
 
     public void ShowHideHands(bool value)
@@ -208,9 +207,7 @@ public class Gun : Item
             }
             else continue;
         }
-        
         return ammoCount;
- 
     }
 
     public void SetAmmo(int delta)

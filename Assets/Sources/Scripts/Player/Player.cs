@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     public GameObject Root;
     public List<GameObject> WeaponList;
-    public GameObject socket;
+    public GameObject WeaponSocket;
     
     public Animator f_Animator;
     public Animator b_Animator;
@@ -21,11 +21,12 @@ public class Player : MonoBehaviour
     public GameObject b_body;
     public bool canMove = true;
     public InventoryManager InventoryManager;
+    public UIGameMode UI;
 
     [SerializeField] private GameObject meshParticlesSystem; // to spawn shell     
-    [SerializeField] private Input _input;
-    [SerializeField] private float _velocity;
-    [SerializeField] private Gun _gun;
+    [SerializeField] private Input input;
+    [SerializeField] private float velocity;
+    [SerializeField] private Gun gun;
     [SerializeField] private FieldOfView field;
     [SerializeField] private PlayerActions playerActions;
     [SerializeField] private Transform playerLeftSide;
@@ -37,54 +38,55 @@ public class Player : MonoBehaviour
 
     private bool isDead = false;
     private int currentHP;
-    private int ammoCount;
     private Rigidbody2D _rigidbody;
     private Vector2 moveDirection;
 
     private void Awake()
     {   
-        ammoCount = 15;
+
         Instantiate(field);
-        _input = new Input();
-        _input.Player.Shoot.performed += context => Shoot();
-        _input.Player.Pause.performed += context => Pause();
-        _input.Player.Reload.performed += context => Reload();
-        _input.Player.FirstGun.performed += context => ChangeGun(1);
-        _input.Player.SecondGun.performed += context => ChangeGun(2);
+        input = new Input();
+        input.Player.Shoot.performed += context => Shoot();
+        input.Player.Pause.performed += context => Pause();
+        input.Player.Reload.performed += context => Reload();
+        input.Player.FirstGun.performed += context => ChangeGun(1);
+        input.Player.SecondGun.performed += context => ChangeGun(2);
 
         _rigidbody = this.GetComponentInParent<Rigidbody2D>();
         audioSource = this.GetComponent<AudioSource>();
         MovementComponent = GetComponentInParent<PlayerMovement>();
         InventoryManager = FindObjectOfType<InventoryManager>();
+        UI = FindObjectOfType<UIGameMode>();
     }
 
     private void Start()
     {
-
+        
         b_body.SetActive(false);
         SetHP(MaxHP);
-        if(_gun != null && InventoryManager != null) InventoryManager.AddItem(_gun.gameObject);
+        if(gun != null && InventoryManager != null) InventoryManager.AddItem(gun.gameObject);
     }
     
     private void Update()
     {
-        Vector2 AimPosition = _input.Player.MousePosition.ReadValue<Vector2>();
+        Vector2 AimPosition = input.Player.MousePosition.ReadValue<Vector2>();
        
         MovementComponent.SetAimPoint(AimPosition);
 
-        if(_gun != null) _gun.SetAimPoint(AimPosition);
+        if(gun != null) gun.SetAimPoint(AimPosition);
               
     }
     private void FixedUpdate()
     {
-        moveDirection = _input.Player.Move.ReadValue<Vector2>();
-        Vector2 mousePosition = _input.Player.MousePosition.ReadValue<Vector2>();
+        moveDirection = input.Player.Move.ReadValue<Vector2>();
+        Vector2 mousePosition = input.Player.MousePosition.ReadValue<Vector2>();
 
-        if(canMove) MovementComponent.Movement(moveDirection, _velocity);
+        if(canMove) MovementComponent.Movement(moveDirection, velocity);
 
         MovementComponent.Rotation(mousePosition, moveDirection);        
     }
 
+    // SETTERS REGION
     #region SetterGetters
     
     public void SetKey(bool value)
@@ -99,16 +101,7 @@ public class Player : MonoBehaviour
     {
         return playerActions;
     }
-    public void SetAmmo(int value)
-    {
-        _gun.ShowBullets();
-        ammoCount = value;
-    }
-    
-     public int GetAmmo()
-    {
-          return ammoCount;
-    }
+
     public Transform GetLeftSide(){
         return playerLeftSide;
     }
@@ -129,7 +122,12 @@ public class Player : MonoBehaviour
     }
     public void SetGun(Gun gun)
     {
-        this._gun = gun;
+        this.gun = gun;
+    }
+
+    public Gun GetGun()
+    {
+        return gun;
     }
 
      public void SetHP(int value)
@@ -147,28 +145,32 @@ public class Player : MonoBehaviour
         if(InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject != null)
         {
             GameObject gunInSlot = InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject;
-            if(_gun.gameObject != gunInSlot){
+            if(gun.gameObject != gunInSlot){
                 gunInSlot.SetActive(true);
-                _gun.gameObject.SetActive(false);
-                _gun.isEquipped = false;
-                _gun = gunInSlot.GetComponent<Gun>();
-                gunInSlot.transform.SetParent(socket.transform);
+                gun.gameObject.SetActive(false);
+                gun.isEquipped = false;
+                gun = gunInSlot.GetComponent<Gun>();
+                gunInSlot.transform.SetParent(WeaponSocket.transform);
                 gunInSlot.transform.position = Vector3.zero;
-                _gun.isEquipped = true;
-                _gun.ShowHideHands(true);
+                gun.isEquipped = true;
+                gun.canShoot = true;
+                gun.RootSocket.position = Vector3.zero;
+                gun.RootSocket.rotation = Quaternion.identity;
+                gun.ShowHideHands(true);
                 gunInSlot.GetComponent<Collider2D>().enabled = false;
+                UI.ShowWeapon(gun.WeaponIcon);
             }
         }
     }
 
     public void Reload()
     {
-        if(_gun != null) _gun.Reload();
+        if(gun != null) gun.Reload();
     }
 
     private void OnEnable()
     {
-        _input.Enable();
+        input.Enable();
     }
     void Pause(){
         
@@ -177,13 +179,15 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        if (_gun != null){
-            if(meshParticlesSystem != null){
-                if (meshParticlesSystem.TryGetComponent(out MeshParticlesSystem particlesSystem)) 
-                    particlesSystem.SpawnShell(new Vector3(_gun.transform.position.x,_gun.transform.position.y, -0.15f));
-            }
+        if(Time.timeScale != 0){
+            if (gun != null){
+                if(meshParticlesSystem != null){
+                    if (meshParticlesSystem.TryGetComponent(out MeshParticlesSystem particlesSystem)) 
+                        particlesSystem.SpawnShell(new Vector3(gun.transform.position.x,gun.transform.position.y, -0.15f));
+                }
 
-            _gun.Shoot();
+                gun.Shoot();
+            }
         }
     }
 
