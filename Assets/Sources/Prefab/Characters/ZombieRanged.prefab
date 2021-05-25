@@ -5158,8 +5158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06186efb03896f24cbf2ea02d0362c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  currentHP: 100
+  MaxHP: 130
+  currentHP: 130
   attackCooldownTime: 2
   state: 0
   Root: {fileID: 7930717148828461635}
@@ -5669,7 +5669,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.3
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -5698,7 +5698,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   enemy: {fileID: 5391227095166537715}
   enemyActions: {fileID: 6162881842256034382}
-  minDistanceToPlayer: 2
+  speed: 1.5
   PlayerTargetTransfrom: {fileID: 0}
 --- !u!82 &4836299032411398706
 AudioSource:

@@ -142,23 +142,27 @@ public class Player : MonoBehaviour
 
     public void ChangeGun(int slotNumber)
     {
-        if(InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject != null)
+        if(gun.canShoot) //workaround to player cannot change weapon while reloading
         {
-            GameObject gunInSlot = InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject;
-            if(gun.gameObject != gunInSlot){
-                gunInSlot.SetActive(true);
-                gun.gameObject.SetActive(false);
-                gun.isEquipped = false;
-                gun = gunInSlot.GetComponent<Gun>();
-                gunInSlot.transform.SetParent(WeaponSocket.transform);
-                gunInSlot.transform.position = Vector3.zero;
-                gun.isEquipped = true;
-                gun.canShoot = true;
-                gun.RootSocket.position = Vector3.zero;
-                gun.RootSocket.rotation = Quaternion.identity;
-                gun.ShowHideHands(true);
-                gunInSlot.GetComponent<Collider2D>().enabled = false;
-                UI.ShowWeapon(gun.WeaponIcon);
+            if(InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject != null)
+            {
+                GameObject gunInSlot = InventoryManager.EquippedItemSlots[slotNumber - 1].ItemObject;
+                if(gun.gameObject != gunInSlot){
+                    gunInSlot.SetActive(true);
+                    gun.gameObject.SetActive(false);
+                    gun.isEquipped = false;
+                    gun = gunInSlot.GetComponent<Gun>();
+                    gunInSlot.transform.SetParent(WeaponSocket.transform);
+                    gunInSlot.transform.position = Vector3.zero;
+                    gun.isEquipped = true;
+                    gun.canShoot = true;
+                    gun.RootSocket.position = Vector3.zero;
+                    //gun.RootSocket.rotation = Quaternion.identity;
+                    gun.ShowHideHands(true);
+                    gun.ShowBullets();
+                    gunInSlot.GetComponent<Collider2D>().enabled = false;
+                    UI.ShowWeapon(gun.WeaponIcon);
+                }
             }
         }
     }

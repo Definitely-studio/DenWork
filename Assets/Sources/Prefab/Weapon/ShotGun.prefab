@@ -34,6 +34,37 @@ Transform:
   m_Father: {fileID: 7125123347346324096}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1200242309094710374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393456755779221367}
+  m_Layer: 6
+  m_Name: Socket2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393456755779221367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200242309094710374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7435755598404042923}
+  m_Father: {fileID: 3816538368183805385}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874495306128875510
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,8 +259,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7125123347346324096}
-  m_Father: {fileID: 3816538368183805385}
-  m_RootOrder: 2
+  m_Father: {fileID: 393456755779221367}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4790590484564557218
 GameObject:
@@ -515,8 +546,8 @@ GameObject:
   - component: {fileID: 8863008110691252884}
   - component: {fileID: 3452753295677577364}
   - component: {fileID: 8188649032812955046}
-  m_Layer: 0
-  m_Name: WeaponShotGun
+  m_Layer: 6
+  m_Name: ShotGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -535,7 +566,7 @@ Transform:
   m_Children:
   - {fileID: 684472971670441727}
   - {fileID: 841613536675747399}
-  - {fileID: 7435755598404042923}
+  - {fileID: 393456755779221367}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -575,20 +606,22 @@ MonoBehaviour:
   Type: 0
   Name: 
   Amount: 1
-  Id: 0
+  Id: 1
   Icon: {fileID: 1782328826373837149, guid: e155cfd001873764183ed7f40d80fac1, type: 3}
   isEquipped: 0
   canShoot: 1
   AmmoType: 1
   shotsCount: 7
   spreading: 0.2
-  shootingSpeed: 2
+  shootingSpeed: 30
   reloadingTime: 3
   bulletsMaxCount: 5
   fowCenter: {fileID: 6548035038108721324}
   weapon: {fileID: 8234080894447373210}
   AmmoIcon: {fileID: 21300000, guid: 717466d7aec94cd4c9573543526dd28a, type: 3}
-  socket: {fileID: 7435755598404042923}
+  WeaponIcon: {fileID: 1782328826373837149, guid: e155cfd001873764183ed7f40d80fac1, type: 3}
+  RootSocket: {fileID: 393456755779221367}
+  WeaponSocket: {fileID: 7125123347346324096}
   _bulletPoint: {fileID: 5828309867917560310}
   bulletType: {fileID: 7427904415594181857, guid: a0cec6deca844df4bb0c2a35ea9bf2c5, type: 3}
   fieldOfView: {fileID: 0}
@@ -626,7 +659,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6548035038108721324}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

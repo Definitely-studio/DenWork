@@ -125,6 +125,7 @@ MonoBehaviour:
   shootGunSoulsDemand: 35
   healSoulsDemand: 40
   BulletImage: {fileID: 6366103754636768331}
+  WeaponImage: {fileID: 6366103753568249034}
   HealSlider: {fileID: 6366103755559948276}
 --- !u!114 &7514568858118291076
 MonoBehaviour:
@@ -1670,6 +1671,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3463810391209190130, guid: 2d8ef4227c88d1e42a3e208e183b6780, type: 3}
   m_PrefabInstance: {fileID: 7514568859817941257}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6366103753568249034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3463810391373413827, guid: 2d8ef4227c88d1e42a3e208e183b6780, type: 3}
+  m_PrefabInstance: {fileID: 7514568859817941257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6366103754636768331 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3463810390311218498, guid: 2d8ef4227c88d1e42a3e208e183b6780, type: 3}

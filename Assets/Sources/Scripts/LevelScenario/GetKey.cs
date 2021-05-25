@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GetKey : MonoBehaviour
 {
-        public Player player;
+    public Player player;
     public AudioSource Sounds;
     public AudioClip pickUp;
+    public SpriteRenderer SpriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +26,9 @@ public class GetKey : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.SetKey(true);
+            SpriteRenderer.enabled = false;
             Sounds.PlayOneShot(pickUp);
-            Destroy(transform.gameObject);
+            Destroy(transform.gameObject,pickUp.length);
         }
     }
 

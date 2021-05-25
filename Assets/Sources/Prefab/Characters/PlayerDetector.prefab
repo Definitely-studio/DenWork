@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 248527660358268828}
   - component: {fileID: 6435755334716528133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,3 +51,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 136
   enemy: {fileID: 0}
+  MaxDistance: 5

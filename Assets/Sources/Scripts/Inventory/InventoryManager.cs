@@ -37,40 +37,31 @@ public class InventoryManager : MonoBehaviour
 		CollectSlots();
 	}
 
-	public InventoryManager() 
-	{
-		
-	}
 	  private void OnEnable()
     {
         _input.Enable();
     }
 
-
 	private void CollectSlots()
 	{
 		for (int i = 0; i< EquippedItem.childCount; i++)
 		{
-			if(EquippedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
-				EquippedItemSlots.Add(slot);
+			if(EquippedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) EquippedItemSlots.Add(slot);
 		}
 
 		for (int i = 0; i< CollectedItem.childCount; i++)
 		{
-			if(CollectedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
-				CollectedItemSlots.Add(slot);
+			if(CollectedItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) CollectedItemSlots.Add(slot);
 		}
 
 		for (int i = 0; i< StoryItem.childCount; i++)
 		{
-			if(StoryItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) 
-				StoryItemSlots.Add(slot);
+			if(StoryItem.GetChild(i).TryGetComponent<InventorySlot>(out InventorySlot slot)) StoryItemSlots.Add(slot);
 		}
 	}
 
 	private void ActivateInventory()
 	{
-	
 		if (isInventoryActive)  
 		{
 			inventoryUI.SetActive(false);
@@ -91,21 +82,19 @@ public class InventoryManager : MonoBehaviour
 
 	private void Pickup()
 	{
-		if(OverlapedItem != null)
-		{
-			AddItem(OverlapedItem);
-		
-		}
+		if(OverlapedItem != null) AddItem(OverlapedItem);
 	}
 
 	public void AddItem(GameObject itemObject) {
 
 		Item item = itemObject.GetComponent<Item>();
+
 		if(item.Type == Item.ItemType.RangedWeaponItem)
 		{
 			foreach (InventorySlot slot in EquippedItemSlots)
 			{
-				if(slot.Item == null){
+				if(slot.Item == null)
+				{
 					
 					slot.Item = item;
 					slot.ItemObject = itemObject;
@@ -114,6 +103,7 @@ public class InventoryManager : MonoBehaviour
 					slot.AmountText.text = slot.Amount.ToString();
 					slot.IconImage.sprite = item.Icon;	
 					slot.IconImage.color = new Color(1,1,1,1);
+
 					if(slot.ItemObject.TryGetComponent(out Gun gun))
 						if(!gun.isEquipped) slot.ItemObject.SetActive(false);
 					
@@ -126,13 +116,12 @@ public class InventoryManager : MonoBehaviour
 		{
 			if(slot.Item != null)
 			{
-				if(slot.Item.Type == item.Type)
+				if(slot.Item.Id == item.Id)
 				{
-					
 					slot.Amount += item.Amount;
 					slot.Item.Amount += item.Amount;
-					Destroy(itemObject);
 					slot.AmountText.text = slot.Amount.ToString();
+					Destroy(itemObject);
 					if(slot.Item.Type == Item.ItemType.AmmoItem) Player.GetGun().ShowBullets();
 					
 					return;		
@@ -142,9 +131,8 @@ public class InventoryManager : MonoBehaviour
 
 		foreach (InventorySlot slot in CollectedItemSlots)
 		{
-			if(slot.Item == null){
-				
-				
+			if(slot.Item == null)
+			{
 				slot.Item = item;
 				slot.ItemObject = itemObject;
 				slot.AmountText.enabled = true;
@@ -153,10 +141,13 @@ public class InventoryManager : MonoBehaviour
 				slot.IconImage.sprite = item.Icon;	
 				slot.IconImage.color = new Color(1,1,1,1);
 				slot.ItemObject.SetActive(false);
+
 				if(slot.Item.Type == Item.ItemType.AmmoItem) Player.GetGun().ShowBullets();
+
 				return;
 			}
 		}
+
 		return;
 	}
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-    [SerializeField] private Input _input;
+    [SerializeField] private Input input;
     public GameObject PanelOptions;
     public GameObject PanelPosthumous;
     public GameObject Inventory;
@@ -21,9 +21,8 @@ public class GameMenu : MonoBehaviour
     void Awake()
     {
      
-       _input = new Input();
-       
-        _input.Player.Pause.performed += context => Pause();
+        input = new Input();
+        input.Player.Pause.performed += context => Pause();
     }
 
     // Update is called once per frame
@@ -33,13 +32,8 @@ public class GameMenu : MonoBehaviour
     }
     public void Pause(){
       
-        if (isPause == true)
-        {
-            OffOptions();
-
-        }
-        else
-            OnOptions();
+        if (isPause == true) OffOptions();
+        else OnOptions();
     }
 
     public void ToStartGame()

@@ -8,7 +8,7 @@ public class PlayerActions : MonoBehaviour
 {
 	public Text uiText;
   public GameObject equippedweapon;
-  private Player player;
+  public Player player;
   public Camera cam;
   public InventoryManager Inventory;
   [SerializeField] private Input input;
@@ -28,9 +28,8 @@ public class PlayerActions : MonoBehaviour
     ui = GameObject.Find("CanvasUI").GetComponent<UIGameMode>();
     gameMenu = GameObject.Find("CanvasUI").GetComponent<GameMenu>();
     Inventory = GameObject.Find("CanvasUI").GetComponentInChildren<InventoryManager>();
-
+    player = GetComponent<Player>();
   }
-
 
 
   #region OnTriggers
@@ -75,7 +74,8 @@ public class PlayerActions : MonoBehaviour
     if(player!= null ){
 
       if (deltaHP < 0 && Sound != null) Sound.PlayOneShot(DamageSound);
-      
+
+      Debug.Log(player.GetHP());
       player.SetHP(player.GetHP() + deltaHP);
       ui.SetHealSlider(player.GetHP(), player.GetMaxHP());
 

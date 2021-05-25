@@ -41,20 +41,23 @@ public class PlayerMovement : MonoBehaviour
         Vector2 dir = _rigidbody.position + move * (Time.fixedDeltaTime * _velocity);
         _rigidbody.transform.position = new Vector3(dir.x, dir.y, _rigidbody.transform.position.z) ;
         
-       //Debug.Log(_rigidbody.transform.position);
     }
 
 
     public void Rotation(Vector2 MouseDir, Vector2 moveDir) {
         Vector3 worldPosMouse = Camera.main.ScreenToWorldPoint(MouseDir);
+       // Vector3 targetDirection = (worldPosMouse - transform.position).normalized;
+       // float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         Vector3 lookDir = ( new Vector3(_rigidbody.position.x, _rigidbody.position.y ,0) - worldPosMouse);
-
-        
+       // player.WeaponSocket.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+       // Debug.Log(angle);
 
         if (lookDir.x < 0) {
+           // player.transform.parent.transform.eulerAngles = new Vector3(0f, 0f, 0f);            
             player.body.transform.eulerAngles = new Vector3(0f, 0f, 0f);          
         }
         if (lookDir.x > 0) {
+            //player.transform.parent.transform.eulerAngles =  new Vector3(0f, 180f, 0f);            
             player.body.transform.eulerAngles = new Vector3(0f, 180f, 0f);             
         }
         if (lookDir.y > -0.25) {
@@ -122,8 +125,6 @@ public class PlayerMovement : MonoBehaviour
             player.f_Animator.SetBool("isWalkBack", false);
             player.b_Animator.SetBool("isWalkBack", false);              
         }
-
-
 
         if (moveDir.magnitude == 0) {
             player.f_Animator.SetBool("isWalk", false);

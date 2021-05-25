@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
     public GameObject PanelCredits;
     public GameObject PanelOptions;
+    public Text Version;
 
     // Start is called before the first frame update
     void Start()
     {
+        ShowVersion();
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class StartMenu : MonoBehaviour
         }
     }
 
+    public void ShowVersion(){
+        Version.text = "Version: " + Application.version.ToString();
+    }
     public void OnExit()
     {
         Application.Quit();
@@ -62,4 +68,10 @@ public class StartMenu : MonoBehaviour
     {
         PanelOptions.SetActive(false);
     }
+
+    public void OpenLink(string link)
+    {
+        Application.OpenURL(link);
+    }
+
 }

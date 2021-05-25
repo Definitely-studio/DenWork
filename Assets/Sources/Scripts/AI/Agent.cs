@@ -12,12 +12,14 @@ public class Agent : MonoBehaviour
     [SerializeField] GameObject Player;
     [SerializeField] Enemy enemy;
     [SerializeField] EnemyActions enemyActions;
+    [SerializeField] float speed;
 
     [SerializeField] Transform PlayerTargetTransfrom;
     private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
+
         Player = GameObject.FindGameObjectWithTag("Player");
         target = transform;
         PlayerTargetTransfrom = Player.transform;
@@ -27,6 +29,7 @@ public class Agent : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.SetDestination(target.position);
+        agent.speed = speed;
         Root = enemy.Root.transform;
         
     }
@@ -36,10 +39,15 @@ public class Agent : MonoBehaviour
     void Update()
     {
         if(!enemy.GetIsDead()) {
-            agent.SetDestination(target.position);
-            AnimateEnemy();
+            if(target != null)
+            {
+                agent.SetDestination(target.position);
+                AnimateEnemy();
+                enemy.animationsController.SetDistance(Vector2.Distance(Root.position, PlayerTargetTransfrom.position)); // Set Distance key in Animator
+            }
            
-            enemy.animationsController.SetDistance(Vector2.Distance(Root.position, PlayerTargetTransfrom.position)); // Set Distance key in Animator
+           
+            
         }
         else 
         {

@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IconImage: {fileID: 6036984800662488703}
+  Amount: 0
   AmountText: {fileID: 584965577936103996}
   ItemObject: {fileID: 0}
   Item: {fileID: 0}

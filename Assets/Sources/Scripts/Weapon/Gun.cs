@@ -87,13 +87,22 @@ public class Gun : Item
             Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
             _rigidbody.transform.position = new Vector3(WeaponSocket.position.x, WeaponSocket.position.y, _rigidbody.transform.position.z);
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+            
+           // transform.localRotation = Quaternion.Euler(0f, 0f, angle);
             _rigidbody.SetRotation(angle);
-
+            //Debug.Log(targetDirection);
             // weapon flip
-           /* if (targetDirection.x > 0) weapon.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            else if (targetDirection.x < 0) weapon.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);*/
+            if (targetDirection.x > 0) 
+            {
+                RootSocket.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                // Debug.Log($" left {RootSocket.localRotation}");
+            }
+            else if (targetDirection.x < 0)
+            { 
+               //Debug.Log($" right {RootSocket.localRotation}");
+                RootSocket.localRotation = Quaternion.Euler(180f, 0f, 0f);
+            }
         }
-       
     }
 
     public void SetAimPoint(Vector2 aimPoint)
@@ -114,9 +123,7 @@ public class Gun : Item
 
     public void Shoot()
     {
-
-        Debug.Log(canShoot);
-        if(canShoot){
+        if(canShoot && !isReloading){
             
             if (bulletsCurrentCount > 0)
             {
@@ -141,14 +148,15 @@ public class Gun : Item
     }
 
     public void Reload()
-    {
-        if(bulletsCurrentCount != bulletsMaxCount && GetAmmo() > 0)
-            StartCoroutine(Reloading(reloadingTime));
+    {   
+        if(bulletsCurrentCount != bulletsMaxCount && GetAmmo() > 0) StartCoroutine(Reloading(reloadingTime));
     }
 
     IEnumerator Reloading(float waitTime)
     {
+       
         isReloading = true;
+        
 
         if(crosshair != null)
         {
@@ -162,8 +170,10 @@ public class Gun : Item
         
         if(bulletsMaxCount - bulletsCurrentCount > GetAmmo())
         {
-            bulletsCurrentCount = GetAmmo() + bulletsCurrentCount;
+            
+            int currentAmmoInInventory = GetAmmo(); // workaround, need to fix SetAmmo()
             SetAmmo(bulletsMaxCount - bulletsCurrentCount);
+            bulletsCurrentCount = currentAmmoInInventory + bulletsCurrentCount; 
         }
         else
         {
@@ -176,15 +186,17 @@ public class Gun : Item
         if(crosshair != null) crosshair.StopReloadingAnimate();
 
         isReloading = false;
+       
         
     }
 
-     IEnumerator WaitBeetwenShoots(float waitTime)
+    IEnumerator WaitBeetwenShoots(float waitTime)
     {
         canShoot = false;
         yield return new WaitForSeconds(waitTime);
         canShoot = true;
     }
+    
     public void ShowBullets()
     {
         ui.ShowBullet(bulletsCurrentCount, bulletsMaxCount, GetAmmo(), AmmoIcon);
@@ -220,12 +232,20 @@ public class Gun : Item
             {
                 if(ammo.AmmoType == AmmoType) 
                 {
-                    if(ammo.Amount >= difference) ammo.Amount -= difference;
+                    if(ammo.Amount >= difference) 
+                    {
+                        ammo.Amount -= difference;
+                        difference = 0;
+                        slot.AmountText.text = ammo.Amount.ToString();
+                    }
                     else
                     {
                         difference -= ammo.Amount;
                         ammo.Amount = 0;
+                        slot.NullifySlotData();
                     }
+                    
+
                     if(difference <= 0) break;
                 }
             }

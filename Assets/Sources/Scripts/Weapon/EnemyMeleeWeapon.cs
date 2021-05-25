@@ -30,13 +30,13 @@ public class EnemyMeleeWeapon : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+      Debug.Log(other.gameObject);
       if(other.gameObject.tag == "Player"){
       
 
             if (other.gameObject.GetComponent<PlayerActions> () != null)
             {
-                other.gameObject.GetComponent<PlayerActions> ().ChangeHP(-damage);
+              other.gameObject.GetComponent<PlayerActions> ().ChangeHP(-damage);
             }
           }
 

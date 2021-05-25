@@ -23,9 +23,8 @@ public class finalDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().GetKey() == true)
+        if (other.gameObject.tag == "Player" && other.gameObject.GetComponentInChildren<Player>().GetKey() == true)
         {
-            
             animator.SetTrigger("ToBlack");
         }
     }
