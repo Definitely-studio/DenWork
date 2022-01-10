@@ -38,7 +38,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!enemy.GetIsDead()) {
+        if(!enemy.GetIsDead() && Time.timeScale != 0f) {
             if(target != null)
             {
                 agent.SetDestination(target.position);
@@ -54,13 +54,14 @@ public class Agent : MonoBehaviour
             agent.SetDestination(transform.position);
         }
     }
-    void OnDrawGizmosSelected()
+
+    /*void OnDrawGizmosSelected()
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(target.position, (float) 0.1);
         Gizmos.DrawSphere(Root.position, (float) 0.1);
-    }
+    }*/
 
 
     public NavMeshAgent GetAgent(){

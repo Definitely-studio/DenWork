@@ -440,7 +440,7 @@ MonoBehaviour:
   AmmoType: 0
   shotsCount: 1
   spreading: 0.05
-  shootingSpeed: 50
+  shootingSpeed: 60
   reloadingTime: 2
   bulletsMaxCount: 10
   fowCenter: {fileID: 0}

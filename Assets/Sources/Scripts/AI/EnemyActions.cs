@@ -10,6 +10,9 @@ public class EnemyActions : MonoBehaviour
     public AudioClip DamageSound;
     public AudioClip DeathSound;
     public AudioClip RoarSound;
+    public AudioRandomizer OuchSounds;
+    public AudioRandomizer DeathSounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +32,9 @@ public class EnemyActions : MonoBehaviour
         
             if (deltaHP <0)
             {
-             if(AudioSound != null && !AudioSound.isPlaying)
+             if(OuchSounds != null)
              {
-                 AudioSound.PlayOneShot(DamageSound);
+                 OuchSounds.PlaySound();
              }
             }
             enemy.SetCurrentHP(enemy.GetCurrentHP() + deltaHP);
@@ -39,7 +42,6 @@ public class EnemyActions : MonoBehaviour
 
             if(enemy.GetCurrentHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true)
             {
-
                 Death();
             }
         }
@@ -49,9 +51,9 @@ public class EnemyActions : MonoBehaviour
 
     private void Death(){
 
-        if(AudioSound != null && !AudioSound.isPlaying)
+        if(DeathSounds != null)
             {
-                AudioSound.PlayOneShot(DeathSound);
+                DeathSounds.PlaySound();
             }
             
         

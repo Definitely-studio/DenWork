@@ -23,10 +23,12 @@ public class Teleport : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if (other.gameObject.tag == "Player" && player.GetKey() == true)
+        if (other.gameObject.TryGetComponent(out PlayerMovement playerMovementController) && player.GetKey() == true)
         {
+            
             player.canMove = false;
-            other.gameObject.GetComponent<Player>().Root.transform.position = newPosition;
+            playerMovementController.GetComponent<Rigidbody2D>().position = newPosition;
+            //other.gameObject.GetComponent<Player>().Root.transform.position = newPosition;
             if(other.gameObject.transform.position == newPosition)
                 player.SetKey(false);
 

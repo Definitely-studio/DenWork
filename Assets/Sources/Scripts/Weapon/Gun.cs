@@ -90,7 +90,8 @@ public class Gun : Item
             
            // transform.localRotation = Quaternion.Euler(0f, 0f, angle);
             _rigidbody.SetRotation(angle);
-            //Debug.Log(targetDirection);
+           
+
             // weapon flip
             if (targetDirection.x > 0) 
             {
@@ -139,10 +140,13 @@ public class Gun : Item
                 ShowBullets();
                 StartCoroutine(WaitBeetwenShoots(60.0f / shootingSpeed));
 
-                if(bulletsCurrentCount <= 0) StartCoroutine(Reloading(reloadingTime));
+                if(bulletsCurrentCount <= 0) Reload();
                 
             }
-            else if(GetAmmo() > 0 && !isReloading) StartCoroutine(Reloading(reloadingTime));
+            else if(GetAmmo() > 0 && !isReloading) 
+            {
+                Reload();
+            }
         }
 
     }
@@ -217,7 +221,10 @@ public class Gun : Item
             {
                 if(ammo.AmmoType == AmmoType) ammoCount += ammo.Amount;
             }
-            else continue;
+            else 
+            {
+                continue;
+            }
         }
         return ammoCount;
     }
@@ -244,12 +251,14 @@ public class Gun : Item
                         ammo.Amount = 0;
                         slot.NullifySlotData();
                     }
-                    
 
                     if(difference <= 0) break;
                 }
             }
-            else continue;
+            else 
+            {
+                continue;
+            }
         }
     }
 

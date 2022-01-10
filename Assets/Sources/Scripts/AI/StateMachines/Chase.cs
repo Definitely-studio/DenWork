@@ -11,24 +11,31 @@ public class Chase : NPCBaseFMS
         //NPC = animator.gameObject;
         //agent = NPC.GetComponent<Agent>();
         
-       
-        if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
-            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
-        else
+        if(Time.timeScale != 0)
         {
-             agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+             if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
+                agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
+            else
+            {
+                agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+            }
         }
+       
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
-            agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
-        else
+        if(Time.timeScale != 0)
         {
-             agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+            if(NPC.transform.position.x < NPC.GetComponent<Enemy>().Player.transform.position.x)
+                agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetLeftSide());
+            else
+            {
+                agent.SetAgentDestination(NPC.GetComponent<Enemy>().Player.GetComponentInChildren<Player>().GetRightSide());
+            }
         }
+       
 
     }
 

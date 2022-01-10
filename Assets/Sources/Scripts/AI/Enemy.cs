@@ -131,9 +131,6 @@ public class Enemy : PawnBase
         state = States.attackig;
 
     }
-
-    
-
 }
 
 

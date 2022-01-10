@@ -69,7 +69,7 @@ public class GameMenu : MonoBehaviour
 
     public void ActivatePostPortus()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         PanelPosthumous.SetActive(true);
         Crosshair.SetActive(false);
         Cursor.visible = true;

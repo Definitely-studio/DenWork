@@ -176,6 +176,7 @@ public class Player : MonoBehaviour
     {
         input.Enable();
     }
+    
     void Pause(){
         
         playerActions.gameMenu.Pause();

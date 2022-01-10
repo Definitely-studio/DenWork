@@ -19,9 +19,9 @@ public class PlayerActions : MonoBehaviour
   public GameMenu gameMenu;
   public UIGameMode ui;
   public GameObject OverlappedItem;
+  public AudioRandomizer OuchSounds;
+  public AudioRandomizer DeathSounds;
 
-
-    // Start is called before the first frame update
 
   private void Awake(){
     
@@ -33,37 +33,24 @@ public class PlayerActions : MonoBehaviour
 
 
   #region OnTriggers
+
   void OnTriggerEnter2D(Collider2D collider) {
-    // Door opening
-    if(collider.gameObject.tag == "Door")
-    {
-      uiText.text = "Press E to open the door";
-    }
+   
+    if(collider.gameObject.tag == "Door") uiText.text = "Press E to open the door";
       
     if(collider.gameObject.layer == LayerMask.NameToLayer("Pickup"))
+      if(Inventory!=null) Inventory.OverlapItem(collider.gameObject);
+    
+  }
+
+  void OnTriggerExit2D(Collider2D collider) {
+  
+    if(collider.gameObject.tag == "Door") uiText.text = null;
+    
+    if(collider.gameObject.layer == LayerMask.NameToLayer("Pickup"))
     {
-      if(Inventory!=null)
-        Inventory.OverlapItem(collider.gameObject);
+      if(Inventory!=null) Inventory.OverlapItem();
     }
-      
-  }
-
-  void OnTriggerStay2D(Collider2D collider) {
-
-  }
-
-    void OnTriggerExit2D(Collider2D collider) {
-    // Door opening
-      if(collider.gameObject.tag == "Door")
-      {
-        uiText.text = null;
-      }
-
-      if(collider.gameObject.layer == LayerMask.NameToLayer("Pickup"))
-      {
-        if(Inventory!=null)
-          Inventory.OverlapItem();
-      }
 
   }
   #endregion
@@ -73,13 +60,13 @@ public class PlayerActions : MonoBehaviour
   {
     if(player!= null ){
 
-      if (deltaHP < 0 && Sound != null) Sound.PlayOneShot(DamageSound);
+      if (deltaHP < 0 && OuchSounds != null) OuchSounds.PlaySound();
 
-      Debug.Log(player.GetHP());
+      // Debug.Log(player.GetHP());
       player.SetHP(player.GetHP() + deltaHP);
       ui.SetHealSlider(player.GetHP(), player.GetMaxHP());
 
-      if(player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true) Death();
+      if (player.GetHP() <= 0 && gameObject.GetComponent<Collider2D>().enabled == true) Death();
       
     }
   }
@@ -87,26 +74,17 @@ public class PlayerActions : MonoBehaviour
   private void Death()
   {
     Collider2D[] colliders =  gameObject.GetComponents<Collider2D>();
-    foreach (Collider2D item in colliders)
-    {
-        item.enabled = false;
-    }
+
+    foreach (Collider2D item in colliders) item.enabled = false;
     
     player.SetIsDead(true);
 
-    if(Sound != null) Sound.PlayOneShot(DeathSound);
+    if(DeathSounds != null) DeathSounds.PlaySound();
 
     Destroy(gameObject);
     
-    if(gameMenu!= null)
-    {
-      gameMenu.ActivatePostPortus();
-      //gameMenu.RestartGame();
-    }
-
+    if(gameMenu!= null) gameMenu.ActivatePostPortus();
+    
   }
-
-
-   
 
 }

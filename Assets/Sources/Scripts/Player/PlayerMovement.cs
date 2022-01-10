@@ -29,10 +29,14 @@ public class PlayerMovement : MonoBehaviour
         _aimPoint = aimPoint;
     }
     private void FixedUpdate() {
-        Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
-        Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
-        fieldOfView.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
-        fieldOfView.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
+        if(Time.timeScale != 0f )
+        {
+            Vector3 mouseWordPosition = Camera.main.ScreenToWorldPoint(_aimPoint);
+            Vector3 targetDirection = (mouseWordPosition - transform.position).normalized;
+            fieldOfView.SetAimDirection(new Vector3(targetDirection.x, targetDirection.y, targetDirection.z ));
+            fieldOfView.SetOrigin(new Vector3(player.transform.position.x,player.transform.position.y + 0.25f ,10));
+        }
+        
     }
 
     public void Movement(Vector2 move, float _velocity)

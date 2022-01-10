@@ -4,41 +4,39 @@ using UnityEngine;
 
 public class EnemyMeleeWeapon : MonoBehaviour
 {
-    public Collider2D damageCollision;
-    public AudioClip HitSound;
-    public int damage = -10;
-    // Start is called before the first frame update
-    void Start()
-    {
-      damageCollision = GetComponent<Collider2D>();
-      damageCollision.enabled = false;
-    }
+  public Collider2D damageCollision;
+  public AudioClip HitSound;
+  public int damage = -10;
+  // Start is called before the first frame update
+  void Start()
+  {
+    damageCollision = GetComponent<Collider2D>();
+    damageCollision.enabled = false;
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
+  // Update is called once per frame
+  void Update()
+  {
 
-    }
+  }
 
-    public void SetActiveCollider(bool value){
+  public void SetActiveCollider(bool value){
 
-      damageCollision.enabled = value;
-      //GetComponentInParent<AudioSource>().PlayOneShot(HitSound);
+    damageCollision.enabled = value;
+    //GetComponentInParent<AudioSource>().PlayOneShot(HitSound);
 
-    }
+  }
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-      Debug.Log(other.gameObject);
-      if(other.gameObject.tag == "Player"){
-      
-
-            if (other.gameObject.GetComponent<PlayerActions> () != null)
-            {
-              other.gameObject.GetComponent<PlayerActions> ().ChangeHP(-damage);
-            }
-          }
-
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    Debug.Log(other.gameObject);
+    if(other.gameObject.tag == "Player"){
+      if (other.gameObject.GetComponent<PlayerActions> () != null)
+      {
+        other.gameObject.GetComponent<PlayerActions> ().ChangeHP(-damage);
       }
+    }
+
+  }
 }

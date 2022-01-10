@@ -30,8 +30,7 @@ public class PlayerDetector : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(!enemy.GetIsDead())
-      DetectPlayer();
+    if(!enemy.GetIsDead() && Time.timeScale != 0f) DetectPlayer();
 
       if(playerisFound)
       {
@@ -52,7 +51,7 @@ public class PlayerDetector : MonoBehaviour
 
       RaycastHit2D PlayerInfo = Physics2D.Raycast(playerDetect.position, lookDirection, rayLenght, layerMask);
 
-      Debug.DrawRay(playerDetect.position, lookDirection * rayLenght, Color.red);
+      Debug.DrawRay(playerDetect.position, lookDirection.normalized * rayLenght, Color.red);
 
       if(PlayerInfo.collider != null && playerisFound == false){
 
